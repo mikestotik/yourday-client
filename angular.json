@@ -42,7 +42,8 @@
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": [
-              "moment"
+              "moment",
+              "luxon"
             ]
           },
           "configurations": {
