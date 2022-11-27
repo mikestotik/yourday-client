@@ -35,6 +35,7 @@
               "src/robots.txt"
             ],
             "styles": [
+              "src/icons/style.css",
               "src/styles.scss"
             ],
             "scripts": [],
