@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
 
+
 enum DeviceType {
-  Android = 'Android',
-  BlackBerry = 'BlackBerry 10',
-  browser = 'browser',
-  iOS = 'iOS',
-  WinCE = 'WinCE',
-  Tizen = 'Tizen',
+  Android = 'android',
+  Browser = 'browser',
+  iOS = 'ios',
   MacOSX = 'Mac OS X'
 }
 
-
-declare var device: {
-  platform: DeviceType
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
+  private readonly platform!: DeviceType;
+
+
   constructor() {
     const cordova: Cordova = window.cordova;
 
     if (cordova) {
-      console.log('Platform:', device.platform);
+      this.platform = cordova.platformId as DeviceType;
+
+      switch (this.platform) {
+        case DeviceType.iOS:
+          // @ts-ignore
+          cordova.plugins.notification.local.requestPermission( (granted) => {
+            if (granted !== 'granted') {
+              console.log('Notification permission not granted');
+            }
+          });
+          break;
+      }
+      // cordova.plugins.notification.local.requestPermission(function (granted) { ... });
     } else {
       if (Notification) {
+        this.platform = DeviceType.Browser;
         Notification.requestPermission().then(permission => {
           if (permission !== 'granted') {
             console.log('Notification permission not granted');
@@ -39,12 +49,29 @@ export class NotificationService {
   }
 
 
-  public show(): void {
-    new Notification('Yourday Reminder', {
-      icon: 'https://yourday.me/favicon.ico',
-      // body: `I remind you of the task: ${ task!.title }`,
-      body: `I remind you of the task: 1`,
-      vibrate: 10
-    });
+  public show(title: string, text: string, datetime?: Date | null): void {
+    switch (this.platform) {
+      case DeviceType.iOS:
+        // @ts-ignore
+        cordova.plugins.notification.local.schedule({
+          title,
+          text,
+          foreground: true,
+          vibrate: true
+        });
+        break;
+      case DeviceType.Android:
+        break;
+      case DeviceType.MacOSX:
+        break;
+      case DeviceType.Browser:
+        new Notification(title, {
+          body: text,
+          icon: 'https://yourday.me/favicon.ico'
+        });
+        break;
+      default:
+        break;
+    }
   }
 }

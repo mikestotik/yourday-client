@@ -66,17 +66,17 @@ export class TaskListAddComponent implements OnInit {
   }
 
 
-  private createForm(): FormGroup<TaskForm> {
-    return this.fb.nonNullable.group({
-      title: [ '', [ Validators.required ] ]
-    });
-  }
-
-
   public onBlur(): void {
     if (this.form.value.title?.length! >= 3) {
       this.onSubmit();
     }
     this.blurEvent.emit();
+  }
+
+
+  private createForm(): FormGroup<TaskForm> {
+    return this.fb.nonNullable.group({
+      title: [ '', [ Validators.required ] ]
+    });
   }
 }

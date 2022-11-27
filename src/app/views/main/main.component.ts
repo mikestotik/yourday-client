@@ -71,7 +71,8 @@ export class MainComponent implements OnInit, OnDestroy {
     if (!this.websocket.connected) {
       this.snackBar.open('WebSocket connection not established', 'Close', {
         verticalPosition: 'top',
-        horizontalPosition: 'end'
+        horizontalPosition: 'end',
+        duration: 10000,
       });
     }
 
@@ -96,8 +97,7 @@ export class MainComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(task => {
-        console.log(task);
-        this.notification.show();
+        this.notification.show('Yourday Reminder', `Need to be done: ${ task!.title }`, task!.datetime);
       });
 
     // Groups Events
