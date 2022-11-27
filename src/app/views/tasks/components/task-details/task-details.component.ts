@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Store } from '@ngxs/store';
 import { NgxMaterialTimepickerComponent, NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
-import { map, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { filter, map, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { TaskConfig } from '../../../../config/task.config';
 import { DictItem } from '../../../../interfaces/dict.interface';
 import { Group } from '../../../../interfaces/group.interface';
@@ -87,6 +87,7 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.select(TaskState.task).pipe(
       map(filterFn => filterFn(this.taskId)),
+      filter(value => !!value),
       switchMap(task => {
         this.groups = this.store.selectSnapshot(GroupState.groups);
         this.group = this.store.selectSnapshot(GroupState.group)(task!.group!);
