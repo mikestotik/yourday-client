@@ -16,6 +16,7 @@ import { AddGroupToStore, RemoveGroupFromStore, UpdateGroupInStore } from '../..
 import { ShowMenu } from '../../models/menu/store/menu.actions';
 import { MenuState } from '../../models/menu/store/menu.state';
 import { NavigationState } from '../../models/navigation/store/navigation.state';
+import { NotificationService } from '../../models/notification/notification.service';
 import { AddTaskToStore, RemoveTaskFromStore, UpdateTaskInStore } from '../../models/task/store/task.actions';
 import { TaskState } from '../../models/task/store/task.state';
 
@@ -38,8 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
   public readonly mainRoutes = MainRoutes;
 
   public user!: User;
-  public currentMainNav!: NavItem;
-  public socketConnected!: boolean;
+  public currentNavigation!: NavItem;
   public websocket!: IOSocket;
 
   private windowWidth = window.innerWidth;
@@ -52,7 +52,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private router: Router,
     private store: Store,
     private socket: Socket,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private notification: NotificationService) {
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -61,20 +62,11 @@ export class MainComponent implements OnInit, OnDestroy {
       map(routeSegment => this.store.selectSnapshot(NavigationState.mainNavigationItem)(routeSegment)),
       takeUntil(this.destroy$)
     )
-      .subscribe(navItem => this.currentMainNav = navItem);
+      .subscribe(navItem => this.currentNavigation = navItem);
   }
 
 
   public ngOnInit(): void {
-    // Notification.requestPermission().then(permission => {
-    //   if (permission !== 'granted') {
-    //     this.snackBar.open('Notification permission not granted', 'Close', {
-    //       verticalPosition: 'top',
-    //       horizontalPosition: 'end'
-    //     });
-    //   }
-    // });
-
     this.websocket = this.socket.ioSocket;
     if (!this.websocket.connected) {
       this.snackBar.open('WebSocket connection not established', 'Close', {
@@ -103,11 +95,10 @@ export class MainComponent implements OnInit, OnDestroy {
         map(id => this.store.selectSnapshot(TaskState.task)(id)),
         takeUntil(this.destroy$)
       )
-      .subscribe(task => new Notification('Yourday Reminder', {
-        icon: 'https://yourday.me/favicon.ico',
-        body: `I remind you of the task: ${ task!.title }`,
-        vibrate: 10
-      }));
+      .subscribe(task => {
+        console.log(task);
+        this.notification.show();
+      });
 
     // Groups Events
     this.socket.fromEvent<Group>(`${ AppEvents.GroupShared }/${ this.user.id }`)

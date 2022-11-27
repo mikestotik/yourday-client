@@ -3,7 +3,7 @@
   <div class="sidebar" [class.hidden]="(shownSidebar$ | async) === false" (swipeleft)="onSidebarSwipeLeft()">
     <div class="sidebar-header">
       <div class="sidebar-header-title">
-        <div class="sidebar-header-title-nav-name">{{ currentMainNav.title }}</div>
+        <div class="sidebar-header-title-nav-name">{{ currentNavigation.title }}</div>
         <div class="sidebar-header-title-tools">
           <div class="header-info-tool">
             <i class="icon icon-alarm"></i>
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="sidebar-navigation" [ngSwitch]="currentMainNav.routerLink">
+    <div class="sidebar-navigation" [ngSwitch]="currentNavigation.routerLink">
       <app-page-navigation-tasks *ngSwitchCase="mainRoutes.Tasks" (itemEvent)="onPageNavItem()"></app-page-navigation-tasks>
       <app-page-navigation-settings *ngSwitchCase="mainRoutes.Settings" (itemEvent)="onPageNavItem()"></app-page-navigation-settings>
     </div>
