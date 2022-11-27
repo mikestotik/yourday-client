@@ -66,6 +66,9 @@
       flex: 1 1 auto;
       font-size: 16px;
       word-break: break-word;
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
 
       &.completed {
         text-decoration: line-through;
@@ -76,7 +79,7 @@
         background: none;
         border: none;
         outline: none;
-        color: var(--color-white);
+        color: inherit;
       }
     }
 
@@ -86,9 +89,9 @@
       opacity: 0.5;
       margin-left: auto;
       cursor: pointer;
-      padding-left: 12px;
       display: flex;
       align-items: center;
+      padding: 8px;
     }
   }
 }
