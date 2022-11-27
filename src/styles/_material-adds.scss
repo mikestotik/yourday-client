@@ -1,0 +1,13 @@
+i[matSuffix] {
+  font-size: 20px;
+  position: relative;
+  cursor: pointer;
+  top: 6px;
+  padding: 8px;
+}
+
+button[mat-menu-item] {
+  i {
+    margin-right: 12px;
+  }
+}

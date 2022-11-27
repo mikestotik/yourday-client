@@ -10,7 +10,6 @@
 
   &-title {
     font-size: 28px;
-    font-weight: 200;
     display: flex;
     align-items: center;
 
@@ -27,9 +26,8 @@
 
   &-subtitle {
     font-size: 20px;
-    font-weight: 300;
     margin-bottom: 32px;
-    opacity: 0.5;
+    opacity: 0.75;
   }
 
   &-payload {
@@ -48,13 +46,12 @@
 
   &-footer {
     font-size: 14px;
-    background: var(--color-black-trans);
+    background: var(--color-black-trans-25);
     border-radius: 4px;
     padding: 24px;
     margin-top: 16px;
 
     a {
-      font-weight: 500;
     }
   }
 }
@@ -72,7 +69,6 @@
 
   &__info {
     strong {
-      font-weight: 400;
       color: var(--color-barnd);
     }
   }
@@ -90,12 +86,11 @@
       border-radius: 4px;
       height: 40px;
       font-size: 20px;
-      font-weight: 200;
-      color: var(--color-white-primary);
-      border: 1px solid var(--color-white-primary-trans);
+      color: var(--color-white);
+      border: 1px solid var(--color-white-trans-10);
 
       &::placeholder {
-        color: var(--color-white-secondary);
+        color: var(--color-white);
       }
     }
   }

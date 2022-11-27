@@ -22,14 +22,12 @@ body {
   font-size: var(--font-size-defailt);
   line-height: var(--line-height-defailt);
   margin: 0;
-  background-image: linear-gradient(0deg, var(--color-dark-primary), var(--color-dark-secondary));
-  color: var(--color-white-primary);
-
+  background-image: var(--background-body);
+  color: var(--text-color);
 }
 
 a {
   color: var(--color-barnd);
-  font-weight: 400;
   opacity: 0.8;
   transition: opacity 400ms;
   cursor: pointer;

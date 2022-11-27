@@ -8,7 +8,6 @@ import { NoContentComponent } from './components/no-content/no-content.component
 import { PageComponent } from './components/page/page.component';
 import { TagComponent } from './components/tag/tag.component';
 import { ExitDialogComponent } from './dialogs/exit-dialog/exit-dialog.component';
-import { TaskDeleteDialogComponent } from './dialogs/task-delete-dialog/task-delete-dialog.component';
 import { ContenteditableDirective } from './directives/contenteditable.directive';
 import { InputDirective } from './directives/input.directive';
 import { ColorValuePipe } from './pipes/color-value.pipe';
@@ -30,7 +29,6 @@ import { SnackSimpleComponent } from './snacks/snack-simple/snack-simple.compone
     ClockComponent,
     PageComponent,
     ExitDialogComponent,
-    TaskDeleteDialogComponent,
     TaskCounterPipe,
     ColorValuePipe,
     InputDirective,

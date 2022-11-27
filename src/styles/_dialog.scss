@@ -1,33 +1,25 @@
-.sidebar-details {
+.dialog {
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
-
-  &__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 22px;
-    opacity: 0.75;
-    cursor: pointer;
-    transition: opacity 256ms;
-    border-radius: 4px;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
+  background: linear-gradient(135deg, var(--color-dark-primary), var(--color-dark-secondary));
+  padding: 24px;
 
   &__title {
     display: flex;
     align-items: center;
     font-size: 20px;
-    font-weight: 300;
     margin-bottom: 24px;
 
-    i {
+    i:first-child {
       margin-right: 12px;
+    }
+
+    i:last-child {
+      margin-left: auto;
+      opacity: 0.75;
+      cursor: pointer;
     }
   }
 

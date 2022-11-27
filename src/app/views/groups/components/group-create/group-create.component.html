@@ -1,16 +1,13 @@
-<form class="sidebar-details" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="sidebar-details__close" (click)="onClose()">
-    <i class="icon icon-cross"></i>
-  </div>
-
-  <div class="sidebar-details__title">
+<form class="dialog" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
     <i class="icon icon-bookmark"></i>
     <span>New Group</span>
+    <i class="icon icon-cross" (click)="onClose()"></i>
   </div>
 
-  <div class="sidebar-details__form form" id="mainForm">
+  <div class="dialog__form form" id="mainForm">
     <div class="form__field" *ngIf="form.controls.title as control">
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput appInput [formControl]="control">
         <mat-error *ngIf="control.hasError('required')">Required field</mat-error>
@@ -20,22 +17,19 @@
     <div class="form__field-title">Color</div>
     <div class="form__field" *ngIf="form.controls.color as control">
       <div class="group-colors">
-        <input #colorNone id="colorNone" type="radio" [value]="null" [hidden]="true" [formControl]="control">
-        <label class="group-colors__item none" for="colorNone" [class.active]="colorNone.checked">
-          <i class="icon icon-checkmark" *ngIf="colorNone.checked"></i>
-        </label>
-
-        <ng-container *ngFor="let color of colors$ | async">
-          <input #radio [id]="color.id" type="radio" [value]="color.id" [hidden]="true" [formControl]="control">
-          <label class="group-colors__item" [for]="color.id" [style.background]="color.value" [class.active]="radio.checked">
-            <i class="icon icon-checkmark" *ngIf="radio.checked"></i>
-          </label>
-        </ng-container>
+        <div class="group-colors__item"
+             *ngFor="let color of colors$ | async"
+             [style.background]="color.value"
+             [class.active]="control.value === color.id"
+             (click)="onColor(color.id)"
+        >
+          <i class="icon icon-checkmark" *ngIf="control.value === color.id"></i>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="sidebar-details__actions">
+  <div class="dialog__actions">
     <button mat-button type="submit" [disabled]="form.invalid">
       <div *ngIf="!sentSave else loader">
         <i class="icon icon-plus"></i>

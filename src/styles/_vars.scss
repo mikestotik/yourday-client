@@ -4,35 +4,19 @@
   --font-size-defailt: 16px;
   --line-height-defailt: 1.5;
 
-  // ******************************************
-  // ******************************************
-  // ******************************************
-  // Color
-  // ******************************************
-  // ******************************************
-  // ******************************************
-
   // Dark
   --color-black: #0A0D11; // 161F27
-  --color-black-trans: #0A0D1125;
+  --color-black-trans-25: #0A0D1125;
 
   // white
-  --color-white-primary: #dddddd;
-  --color-white-primary-trans: #dddddd10;
-
-  // Grey
-  --color-white-secondary: #d8d8de;
-
-  // Border
-  --color-grey: #84878a;
+  --color-white: #d8d8de;
+  --color-white-trans-10: #dddddd10;
 
   // Dark Primary
   --color-dark-primary: #313235;
-  --color-dark-primary-trans: #31323550;
 
   // Dark Secondary
   --color-dark-secondary: #28292d;
-  --color-dark-secondary-trans: #28292d50;
 
   // Primary
   --color-barnd: #007bfc;
@@ -41,18 +25,32 @@
   --color-warn: #fca426;
   --color-yellow: #e6e089;
 
-  // ******************************************
-  // ******************************************
-  // ******************************************
-  // Components
-  // ******************************************
-  // ******************************************
-  // ******************************************
+  // Background
+  --background-body: linear-gradient(135deg, var(--color-dark-primary), var(--color-dark-secondary));
+  --background-input: transparent;
+  --input-autofill-background: #2a2b2e;
+  --input-autofill-text-color: #d4d5d9;
 
-  // Sidebar
-  --main-sidebar-size-desktop: 272px;
-  --main-sidebar-size-mobile: 320px;
+  // Text
+  --text-color: var(--color-white);
 
   // Buttons
-  --button-min-size: 48px;
+  --button-size: 48px;
+
+  // Sidebar
+  --sidebar-background: linear-gradient(250deg, var(--color-dark-primary), var(--color-dark-secondary));
+  --sidebar-boxshadow: 4px 4px 4px #00000015;
+  --sidebar-size-desktop: 272px;
+  --sidebar-size-mobile: 320px;
+}
+
+.theme-light {
+  --background-body: #ffffff;
+  --background-input-autofill: #ffffff;
+
+  --sidebar-background:  #ffffff;
+
+  --text-color: var(--color-black);
+  --input-autofill-background: #ffffff;
+  --input-autofill-text-color: #2a2b2e;
 }

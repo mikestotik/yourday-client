@@ -44,7 +44,7 @@
       </div>
 
       <form class="form__field" [formGroup]="formAddUser" (ngSubmit)="onSubmitAddUser()">
-        <mat-form-field appearance="outline" *ngIf="formAddUser.controls.email as control">
+        <mat-form-field *ngIf="formAddUser.controls.email as control">
           <mat-label>Users</mat-label>
           <input matInput appInput placeholder="Email" [formControl]="control">
           <mat-error *ngIf="control.hasError('email')">The field does not match the email format</mat-error>
@@ -76,7 +76,7 @@
       <div class="form__field">
         <form class="tag-form" [formGroup]="formAddTag" (ngSubmit)="onSubmitAddTag()">
           <div class="tag-form__title">
-            <mat-form-field appearance="outline" *ngIf="formAddTag.controls.title as control">
+            <mat-form-field *ngIf="formAddTag.controls.title as control">
               <mat-label>Tags</mat-label>
               <input matInput appInput placeholder="Tag Title" [formControl]="control">
             </mat-form-field>

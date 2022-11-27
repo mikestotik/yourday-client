@@ -61,6 +61,14 @@ export class GroupCreateComponent implements OnInit {
     }
   }
 
+  public onColor(colorId: number | null): void {
+    const control = this.form.controls.color;
+    if (control.value === colorId) {
+      control.patchValue(null);
+    } else {
+      control.patchValue(colorId);
+    }
+  }
 
   private createForm(): FormGroup<Form> {
     return this.fb.nonNullable.group({

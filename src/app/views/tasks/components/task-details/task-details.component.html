@@ -86,7 +86,7 @@
         <h3>Deadline</h3>
 
         <!--  DATE  -->
-        <mat-form-field appearance="outline" color="primary" floatLabel="always">
+        <mat-form-field color="primary" floatLabel="always">
           <mat-label>Date</mat-label>
           <input #dateInput matInput [matDatepicker]="picker" [formControl]="control" placeholder="Select Date" readonly>
           <i class="icon icon-calendar-full" matSuffix *ngIf="!control.value" (click)="picker.open()"></i>
@@ -95,7 +95,7 @@
         </mat-form-field>
 
         <!--  TIME  -->
-        <mat-form-field appearance="outline" color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value">
+        <mat-form-field color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value">
           <mat-label>Time</mat-label>
 
           <input #timeInput matInput placeholder="--:--" [ngxTimepicker]="appendedToInput" [format]="24" readonly [value]="time">
@@ -105,7 +105,7 @@
 
         <!--  REMINDER  -->
         <ng-container *ngIf="false">
-          <mat-form-field appearance="outline" color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value && taskForm.controls.reminder as control">
+          <mat-form-field color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value && taskForm.controls.reminder as control">
             <mat-label>Remind In</mat-label>
             <mat-select [formControl]="control" placeholder="Select Time">
               <mat-option [value]="option.code" *ngFor="let option of reminderOptions">{{ option.value }}</mat-option>

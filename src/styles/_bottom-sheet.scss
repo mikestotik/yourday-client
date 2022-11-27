@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+  padding: 16px 8px;
 
   &-header {
     display: flex;
@@ -16,7 +17,6 @@
       flex: 1 1 auto;
       max-width: 280px;
       font-size: 20px;
-      font-weight: 300;
       line-height: 1.25;
       border-radius: 4px;
       outline: none;
@@ -42,12 +42,12 @@
 
     &__actions {
       margin-left: auto;
-      font-weight: 300;
       opacity: 0.75;
     }
   }
 
   &-sub-header {
+    margin-top: 8px;
     margin-bottom: 12px;
     display: flex;
   }

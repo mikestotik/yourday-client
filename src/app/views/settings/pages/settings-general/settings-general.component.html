@@ -1,7 +1,7 @@
 <app-page title="General">
   <form class="settings" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="settings__form form">
-      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.startPageStrategy as control">
+      <mat-form-field class="form__field" *ngIf="form.controls.startPageStrategy as control">
         <mat-label>Start Page Strategy</mat-label>
         <mat-select [formControl]="control">
           <mat-option *ngFor="let page of startPages" [value]="page.code">

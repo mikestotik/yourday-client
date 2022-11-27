@@ -10,7 +10,7 @@
     </div>
 
     <div class="auth-payload form">
-      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.email as control">
+      <mat-form-field class="form__field" *ngIf="form.controls.email as control">
         <mat-label>Email</mat-label>
         <input matInput appInput [formControl]="control">
         <mat-error *ngIf="control.hasError('email') && control.touched">
@@ -21,11 +21,10 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.password as control">
+      <mat-form-field class="form__field" *ngIf="form.controls.password as control">
         <mat-label>Password</mat-label>
         <input matInput appInput [formControl]="control" [type]="passwordVisible ? 'text' : 'password'">
-        <mat-icon matSuffix (click)="passwordVisible = !passwordVisible">
-          visibility_{{ passwordVisible ? 'on' : 'off' }}</mat-icon>
+        <i class="icon icon-eye" matSuffix (click)="passwordVisible = !passwordVisible"></i>
         <mat-error *ngIf="control.hasError('required') && control.touched">
           Required field
         </mat-error>
@@ -34,7 +33,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.lang as control">
+      <mat-form-field class="form__field" *ngIf="form.controls.lang as control">
         <mat-label>Language</mat-label>
         <mat-select [formControl]="control">
           <mat-option *ngFor="let lang of languages" [value]="lang.code">

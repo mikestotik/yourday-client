@@ -8,16 +8,6 @@
   cursor: pointer;
   border-radius: 6px;
   overflow: hidden;
-  color: var(--color-white-secondary);
-  font-weight: 300;
-
-  &:hover {
-    color: #ffffff;
-  }
-
-  &:active {
-    color: #ffffff;
-  }
 
   &.checked {
     opacity: 0.5;
@@ -38,7 +28,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     flex: 1 1 auto;
-    font-weight: inherit;
     transition: color 320ms;
 
     &.checked {

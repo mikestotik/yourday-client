@@ -33,10 +33,9 @@
 
     &__empty-list {
       padding: 16px;
-      background: var(--color-black-trans);
+      background: var(--color-black-trans-25);
       border-radius: 6px;
-      font-weight: 300;
-      color: var(--color-grey);
+      color: var(--color-white);
       font-size: 14px;
     }
   }
@@ -53,7 +52,6 @@
     cursor: pointer;
     position: relative;
     border-radius: 6px;
-    font-weight: 400;
     font-size: 16px;
     margin: 4px 0;
 
@@ -68,24 +66,21 @@
 
     &__title {
       color: inherit;
-      font-weight: 300;
     }
 
     &.pinned &__title {
-      font-weight: 400;
     }
 
 
     &__info {
       margin-left: auto;
-      font-weight: 200;
       display: flex;
       align-items: center;
     }
 
 
     &.active {
-      background: var(--color-black-trans);
+      background: var(--color-black-trans-25);
 
       &:before {
         content: '';
