@@ -136,7 +136,9 @@
               "src/icons/style.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/cordova.js"
+            ]
           }
         },
         "lint": {
