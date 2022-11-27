@@ -2,11 +2,15 @@
   "name": "yourday-client",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start:local": "ng serve --proxy-config proxy/local.json --port 4242",
+    "start:prod": "ng serve --proxy-config proxy/prod.json --port 4242",
+    "build:dev": "rimraf dist && ng build --configuration development",
+    "build:prod": "rimraf dist && ng build --configuration production",
+    "build:mobile": "rimraf www && ng build --base-href ./ --configuration mobile --output-path www",
+    "artifact": "rm -f artifact.zip && cd dist/yourday-client/ && zip -r artifact.zip ./ && mv artifact.zip ../../",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
