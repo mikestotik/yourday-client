@@ -1,0 +1,15 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  height: 100%;
+
+  &__form {
+  }
+
+  &__actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}

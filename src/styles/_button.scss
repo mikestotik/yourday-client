@@ -1,0 +1,18 @@
+button[mat-button], button[mat-flat-button] {
+  background: var(--color-white-primary-trans);
+
+  i {
+    color: inherit;
+    font-size: 16px;
+    margin-right: 8px;
+    position: relative;
+  }
+}
+
+.mat-button .mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
+  transition: background-color 256ms;
+}
+
+.mat-button, .mat-icon-button, .mat-stroked-button {
+  transition: color 256ms;
+}

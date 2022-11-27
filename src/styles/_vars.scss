@@ -1,0 +1,58 @@
+:root {
+  --font-family-default: 'Work Sans', sans-serif;
+  --font-weight-default: 400;
+  --font-size-defailt: 16px;
+  --line-height-defailt: 1.5;
+
+  // ******************************************
+  // ******************************************
+  // ******************************************
+  // Color
+  // ******************************************
+  // ******************************************
+  // ******************************************
+
+  // Dark
+  --color-black: #0A0D11; // 161F27
+  --color-black-trans: #0A0D1125;
+
+  // white
+  --color-white-primary: #dddddd;
+  --color-white-primary-trans: #dddddd10;
+
+  // Grey
+  --color-white-secondary: #d8d8de;
+
+  // Border
+  --color-grey: #84878a;
+
+  // Dark Primary
+  --color-dark-primary: #313235;
+  --color-dark-primary-trans: #31323550;
+
+  // Dark Secondary
+  --color-dark-secondary: #28292d;
+  --color-dark-secondary-trans: #28292d50;
+
+  // Primary
+  --color-barnd: #007bfc;
+  --color-success: #66bb6a;
+  --color-danged: #FD7272;
+  --color-warn: #fca426;
+  --color-yellow: #e6e089;
+
+  // ******************************************
+  // ******************************************
+  // ******************************************
+  // Components
+  // ******************************************
+  // ******************************************
+  // ******************************************
+
+  // Sidebar
+  --main-sidebar-size-desktop: 272px;
+  --main-sidebar-size-mobile: 320px;
+
+  // Buttons
+  --button-min-size: 48px;
+}

@@ -1,0 +1,25 @@
+.priority-theme {
+  &-3 {
+    color: var(--color-danged);
+    border-color: var(--color-danged);
+  }
+
+  &-2 {
+    color: var(--color-warn);
+    border-color: var(--color-warn);
+  }
+
+  &-1 {
+    color: var(--color-success);
+    border-color: var(--color-success);
+  }
+
+  &-0 {
+    color: var(--color-white-primary);
+    border-color: var(--color-white-primary);
+  }
+}
+
+//--color-primary: #59ffe7;
+//--color-danged: #ff5a4a;
+//--color-warn: #fca500;

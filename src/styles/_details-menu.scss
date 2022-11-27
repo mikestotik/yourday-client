@@ -1,0 +1,26 @@
+.details-menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 16px;
+  font-size: 16px;
+
+  &__icon {
+    opacity: 0.75;
+  }
+
+  &__title {
+    padding: 6px;
+    margin-top: -2px;
+  }
+
+  &__chevron {
+    font-size: 10px;
+    opacity: 0.50;
+  }
+}
+
+.task-details-menu.mat-menu-panel {
+  min-width: 176px;
+  max-height: 70vh;
+}

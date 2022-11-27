@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__field-title {
+    font-size: 16px;
+    opacity: 0.75;
+    margin-bottom: 8px;
+  }
+
+  &__field {
+    position: relative;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 32px;
+    justify-content: center;
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-left: 6px;
+        font-size: 10px;
+        padding: 0 4px;
+        margin-top: 4px;
+      }
+    }
+  }
+}

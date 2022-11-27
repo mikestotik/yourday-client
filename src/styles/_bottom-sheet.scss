@@ -1,0 +1,70 @@
+.bottom-sheet {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+
+  &-header {
+    display: flex;
+    margin-bottom: 16px;
+
+    &__icon {
+      font-size: 22px;
+    }
+
+    &__title {
+      flex: 1 1 auto;
+      max-width: 280px;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.25;
+      border-radius: 4px;
+      outline: none;
+      margin: 0 12px;
+
+      &.error {
+        outline: 1px dashed var(--color-danged);
+      }
+    }
+
+    &__close {
+      opacity: 0.75;
+      cursor: pointer;
+      transition: opacity 256ms;
+      border-radius: 4px;
+      margin-left: auto;
+      font-size: 22px;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &__actions {
+      margin-left: auto;
+      font-weight: 300;
+      opacity: 0.75;
+    }
+  }
+
+  &-sub-header {
+    margin-bottom: 12px;
+    display: flex;
+  }
+
+  &-payload {
+    flex: 1 1 auto;
+    overflow: auto;
+    margin-top: 12px;
+  }
+
+  &-actions {
+    margin-top: auto;
+    padding-top: 8px;
+
+    button {
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+}
