@@ -61,8 +61,7 @@ $yourday-theme: mat.define-light-theme((
   typography: mat.define-typography-config(
     $font-family: var(--font-family-default),
     $button: mat.define-typography-level(16px, 16px, 400),
-    $body-1: mat.define-typography-level(14px, 20px, 400),
-    $input:  mat.define-typography-level(16px, 1.125, 400)
+    $body-1: mat.define-typography-level(14px, 20px, 400)
   )
 ));
 
