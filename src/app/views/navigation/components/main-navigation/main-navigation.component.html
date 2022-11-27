@@ -1,0 +1,12 @@
+<div class="main-nav">
+  <button
+    mat-icon-button
+    *ngFor="let action of mainNavigation$ | async"
+    [disabled]="action.disabled"
+    [hidden]="action.hidden"
+    [routerLink]="action.routerLink"
+    routerLinkActive="active"
+  >
+    <i [ngClass]="action.icon"></i>
+  </button>
+</div>

@@ -1,0 +1,55 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 16px 12px;
+
+    &__menu-toggle {
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      width: 48px;
+      font-size: 28px;
+      color: var(--color-barnd);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    &__title {
+      font-weight: 300;
+      position: relative;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: color 256ms;
+
+      i {
+        margin-left: 12px;
+        font-size: 16px;
+        opacity: 0.33;
+      }
+
+      &:hover {
+        i {
+          color: var(--color-barnd);
+        }
+      }
+    }
+
+    &__actions {
+      margin-left: auto;
+    }
+  }
+
+  &-payload {
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+}

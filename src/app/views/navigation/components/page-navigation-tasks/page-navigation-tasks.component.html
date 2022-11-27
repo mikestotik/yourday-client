@@ -1,0 +1,53 @@
+<section class="page-nav">
+  <div class="page-nav-group">
+    <div class="page-nav-group__title">Filters</div>
+    <div class="page-nav-group__list">
+      <div class="page-nav-item"
+           matRipple
+           *ngFor="let item of pageNavigation$ | async"
+           [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, item.routerLink ]"
+           routerLinkActive="active"
+           (click)="itemEvent.emit()">
+        <div class="page-nav-item__icon">
+          <i [ngClass]="item.icon"></i>
+        </div>
+        <div class="page-nav-item__title">{{ item.title }}</div>
+        <div class="page-nav-item__info">
+          <span class="task-count">{{ (item.routerLink | taskCounter) | async }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="(groups$ | async) as groups">
+    <div class="page-nav-group">
+      <div class="page-nav-group__title">
+        <span>Groups <span *ngIf="groups.length">({{ groups.length }})</span></span>
+        <i class="icon icon-plus" (click)="onAddTaskGroup()"></i>
+      </div>
+
+      <div class="page-nav__empty-list" *ngIf="!groups.length">
+        There are no groups yet. Tap [+] to add new group.
+      </div>
+
+      <div class="page-nav-group__list" *ngFor="let group of groups | groupSort: (pinnedGroups$ | async)">
+        <div class="page-nav-item"
+             matRipple
+             [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, group.id ]"
+             routerLinkActive="active"
+             [class.pinned]="(pinnedGroups$ | async)?.includes(group.id)"
+             (click)="itemEvent.emit()">
+          <div class="page-nav-item__icon" [style.color]="group.color | colorValue">
+            <i class="icon icon-bookmark"></i>
+          </div>
+          <div class="page-nav-item__title">{{ group.title }}</div>
+          <div class="page-nav-item__info">
+            <i class="icon icon-users" *ngIf="group.users.length"></i>
+            <span class="task-count">{{ (group.id | taskCounter) | async }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

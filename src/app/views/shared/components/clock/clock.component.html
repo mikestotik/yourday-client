@@ -1,0 +1,47 @@
+<div class="clock">
+  <div class="clock__analog">
+    <div class="sectors">
+      <ng-container *ngFor="let sector of sectors">
+        <div class="sector"
+             [style.transform]="'rotateZ(' + sector * 6 + 'deg)'"
+             (click)="onSelect(sector)"
+             (mouseenter)="onEnter(sector)"
+             (mouseleave)="onLeave()"
+             [class.sector_hour]="!(sector % 5)"
+        >
+          <div class="sector__marker"></div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="clock-hands">
+      <div #hour class="clock-hands__item hour"></div>
+      <div #min class="clock-hands__item min"></div>
+      <div #second class="clock-hands__item second" [hidden]="true"></div>
+    </div>
+  </div>
+
+  <div class="clock__digit">
+    <div class="digit" [class.disabled]="!selectedHour && !selectedMins">
+      <div class="digit__format"
+           [class.disabled]="!selectedMins || !selectedHour"
+           [class.active]="selectedFormat === timeFormat.AM"
+           (click)="onSelectFormat(timeFormat.AM)"
+      >
+        <span>AM</span>
+      </div>
+
+      <div class="digit__time" [class.active]="atHour">{{ date | date: 'hh' }}</div>
+      <div class="digit__div">:</div>
+      <div class="digit__time" [class.active]="atMin">{{ date | date: 'mm' }}</div>
+
+      <div class="digit__format"
+           [class.disabled]="!selectedMins || !selectedHour"
+           [class.active]="selectedFormat === timeFormat.PM"
+           (click)="onSelectFormat(timeFormat.PM)"
+      >
+        <span>PM</span>
+      </div>
+    </div>
+  </div>
+</div>

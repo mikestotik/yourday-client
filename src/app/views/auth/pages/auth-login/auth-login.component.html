@@ -1,0 +1,52 @@
+<main class="auth-page">
+  <form class="auth" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="auth-title">
+      <i class="icon icon-checkmark-circle-on"></i>
+      <span>Yourday</span>
+    </div>
+
+    <div class="auth-subtitle">
+      Succeed in everything!
+    </div>
+
+    <div class="auth-payload form">
+      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.email as control">
+        <mat-label>Email</mat-label>
+        <input matInput appInput [formControl]="control">
+        <mat-error *ngIf="control.hasError('email') && control.touched">
+          The field does not match the email pattern
+        </mat-error>
+        <mat-error *ngIf="control.hasError('required') && control.touched">
+          Required field
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.password as control">
+        <mat-label>Password</mat-label>
+        <input matInput appInput [formControl]="control" [type]="passwordVisible ? 'text' : 'password'">
+
+        <mat-icon matSuffix (click)="passwordVisible = !passwordVisible">visibility_{{ passwordVisible ? 'on' : 'off' }}</mat-icon>
+
+        <mat-error *ngIf="control.hasError('required') && control.touched">
+          Required field
+        </mat-error>
+        <mat-error *ngIf="control.hasError('minlength') && control.touched">
+          Password must be at least {{ config.PASSWORD_MIN_LENGTH }} characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="auth-actions">
+      <button mat-button type="submit" [disabled]="form.invalid">
+        <div *ngIf="!formSent">Login</div>
+        <div *ngIf="formSent" class="loader"></div>
+      </button>
+    </div>
+
+    <div class="auth-footer">
+      <span>New to Yourday? </span>
+      <a [routerLink]="registrationRoute">Create an Account</a>
+    </div>
+  </form>
+</main>
+

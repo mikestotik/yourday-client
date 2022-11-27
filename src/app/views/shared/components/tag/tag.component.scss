@@ -1,0 +1,44 @@
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  height: 24px;
+  border-radius: 4px;
+  padding: 0 8px;
+  cursor: pointer;
+
+  &.md {
+    height: 24px;
+  }
+
+  &.lg {
+    height: 26px;
+  }
+
+  &__title {
+    color: var(--color-white-secondary);
+    margin-top: -2px;
+  }
+
+  &__icon, &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    margin-right: 6px;
+  }
+
+  &__close {
+    cursor: pointer;
+    opacity: 0.33;
+    transition: opacity 256ms;
+    margin-left: 6px;
+    font-size: 12px;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

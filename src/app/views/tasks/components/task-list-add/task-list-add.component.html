@@ -1,0 +1,18 @@
+<form class="task-form" matRipple [class.focused]="focused" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="task-form__check">
+    <label *ngIf="!sent" class="icon icon-checkmark-circle-off" for="task-input"></label>
+    <div *ngIf="sent" class="loader"></div>
+  </div>
+  <input
+    class="task-form__input"
+    id="task-input"
+    type="text"
+    placeholder="New task..."
+    appInput
+    [formControl]="form.controls.title"
+    (blur)="onBlur()"
+    (focusin)="focused = true"
+    (focusout)="focused = false"
+    #taskInput
+  >
+</form>

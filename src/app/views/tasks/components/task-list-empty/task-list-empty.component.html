@@ -1,0 +1,10 @@
+<div class="task-list-empty">
+  <i class="task-list-empty__icon" [ngClass]="icon"></i>
+  <div class="task-list-empty__title">{{ title }}</div>
+  <div class="task-list-empty__subtitle">{{ subtitle }}</div>
+
+  <div class="task-list-empty__action" (click)="addFirst.next()">
+    <i class="icon icon-plus"></i>
+    <span>Add Task</span>
+  </div>
+</div>

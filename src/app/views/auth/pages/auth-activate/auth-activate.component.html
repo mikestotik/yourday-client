@@ -1,0 +1,35 @@
+<main class="auth-page">
+  <form class="auth" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="auth-title">
+      <i class="icon icon"></i>
+      <span>Yourday</span>
+    </div>
+
+    <div class="auth-subtitle">Succeed in everything!</div>
+
+    <div class="auth-payload">
+      <div class="register-complete">
+        <div class="register-complete__info">
+          <div>
+            To complete registration, you need to enter the verification code that was sent to <strong>{{ email }}</strong>.
+          </div>
+          <br>
+          <div>
+            If the email is not in your inbox, please check your SPAM folder.
+          </div>
+        </div>
+        <div class="register-complete__code">
+          <input maxlength="6" appInput [formControl]="form.controls.secret" placeholder="Past Code" autofocus>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-actions">
+      <button mat-button type="submit" [disabled]="form.invalid">
+        <div *ngIf="!formSent">Activate</div>
+        <div *ngIf="formSent" class="loader"></div>
+      </button>
+    </div>
+  </form>
+</main>
+

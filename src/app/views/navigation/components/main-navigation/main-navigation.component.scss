@@ -1,0 +1,22 @@
+.main-nav {
+  height: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid var(--color-white-primary-trans);
+
+  button {
+    height: 48px;
+    width: 48px;
+
+    i {
+      font-size: 24px;
+      position: relative;
+    }
+  }
+
+  button.active {
+    color: var(--color-barnd);
+  }
+}

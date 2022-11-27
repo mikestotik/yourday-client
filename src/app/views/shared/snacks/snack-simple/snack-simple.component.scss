@@ -1,0 +1,27 @@
+.snack {
+  display: flex;
+
+  &__icon {
+    font-size: 28px;
+    margin-right: 12px;
+
+    &.default {
+      color: var(--color-white-primary);
+    }
+
+    &.success {
+      color: var(--color-success);
+    }
+
+    &.warning {
+      color: var(--color-warn);
+    }
+
+    &.danger {
+      color: var(--color-danged);
+    }
+  }
+
+  &__message {
+  }
+}

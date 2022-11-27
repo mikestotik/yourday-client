@@ -1,0 +1,32 @@
+<main class="main">
+  <div class="sidebar-div" *ngIf="shownSidebar$ | async" (swipeleft)="onSidebarSwipeLeft()" (click)="onSidebarSwipeLeft()"></div>
+  <div class="sidebar" [class.hidden]="(shownSidebar$ | async) === false" (swipeleft)="onSidebarSwipeLeft()">
+    <div class="sidebar-header">
+      <div class="sidebar-header-title">
+        <div class="sidebar-header-title-nav-name">{{ currentMainNav.title }}</div>
+        <div class="sidebar-header-title-tools">
+          <div class="header-info-tool">
+            <i class="icon icon-alarm"></i>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-header-info">
+        <div class="sidebar-header-info__user">{{ user.email }}</div>
+        <div class="sidebar-header-info__status" [class.online]="websocket.connected">{{ websocket.connected ? 'Online' : 'Offline' }}</div>
+      </div>
+    </div>
+
+    <div class="sidebar-navigation" [ngSwitch]="currentMainNav.routerLink">
+      <app-page-navigation-tasks *ngSwitchCase="mainRoutes.Tasks" (itemEvent)="onPageNavItem()"></app-page-navigation-tasks>
+      <app-page-navigation-settings *ngSwitchCase="mainRoutes.Settings" (itemEvent)="onPageNavItem()"></app-page-navigation-settings>
+    </div>
+
+    <div class="sidebar-footer">
+      <app-main-navigation></app-main-navigation>
+    </div>
+  </div>
+
+  <div class="payload">
+    <router-outlet></router-outlet>
+  </div>
+</main>

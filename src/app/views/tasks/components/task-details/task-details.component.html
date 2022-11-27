@@ -1,0 +1,173 @@
+<form class="bottom-sheet" *ngIf="task" [formGroup]="taskForm" (ngSubmit)="onSubmit()" (swipedown)="onClose()">
+  <div class="bottom-sheet-header">
+    <div class="bottom-sheet-header__icon">
+      <i class="icon icon-book"></i>
+    </div>
+
+    <ng-container *ngIf="taskForm.controls.title as control">
+      <div class="bottom-sheet-header__title"
+           appInput
+           contenteditable
+           [formControl]="control"
+           [class.error]="control.hasError('required')"
+           (blur)="onTitleChanged()"
+      >
+      </div>
+    </ng-container>
+
+    <div class="bottom-sheet-header__close" (click)="onClose()">
+      <i class="icon icon-cross"></i>
+    </div>
+  </div>
+
+  <div class="bottom-sheet-sub-header">
+    <div class="details-menu" [matMenuTriggerFor]="groupMenu" [style.color]="group?.color | colorValue">
+      <div class="details-menu__icon">
+        <i class="icon icon-bookmark"></i>
+      </div>
+      <div class="details-menu__title">{{ group ? group.title : 'Incoming'}}</div>
+      <div class="details-menu__chevron">
+        <i class="icon icon-chevron-down"></i>
+      </div>
+    </div>
+    <mat-menu class="task-details-menu" #groupMenu="matMenu">
+      <button mat-menu-item (click)="onChangeGroup(null)">
+        <i class="icon icon-inbox"></i>
+        <span>Incoming</span>
+      </button>
+      <button mat-menu-item *ngFor="let group of groups" [style.color]="group.color | colorValue" (click)="onChangeGroup(group.id)">
+        <i class="icon icon-bookmark"></i>
+        <span>{{ group.title }}</span>
+      </button>
+    </mat-menu>
+
+    <ng-container *ngIf="group?.tags?.length">
+      <div class="details-menu" [style.color]="task.tag && task.tag.color ? task.tag.color.value + 95 : ''" [matMenuTriggerFor]="tagMenu">
+        <div class="details-menu__icon">
+          <i class="icon icon-tag"></i>
+        </div>
+        <div class="details-menu__title">{{ task.tag ? task.tag.title : 'Select tag'}}</div>
+        <div class="details-menu__chevron">
+          <i class="icon icon-chevron-down"></i>
+        </div>
+      </div>
+
+      <mat-menu  class="task-details-menu" #tagMenu="matMenu">
+        <button mat-menu-item (click)="onChangeTag(null)">
+          <i class="icon icon-tag"></i>
+          <span>No tag</span>
+        </button>
+        <button mat-menu-item *ngFor="let tag of group?.tags" [style.color]="tag.color ? tag.color.value + 95 : 'initial'" (click)="onChangeTag(tag.id)">
+          <i class="icon icon-tag"></i>
+          <span>{{ tag.title }}</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </div>
+
+  <div class="bottom-sheet-payload">
+    <div class="form">
+      <!--  PRIORITY  -->
+      <div class="form__field">
+        <h3>Priority</h3>
+        <div class="task-priority" *ngIf="taskForm.controls.priority as control">
+          <div class="task-priority__item priority-theme-{{ p.id }}"
+               *ngFor="let p of priorityList"
+               [class.active]="p.id === control.value"
+               (dblclick)="onPriorityReset()"
+               (click)="onPriority(p.id)">
+            {{ p.title }}
+          </div>
+        </div>
+      </div>
+
+      <!--  CALENDAR  -->
+      <div class="form__field" *ngIf="taskForm.controls.datetime as control">
+        <h3>Deadline</h3>
+
+        <!--  DATE  -->
+        <mat-form-field appearance="outline" color="primary" floatLabel="always">
+          <mat-label>Date</mat-label>
+          <input #dateInput matInput [matDatepicker]="picker" [formControl]="control" placeholder="Select Date" readonly>
+          <i class="icon icon-calendar-full" matSuffix *ngIf="!control.value" (click)="picker.open()"></i>
+          <i class="icon icon-cross" matSuffix *ngIf="control.value" (click)="onResetDate(dateInput)"></i>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!--  TIME  -->
+        <mat-form-field appearance="outline" color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value">
+          <mat-label>Time</mat-label>
+
+          <input #timeInput matInput placeholder="--:--" [ngxTimepicker]="appendedToInput" [format]="24" readonly [value]="time">
+          <i class="icon icon-clock" matSuffix (click)="appendedToInput.open()"></i>
+          <ngx-material-timepicker #appendedToInput [appendToInput]="true" [theme]="darkTheme" (timeSet)="onChangeTime($event, timeInput)"></ngx-material-timepicker>
+        </mat-form-field>
+
+        <!--  REMINDER  -->
+        <ng-container *ngIf="false">
+          <mat-form-field appearance="outline" color="primary" floatLabel="always" *ngIf="taskForm.controls.datetime.value && taskForm.controls.reminder as control">
+            <mat-label>Remind In</mat-label>
+            <mat-select [formControl]="control" placeholder="Select Time">
+              <mat-option [value]="option.code" *ngFor="let option of reminderOptions">{{ option.value }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </div>
+
+      <!--  CHECK LIST  -->
+      <form class="form__field" [formGroup]="checkListForm" (ngSubmit)="onAddSubTask()">
+        <h3>Checklist</h3>
+
+        <div class="checklist">
+          <div class="checklist-item" *ngFor="let item of task.checkList">
+            <div class="checklist-item__checkbox">
+              <mat-checkbox [checked]="item.completed" color="primary" [disableRipple]="false"></mat-checkbox>
+            </div>
+            <div class="checklist-item__title" [class.completed]="item.completed">
+              <div>{{ item.title }}</div>
+            </div>
+            <div class="checklist-item__delete" (click)="onDeleteSubTask(item.id)">
+              <i class="icon icon-cross"></i>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checklist-item__checkbox">
+              <mat-checkbox color="primary" [disabled]="true"></mat-checkbox>
+            </div>
+            <div class="checklist-item__title" *ngIf="checkListForm.controls.title as control">
+              <input appInput type="text" [formControl]="control" placeholder="Add task...">
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!--  NOTE  -->
+      <div class="form__field" *ngIf="taskForm.controls.note as control">
+        <h3>Note</h3>
+        <textarea class="note" matInput [formControl]="control" rows="6" (blur)="onNoteChanged()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-sheet-actions">
+    <button mat-button type="submit" [disabled]="taskForm.invalid || sentSave || !valueChanged" *ngIf="false">
+      <div *ngIf="!sentSave else loader">
+        <i class="icon icon-checkmark"></i>
+        <span>Save</span>
+      </div>
+    </button>
+
+    <button mat-button type="button" color="warn" (click)="onDelete()" [disabled]="sentDelete">
+      <div *ngIf="!sentDelete else loader">
+        <i class="icon icon-trash"></i>
+        <span>Delete</span>
+      </div>
+    </button>
+
+    <ng-template #loader>
+      <div *ngIf="sentDelete" class="loader"></div>
+    </ng-template>
+  </div>
+</form>
+

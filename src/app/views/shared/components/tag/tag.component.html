@@ -1,0 +1,15 @@
+<div class="tag {{ size }}" [style.background]="color ? color + 25 : ''">
+  <div class="tag__icon">
+    <i class="icon icon-tag" *ngIf="!icon"></i>
+    <i [ngClass]="icon" *ngIf="icon"></i>
+  </div>
+
+  <div class="tag__title">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="tag__close" (click)="onRemoveTag()" *ngIf="!deleteDisabled">
+    <i class="icon icon-cross" *ngIf="!deleteIcon"></i>
+    <i *ngIf="deleteIcon" [ngClass]="deleteIcon"></i>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<section class="page-nav">
+  <div class="page-nav-group">
+    <div class="page-nav-group__title">General</div>
+    <div class="page-nav-group__list">
+      <ng-container *ngFor="let item of pageNavigation$ | async">
+        <div class="page-nav-item"
+             matRipple
+             *ngIf="!item.disabled"
+             [routerLink]="[ '/', appRoutes.App, mainRoutes.Settings, item.routerLink ]"
+             routerLinkActive="active"
+             (click)="itemEvent.emit()">
+          <div class="page-nav-item__icon">
+            <i [ngClass]="item.icon"></i>
+          </div>
+          <div class="page-nav-item__title">{{ item.title }}</div>
+          <div class="page-nav-item__info"></div>
+        </div>
+      </ng-container>
+
+      <div class="page-nav-item" matRipple (click)="onSync()">
+        <div class="page-nav-item__icon">
+          <i class="icon icon-sync"></i>
+        </div>
+        <div class="page-nav-item__title">Sync</div>
+      </div>
+
+      <div class="page-nav-item" matRipple (click)="onExit()">
+        <div class="page-nav-item__icon">
+          <i class="icon icon-exit"></i>
+        </div>
+        <div class="page-nav-item__title">Logout</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-header__menu-toggle" (click)="onMenuToggle()">
+      <i class="icon icon-menu"></i>
+    </div>
+
+    <div class="page-header__title" (click)="titleClick.emit()">
+      <span>{{ title }}</span>
+      <i *ngIf="titleSuffixIcon" [ngClass]="titleSuffixIcon"></i>
+    </div>
+
+    <div class="page-header__actions">
+      <ng-content select="[page-menu]"></ng-content>
+    </div>
+  </div>
+
+  <div class="page-payload">
+    <ng-content></ng-content>
+  </div>
+</div>

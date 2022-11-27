@@ -1,0 +1,115 @@
+<form class="bottom-sheet" [formGroup]="form" (ngSubmit)="onSubmit()" (swipedown)="onClose()">
+  <div class="bottom-sheet-header">
+    <div class="bottom-sheet-header__icon">
+      <i class="icon icon-bookmark"></i>
+    </div>
+
+    <ng-container *ngIf="form.controls.title as control">
+      <div class="bottom-sheet-header__title"
+           appInput
+           contenteditable
+           [formControl]="control"
+           [class.error]="control.hasError('required')"
+           (blur)="onTitleChanged()"
+      >
+      </div>
+    </ng-container>
+
+    <div class="bottom-sheet-header__actions" *ngIf="(pinnedGroups$ | async) as pinned">
+      <mat-slide-toggle
+        color="primary"
+        labelPosition="before"
+        [checked]="pinned.includes(group.id)"
+        (change)="onPin($event.checked)"
+      >
+        Pinned
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="bottom-sheet-payload">
+    <div class="form">
+      <div class="form__field-title">Color</div>
+      <div class="form__field" *ngIf="form.controls.color as control">
+        <div class="group-colors">
+          <div class="group-colors__item"
+               *ngFor="let color of colors"
+               [style.background]="color.value"
+               [class.active]="control.value === color.id"
+               (click)="onColor(color.id)"
+          >
+            <i class="icon icon-checkmark" *ngIf="control.value === color.id"></i>
+          </div>
+        </div>
+      </div>
+
+      <form class="form__field" [formGroup]="formAddUser" (ngSubmit)="onSubmitAddUser()">
+        <mat-form-field appearance="outline" *ngIf="formAddUser.controls.email as control">
+          <mat-label>Users</mat-label>
+          <input matInput appInput placeholder="Email" [formControl]="control">
+          <mat-error *ngIf="control.hasError('email')">The field does not match the email format</mat-error>
+        </mat-form-field>
+
+        <!-- NO SHARED-->
+        <ng-container *ngIf="!group.users.length">
+          <div class="shared-users shared-users_empty">
+            No shared users.
+          </div>
+        </ng-container>
+
+        <!-- SHARED-->
+        <ng-container *ngIf="group.users.length">
+          <div class="shared-users">
+            <div class="shared-users-item" *ngFor="let user of group.users; let i = index">
+              <div class="shared-users-item__id">{{ i + 1 }}.</div>
+              <div class="shared-users-item__email">{{ user.email }}</div>
+              <div class="shared-users-item__remove">
+                <button mat-icon-button type="button" (click)="onDeleteUser(user.email)">
+                  <i class="icon icon-cross"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+
+      <div class="form__field">
+        <form class="tag-form" [formGroup]="formAddTag" (ngSubmit)="onSubmitAddTag()">
+          <div class="tag-form__title">
+            <mat-form-field appearance="outline" *ngIf="formAddTag.controls.title as control">
+              <mat-label>Tags</mat-label>
+              <input matInput appInput placeholder="Tag Title" [formControl]="control">
+            </mat-form-field>
+          </div>
+        </form>
+
+        <div class="tag-list">
+          <app-tag class="tag-list__item" size="lg" *ngFor="let tag of group.tags" [color]="tag.color.value"
+                   (delete)="onDeleteTag(tag)">
+            {{ tag.title }}
+          </app-tag>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-sheet-actions">
+    <button mat-button type="submit" [disabled]="form.invalid" *ngIf="false">
+      <div *ngIf="!sentSave else loader">
+        <i class="icon icon-checkmark"></i>
+        <span>Save</span>
+      </div>
+    </button>
+
+    <button mat-button type="button" color="warn" (click)="onDelete()" [disabled]="sentDelete">
+      <div *ngIf="!sentDelete else loader">
+        <i class="icon icon-trash"></i>
+        <span>Delete</span>
+      </div>
+    </button>
+
+    <ng-template #loader>
+      <div class="loader"></div>
+    </ng-template>
+  </div>
+</form>

@@ -1,0 +1,43 @@
+<app-page title="Account">
+  <form class="settings" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="settings__form form">
+      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.email as control">
+        <mat-label>Email</mat-label>
+        <input matInput appInput [formControl]="control">
+        <mat-error *ngIf="control.hasError('email') && control.touched">
+          The field does not match the email pattern
+        </mat-error>
+        <mat-error *ngIf="control.hasError('required') && control.touched">
+          Required field
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.username as control">
+        <mat-label>Username</mat-label>
+        <input matInput appInput [formControl]="control">
+        <mat-error *ngIf="control.hasError('required') && control.touched">
+          Required field
+        </mat-error>
+        <mat-error *ngIf="control.hasError('minlength') && control.touched">
+          Minimum number of characters: {{ usernameMinlength }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form__field" appearance="outline" *ngIf="form.controls.lang as control">
+        <mat-label>Language</mat-label>
+        <mat-select [formControl]="control">
+          <mat-option *ngFor="let lang of languages" [value]="lang.code">
+            {{ lang.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="settings__actions">
+      <button mat-button type="submit" [disabled]="form.invalid || formSent" color="primary">
+        <div *ngIf="!formSent">Save</div>
+        <div *ngIf="formSent" class="loader"></div>
+      </button>
+    </div>
+  </form>
+</app-page>

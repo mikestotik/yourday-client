@@ -1,0 +1,51 @@
+.task-form {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  position: relative;
+  opacity: 0.63;
+  transition: opacity 320ms;
+
+  &.focused {
+    opacity: 1;
+  }
+
+  &__check, &__close {
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 26px;
+    width: 26px;
+  }
+
+  &__check {
+    margin-right: 16px;
+    opacity: 0.75;
+  }
+
+  &__close {
+    margin-left: auto;
+    opacity: 0.5;
+  }
+
+  &__input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--color-white-primary);
+    padding: 0;
+    margin: 0;
+    flex: 1 0 auto;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 200;
+    }
+  }
+}

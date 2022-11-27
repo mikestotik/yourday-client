@@ -1,0 +1,9 @@
+<div class="snack">
+  <div class="snack__icon" [ngSwitch]="data.type" [ngClass]="data.type">
+    <i *ngSwitchCase="types.Success" class="icon icon-checkmark-circle-on"></i>
+    <i *ngSwitchCase="types.Warning" class="icon icon-warning"></i>
+    <i *ngSwitchCase="types.Danger" class="icon icon-cross-circle"></i>
+    <i *ngSwitchDefault class="icon icon-checkmark-circle-on"></i>
+  </div>
+  <div class="snack__message">{{ data.message }}</div>
+</div>

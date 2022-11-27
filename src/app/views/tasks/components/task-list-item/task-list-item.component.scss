@@ -1,0 +1,67 @@
+.task {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  transition: color, transform 320ms;
+  height: 48px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  color: var(--color-white-secondary);
+  font-weight: 300;
+
+  &:hover {
+    color: #ffffff;
+  }
+
+  &:active {
+    color: #ffffff;
+  }
+
+  &.checked {
+    opacity: 0.5;
+  }
+
+  &-status {
+    margin-right: 16px;
+    font-size: 24px;
+    width: 26px;
+    cursor: pointer;
+    opacity: 0.5;
+    display: flex;
+  }
+
+  &-title {
+    color: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1 1 auto;
+    font-weight: inherit;
+    transition: color 320ms;
+
+    &.checked {
+      text-decoration: line-through;
+    }
+  }
+
+  &-info {
+    margin-left: auto;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 32px;
+    margin-right: 2px;
+
+    &__tag {
+
+    }
+
+    &__icon {
+      opacity: 0.5;
+      margin-left: 12px;
+    }
+  }
+}

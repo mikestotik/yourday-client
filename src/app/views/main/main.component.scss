@@ -1,0 +1,141 @@
+.main {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.payload {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.sidebar-div {
+  position: absolute;
+  background: #00000050;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+
+  @media (min-width: 720px) {
+    display: none;
+  }
+}
+
+.sidebar {
+  flex: 0 0 auto;
+  position: absolute;
+  z-index: 2;
+  background: var(--color-dark-primary);
+  box-shadow: 4px 4px 4px var(--color-black-trans);
+  transition: margin-left 400ms;
+  transition-timing-function: cubic-bezier(0.51, 0, 0.51, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: var(--main-sidebar-size-mobile);
+
+  &.hidden {
+    margin-left: calc(0px - var(--main-sidebar-size-mobile));
+    box-shadow: none;
+  }
+
+  @media (min-width: 720px) {
+    position: relative;
+    width: var(--main-sidebar-size-desktop);
+
+    &.hidden {
+      margin-left: calc(0px - var(--main-sidebar-size-desktop));
+      box-shadow: none;
+    }
+  }
+
+  &-header {
+    flex: 0 0 auto;
+    height: 88px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 16px;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 22px;
+
+      &-nav-name {
+
+      }
+
+      &-tools {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 2px;
+      opacity: 0.75;
+      font-weight: 300;
+
+      &__user {
+
+      }
+
+      &__status {
+        color: var(--color-danged);
+
+        &.online {
+          color: var(--color-success);
+        }
+      }
+    }
+  }
+
+  &-navigation {
+    flex: 1 1 auto;
+    display: flex;
+    padding: 8px 16px;
+    overflow: auto;
+
+    & > * {
+      width: 100%;
+    }
+  }
+
+  &-footer {
+    margin-top: auto;
+  }
+}
+
+.main-title {
+  &__category {
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  &__info {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.75;
+  }
+}
+
+.header-info-tool {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity .34s;
+  font-size: 22px;
+  padding: 0 8px;
+
+  &:hover {
+    opacity: 1;
+  }
+}

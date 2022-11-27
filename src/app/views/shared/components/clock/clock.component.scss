@@ -1,0 +1,154 @@
+$clock-border: 2px solid #ffffff00;
+$clock-background: #ffffff10;
+$clock-inner-background: #3d546c;
+$clock-tick-size: 4px;
+$clock-size: 180px;
+
+.clock {
+  margin-top: 12px;
+
+  &__analog {
+    width: $clock-size;
+    height: $clock-size;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  &__digit {
+    margin-top: 8px;
+  }
+}
+
+.digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
+  &__format {
+    padding: 12px 24px;
+    cursor: pointer;
+
+    &.active {
+      opacity: 1;
+      color: var(--color-barnd);
+    }
+
+    &.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  &__time {
+    &.active {
+      color: var(--color-barnd);
+    }
+  }
+
+  &__div {
+
+  }
+}
+
+.clock-hands {
+  position: absolute;
+  top: 9%;
+  left: 11%;
+  width: 80%;
+  height: 80%;
+  border-radius: 100%;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 18px;
+    margin-left: -9px;
+    margin-top: -6px;
+    background: var(--color-barnd);
+    z-index: 11;
+  }
+
+  &__item {
+    width: 50%;
+    right: 50%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 50%;
+    border-radius: 6px;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+
+    &.hour {
+      width: 30%;
+      z-index: 3;
+    }
+
+    &.min {
+      height: 3px;
+      z-index: 10;
+      width: 40%;
+    }
+
+    &.second {
+      background: var(--color-barnd);
+      width: 45%;
+      height: 1px;
+    }
+  }
+}
+
+.sectors {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #ffffff10;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.sector {
+  height: 50%;
+  left: 48%;
+  position: absolute;
+  top: 0;
+  transform-origin: 50% 100%;
+  width: 4%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  &__marker {
+    height: 2px;
+    width: 2px;
+    background: #ffffff50;
+    border-radius: 50%;
+    transition: transform 256ms;
+    margin-top: 8px;
+  }
+
+  &_hour &__marker {
+    background: var(--color-barnd);
+    height: 6px;
+    width: 6px;
+    margin-top: 6px;
+  }
+
+  &:hover &__marker {
+    transform: scale(4);
+  }
+}

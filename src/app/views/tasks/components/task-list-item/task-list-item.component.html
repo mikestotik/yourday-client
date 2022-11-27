@@ -1,0 +1,18 @@
+<div class="task" matRipple [class.checked]="task.completed">
+  <div class="task-status priority-theme-{{ task.priority! }}" (click)="onCheck()">
+    <i *ngIf="!sent" class="icon icon-checkmark-circle-{{ task.completed ? 'on' : 'off' }}"></i>
+    <div *ngIf="sent" class="loader"></div>
+  </div>
+
+  <div class="task-title" [class.checked]="task.completed" (click)="onClick()">{{ task.title }}</div>
+
+  <div class="task-info" (click)="onClick()">
+    <div class="task-info__tag" *ngIf="task.tag as tag">
+      <app-tag [color]="tag.color.value" [deleteDisabled]="true">{{ tag.title }}</app-tag>
+    </div>
+
+    <i class="task-info__icon icon icon-list" *ngIf="task.checkList.length"></i>
+    <i class="task-info__icon icon icon-calendar-full" *ngIf="task.datetime"></i>
+    <i class="task-info__icon icon icon-file-empty" *ngIf="task.note"></i>
+  </div>
+</div>

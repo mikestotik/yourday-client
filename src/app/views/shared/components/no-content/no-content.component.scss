@@ -1,0 +1,21 @@
+.no-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.2;
+
+  i {
+    font-size: 48px;
+    margin-top: -64px;
+  }
+
+  span {
+    font-size: 20px;
+    max-width: 200px;
+    text-align: center;
+    margin-top: 16px;
+  }
+}
