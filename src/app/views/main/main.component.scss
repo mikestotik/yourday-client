@@ -51,11 +51,10 @@
 
   &-header {
     flex: 0 0 auto;
-    height: 88px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0 16px;
+    padding: 20px 16px 16px;
 
     &-title {
       display: flex;
