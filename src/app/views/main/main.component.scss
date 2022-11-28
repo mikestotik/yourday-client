@@ -60,16 +60,25 @@
     &-title {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       font-size: 22px;
 
-      &-nav-name {
+      &-logo {
+        color: var(--color-barnd);
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+        margin-top: -2px;
+      }
 
+      &-nav-name {
+        display: flex;
+        align-items: center;
       }
 
       &-tools {
         display: flex;
         align-items: center;
+        margin-left: auto;
       }
     }
 

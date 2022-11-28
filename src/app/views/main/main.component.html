@@ -3,6 +3,9 @@
   <div class="sidebar" [class.hidden]="(shownSidebar$ | async) === false" (swipeleft)="onSidebarSwipeLeft()">
     <div class="sidebar-header">
       <div class="sidebar-header-title">
+        <div class="sidebar-header-title-logo">
+          <i [ngClass]="currentNavigation.icon"></i>
+        </div>
         <div class="sidebar-header-title-nav-name">{{ currentNavigation.title }}</div>
         <div class="sidebar-header-title-tools">
           <div class="header-info-tool">
