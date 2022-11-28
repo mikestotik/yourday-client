@@ -89,7 +89,7 @@
         <mat-form-field color="primary" floatLabel="always">
           <mat-label>Date</mat-label>
           <input #dateInput matInput [matDatepicker]="picker" [formControl]="control" placeholder="Select Date" readonly>
-          <i class="icon icon-calendar-full" matSuffix *ngIf="!control.value" (click)="picker.open()"></i>
+          <i class="icon icon-calendar-full" matSuffix *ngIf="!control.value" (click)="onDate(picker)"></i>
           <i class="icon icon-cross" matSuffix *ngIf="control.value" (click)="onResetDate(dateInput)"></i>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

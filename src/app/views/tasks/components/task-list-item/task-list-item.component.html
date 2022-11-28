@@ -12,7 +12,7 @@
     </div>
 
     <i class="task-info__icon icon icon-list" *ngIf="task.checkList.length"></i>
-    <i class="task-info__icon icon icon-calendar-full" *ngIf="task.datetime"></i>
+    <i class="task-info__icon icon icon-calendar-full" *ngIf="task.datetime" [class.overdue]="task.datetime | overdue"></i>
     <i class="task-info__icon icon icon-file-empty" *ngIf="task.note"></i>
   </div>
 </div>

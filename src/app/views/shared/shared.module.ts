@@ -15,6 +15,7 @@ import { GroupColorPipe } from './pipes/group-color.pipe';
 import { GroupSortPipe } from './pipes/group-sort.pipe';
 import { TaskCounterPipe } from './pipes/task-counter.pipe';
 import { SnackSimpleComponent } from './snacks/snack-simple/snack-simple.component';
+import { OverduePipe } from './pipes/overdue.pipe';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { SnackSimpleComponent } from './snacks/snack-simple/snack-simple.compone
     TagComponent,
     GroupColorPipe,
     GroupSortPipe,
-    SnackSimpleComponent
+    SnackSimpleComponent,
+    OverduePipe
   ],
   exports: [
     MatButtonModule,
@@ -49,7 +51,8 @@ import { SnackSimpleComponent } from './snacks/snack-simple/snack-simple.compone
     ContenteditableDirective,
     TagComponent,
     GroupColorPipe,
-    GroupSortPipe
+    GroupSortPipe,
+    OverduePipe
   ]
 })
 export class SharedModule {}

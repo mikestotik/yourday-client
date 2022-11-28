@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { Store } from '@ngxs/store';
 import { NgxMaterialTimepickerComponent, NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 import { filter, map, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -92,9 +93,8 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
         this.groups = this.store.selectSnapshot(GroupState.groups);
         this.group = this.store.selectSnapshot(GroupState.group)(task!.group!);
         this.taskForm = this.createForm(task!);
-        this.taskFormStartValue = { ...this.taskForm.value };
+        this.taskFormStartValue = JSON.parse(JSON.stringify(this.taskForm.value));
         this.task = task!;
-
         this.time = this.getTime(task!.datetime);
         this.checkListForm = this.createCheckListForm();
         return this.taskForm.valueChanges;
@@ -178,6 +178,24 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
   }
 
 
+  public onDate(picker: MatDatepicker<any>): void {
+    const now = new Date();
+    now.setHours(now.getHours() + 1)
+
+    this.time = this.getTime(now);
+    this.taskForm.controls.datetime.patchValue(now);
+    picker.open();
+    this.saveValue(this.taskForm.value);
+  }
+
+
+  public onResetDate(dateInput: HTMLInputElement): void {
+    this.taskForm.controls.datetime.patchValue(null);
+    this.saveValue(this.taskForm.value);
+    setTimeout(() => dateInput.blur(), 0);
+  }
+
+
   public onChangeTime($event: string, timeInput: HTMLInputElement): void {
     const datetime: Date | null = this.taskForm.controls.datetime.value;
 
@@ -190,13 +208,6 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
       this.saveValue(this.taskForm.value);
       setTimeout(() => timeInput.blur(), 0);
     }
-  }
-
-
-  public onResetDate(dateInput: HTMLInputElement): void {
-    this.taskForm.controls.datetime.patchValue(null);
-    this.saveValue(this.taskForm.value);
-    setTimeout(() => dateInput.blur(), 0);
   }
 
 
@@ -241,5 +252,4 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
     }
     return '';
   }
-
 }
