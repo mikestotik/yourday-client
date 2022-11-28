@@ -179,13 +179,15 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
 
 
   public onDate(picker: MatDatepicker<any>): void {
-    const now = new Date();
-    now.setHours(now.getHours() + 1)
+    if (!this.taskForm.controls.datetime.value) {
+      const now = new Date();
+      now.setHours(now.getHours() + 1);
 
-    this.time = this.getTime(now);
-    this.taskForm.controls.datetime.patchValue(now);
+      this.time = this.getTime(now);
+      this.taskForm.controls.datetime.patchValue(now);
+      this.saveValue(this.taskForm.value);
+    }
     picker.open();
-    this.saveValue(this.taskForm.value);
   }
 
 
