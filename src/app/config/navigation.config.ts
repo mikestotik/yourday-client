@@ -47,7 +47,7 @@ export const PAGE_NAVIGATION_TASKS: NavItem[] = [
     icon: 'icon icon-clock'
   },
   {
-    routerLink: TaskFilter.Upcoming,
+    routerLink: TaskFilter.Planned,
     title: 'Planned',
     icon: 'icon icon-calendar-full'
   }

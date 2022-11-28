@@ -241,7 +241,7 @@ function filterByFilter(filter: string, state: TaskModel) {
       return state.tasks.filter(i => !i.group);
     case TaskFilter.Today:
       return state.tasks.filter(i => moment().isSame(i.datetime, 'day'));
-    case TaskFilter.Upcoming:
+    case TaskFilter.Planned:
       return state.tasks.filter(i => moment().isBefore(i.datetime));
     default:
       return [];

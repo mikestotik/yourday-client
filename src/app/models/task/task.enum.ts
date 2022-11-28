@@ -2,7 +2,7 @@ export enum TaskFilter {
   All = 'all',
   Incoming = 'incoming',
   Today = 'today',
-  Upcoming = 'upcoming',
+  Planned = 'planned',
 }
 
 

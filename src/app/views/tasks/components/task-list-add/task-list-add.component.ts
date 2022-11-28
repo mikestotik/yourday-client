@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import * as moment from 'moment';
 import { AddTask } from '../../../../models/task/store/task.actions';
 import { TaskFilter } from '../../../../models/task/task.enum';
 
@@ -53,10 +54,20 @@ export class TaskListAddComponent implements OnInit {
     if (this.form.valid) {
       this.sent = true;
 
+      let datetime = null;
+      if (this.groupOrFilterId === TaskFilter.Today) {
+        datetime = new Date();
+        datetime.setHours(datetime.getHours() + 1)
+      }
+      if (this.groupOrFilterId === TaskFilter.Planned) {
+        datetime = moment().add(1, 'days').toDate();
+        datetime.setHours(9, 0, 0);
+      }
+
       this.store.dispatch(new AddTask({
         title: this.form.value.title as string,
         group: !isNaN(Number(this.groupOrFilterId)) ? Number(this.groupOrFilterId) : null,
-        datetime: this.groupOrFilterId === TaskFilter.Today ? new Date() : null
+        datetime
       }))
         .subscribe(() => {
           this.form.reset();
