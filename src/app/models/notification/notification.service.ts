@@ -35,7 +35,7 @@ export class NotificationService {
       }
       // cordova.plugins.notification.local.requestPermission(function (granted) { ... });
     } else {
-      if (Notification) {
+      if ('Notification' in window) {
         this.platform = DeviceType.Browser;
         Notification.requestPermission().then(permission => {
           if (permission !== 'granted') {
