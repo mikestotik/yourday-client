@@ -1,4 +1,4 @@
-<div class="task" matRipple [class.checked]="task.completed">
+<div class="task" [class.checked]="task.completed">
   <div class="task-status priority-theme-{{ task.priority! }}" (click)="onCheck()">
     <i *ngIf="!sent" class="icon icon-checkmark-circle-{{ task.completed ? 'on' : 'off' }}"></i>
     <div *ngIf="sent" class="loader"></div>

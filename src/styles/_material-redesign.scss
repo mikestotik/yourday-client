@@ -35,6 +35,9 @@
 
   .mat-bottom-sheet-container {
     background: var(--background-body);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    min-height: 96vh;
   }
 
   .mdc-menu-surface {

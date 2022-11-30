@@ -15,7 +15,7 @@
 
     &__title {
       flex: 1 1 auto;
-      max-width: 280px;
+      max-width: 392px;
       font-size: 20px;
       line-height: 1.25;
       border-radius: 4px;
@@ -28,7 +28,7 @@
     }
 
     &__close {
-      opacity: 0.75;
+      opacity: 0.5;
       cursor: pointer;
       transition: opacity 256ms;
       border-radius: 4px;
