@@ -13,18 +13,6 @@ export class HammerConfig extends HammerGestureConfig {
 
     mc.get('swipe').set({ enable: true, direction: Hammer.DIRECTION_ALL });
 
-    // if (element.classList.contains('bottom-sheet')) {
-    //   mc.get('swipe').set({ enable: true, direction: Hammer.DIRECTION_DOWN });
-    // } else {
-    //   mc.get('swipe').set({ enable: false, direction: Hammer.DIRECTION_DOWN });
-    // }
-    //
-    // if (element.classList.contains('task-list')) {
-    //   mc.get('swipe').set({ enable: false });
-    // } else {
-    //   mc.get('swipe').set({ enable: true });
-    // }
-
     return mc;
   }
 }
