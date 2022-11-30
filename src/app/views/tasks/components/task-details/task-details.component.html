@@ -57,6 +57,7 @@
           <i class="icon icon-tag"></i>
           <span>No tag</span>
         </button>
+
         <button mat-menu-item *ngFor="let tag of group?.tags" [style.color]="tag.color ? tag.color.value + 95 : 'initial'" (click)="onChangeTag(tag.id)">
           <i class="icon icon-tag"></i>
           <span>{{ tag.title }}</span>

@@ -131,12 +131,18 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
 
 
   public onChangeTag(tagId: number | null): void {
-    this.saveValue({ tag: tagId });
+    this.sentSave = true;
+    this.store.dispatch(new UpdateTask(this.task.id, { tag: tagId })).subscribe(() => {
+      this.sentSave = false;
+    });
   }
 
 
   public onChangeGroup(groupId: number | null): void {
-    this.saveValue({ group: groupId });
+    this.sentSave = true;
+    this.store.dispatch(new UpdateTask(this.task.id, { group: groupId })).subscribe(() => {
+      this.sentSave = false;
+    });
   }
 
 
