@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ResponseError } from '../../interfaces/error.interface';
+import { ResponseError } from '../interfaces/error.interface';
 
 
 @Injectable()
@@ -26,6 +26,7 @@ export class ErrorsInterceptor implements HttpInterceptor {
           this.snackBar.open(apiError.message, 'Close', {
             verticalPosition: 'top',
             horizontalPosition: 'end',
+            duration: 5000
           });
         }
         return throwError(() => errorResponse);

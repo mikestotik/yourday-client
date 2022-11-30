@@ -19,7 +19,7 @@ import { HammerConfig } from './config/hammer.config';
 import { AccountState } from './models/account/store/account.state';
 import { AuthInterceptor } from './models/auth/interceptors/auth.interceptor';
 import { AuthState } from './models/auth/store/auth.state';
-import { ErrorsInterceptor } from './models/errors/errors.interceptor';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { GroupModelModule } from './models/group/group.module';
 import { MenuState } from './models/menu/store/menu.state';
 import { NavigationState } from './models/navigation/store/navigation.state';
