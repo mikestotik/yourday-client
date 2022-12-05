@@ -67,6 +67,10 @@
         align-items: center;
         margin-right: 8px;
         font-size: 27px;
+
+        i {
+          margin-top: -1px;
+        }
       }
 
       &-nav-name {
