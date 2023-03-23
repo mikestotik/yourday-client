@@ -13,7 +13,7 @@ import { ShowMenu } from '../../models/menu/store/menu.actions';
 import { SettingsState } from '../../models/settings/store/settings.state';
 import { ClearTasks, DisplayCompleted, RemoveTask, SortTasks, UpdateTask } from '../../models/task/store/task.actions';
 import { TaskState } from '../../models/task/store/task.state';
-import { TaskFilter, TaskSort } from '../../models/task/task.enum';
+import { TaskFilter, TaskPriority, TaskSort } from '../../models/task/task.enum';
 import { GroupDetailsComponent } from '../groups/components/group-details/group-details.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component';
@@ -188,12 +188,27 @@ export class TasksComponent implements OnInit, OnDestroy {
     worksheet.getColumn(1).width = 80;
 
     this.tasks.forEach(task => {
-      worksheet.addRow({ task: task.title, priority: task.priority, note: task.note });
+      worksheet.addRow({ task: task.title, priority: priorityName(task.priority), note: task.note });
     });
 
     workbook.xlsx.writeBuffer().then((data: any) => {
       const blob = new Blob([ data ], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, `Tasks - ${ group?.title }.xlsx`);
     });
+  }
+}
+
+function priorityName(priority: TaskPriority | null): string {
+  switch (priority) {
+    case TaskPriority.Low:
+      return 'Low'
+    case TaskPriority.Middle:
+      return 'Middle'
+    case TaskPriority.High:
+      return 'High'
+    case TaskPriority.VeryHigh:
+      return 'VeryHigh'
+    default:
+      return 'Middle'
   }
 }
