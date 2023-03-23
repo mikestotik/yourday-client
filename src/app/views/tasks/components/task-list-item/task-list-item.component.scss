@@ -45,11 +45,34 @@
     margin-right: 2px;
 
     &__tag {
+    }
+
+    &__est-time,
+    &__est-stp {
+      font-size: 12px;
+      border: 1px solid;
+      border-radius: 4px;
+      padding: 0 4px;
+      min-width: 24px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+      opacity: 0.63;
+    }
+
+    &__est-time {
+      border-color: var(--color-barnd)
+    }
+
+    &__est-stp {
+      border-color: #ffffff75
 
     }
 
     &__icon {
-      opacity: 0.5;
+      opacity: 0.63;
       margin-left: 12px;
     }
   }

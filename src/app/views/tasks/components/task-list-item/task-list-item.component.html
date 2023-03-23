@@ -11,6 +11,9 @@
       <app-tag [color]="tag.color.value" [deleteDisabled]="true">{{ tag.title }}</app-tag>
     </div>
 
+    <div class="task-info__est-time" *ngIf="task.estTime">{{ task.estTime }}</div>
+    <div class="task-info__est-stp" *ngIf="task.estStp">{{ task.estStp }}</div>
+
     <i class="task-info__icon icon icon-list" *ngIf="task.checkList.length"></i>
     <i class="task-info__icon icon icon-calendar-full" *ngIf="task.datetime" [class.overdue]="task.datetime | overdue"></i>
     <i class="task-info__icon icon icon-file-empty" *ngIf="task.note"></i>
