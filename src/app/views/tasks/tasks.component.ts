@@ -195,9 +195,9 @@ export class TasksComponent implements OnInit, OnDestroy {
       worksheet.addRow({
         task: task.title,
         priority: priorityName(task.priority),
-        note: task.note,
         storypoint: task.estStp,
-        estimate: task.estTime
+        estimate: task.estTime,
+        note: task.note,
       });
     });
 
