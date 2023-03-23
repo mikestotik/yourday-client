@@ -172,6 +172,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     const columns = {
       Task: 'task',
       Priority: 'priority',
+      Storypoint: 'storypoint',
+      Estimate: 'estimate',
       Note: 'note'
     };
 
@@ -183,12 +185,20 @@ export class TasksComponent implements OnInit, OnDestroy {
     worksheet.columns = [
       { header: 'Task', key: columns.Task },
       { header: 'Priority', key: columns.Priority },
+      { header: 'Storypoint', key: columns.Priority },
+      { header: 'Estimate', key: columns.Priority },
       { header: 'Note', key: columns.Note }
     ];
     worksheet.getColumn(1).width = 80;
 
     this.tasks.forEach(task => {
-      worksheet.addRow({ task: task.title, priority: priorityName(task.priority), note: task.note });
+      worksheet.addRow({
+        task: task.title,
+        priority: priorityName(task.priority),
+        note: task.note,
+        storypoint: task.estStp,
+        estimate: task.estTime
+      });
     });
 
     workbook.xlsx.writeBuffer().then((data: any) => {
