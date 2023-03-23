@@ -43,7 +43,8 @@
             "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": [
               "moment",
-              "luxon"
+              "luxon",
+              "exceljs"
             ]
           },
           "configurations": {

@@ -69,11 +69,11 @@ export class MainComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.websocket = this.socket.ioSocket;
     if (!this.websocket.connected) {
-      this.snackBar.open('WebSocket connection not established', 'Close', {
-        verticalPosition: 'top',
-        horizontalPosition: 'end',
-        duration: 10000,
-      });
+      // this.snackBar.open('WebSocket connection not established', 'Close', {
+      //   verticalPosition: 'top',
+      //   horizontalPosition: 'end',
+      //   duration: 10000,
+      // });
     }
 
     this.user = this.store.selectSnapshot(AccountState.user)!;

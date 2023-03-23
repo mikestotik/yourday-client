@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { GroupResource } from './group.resource';
 
+
 describe('GroupResource', () => {
   let service: GroupResource;
 

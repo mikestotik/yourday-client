@@ -2,9 +2,13 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
+import * as ExcelJS from 'exceljs';
+import * as fs from 'file-saver';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Task } from '../../interfaces/task.interface';
+import { AccountState } from '../../models/account/store/account.state';
 import { isGroupId } from '../../models/group/group.utils';
+import { GroupState } from '../../models/group/store/group.state';
 import { ShowMenu } from '../../models/menu/store/menu.actions';
 import { SettingsState } from '../../models/settings/store/settings.state';
 import { ClearTasks, DisplayCompleted, RemoveTask, SortTasks, UpdateTask } from '../../models/task/store/task.actions';
@@ -158,5 +162,37 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   public onClearList(): void {
     this.store.dispatch(new ClearTasks(this.tasks.map(i => i.id)));
+  }
+
+
+  public onDownload(): void {
+    const user = this.store.selectSnapshot(AccountState.user);
+    const group = this.store.selectSnapshot(GroupState.group)(parseInt(this.groupOrFilterId));
+
+    const columns = {
+      Id: 'id',
+      Task: 'task',
+      Note: 'note'
+    };
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = user?.fullName!;
+
+    const worksheet = workbook.addWorksheet(group?.title);
+
+    worksheet.columns = [
+      { header: 'Task', key: columns.Task },
+      { header: 'Note', key: columns.Note }
+    ];
+    worksheet.getColumn(1).width = 80;
+
+    this.tasks.forEach(task => {
+      worksheet.addRow({ task: task.title, note: task.note });
+    });
+
+    workbook.xlsx.writeBuffer().then((data: any) => {
+      const blob = new Blob([ data ], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, `Tasks - ${ group?.title }.xlsx`);
+    });
   }
 }
