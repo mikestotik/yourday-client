@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -26,6 +27,7 @@ import { isEqual } from '../../../../utils/obj.utils';
 interface GroupDetailsForm {
   title: FormControl<string>;
   color: FormControl<number | null>;
+  renewable: FormControl<boolean>;
 }
 
 
@@ -174,7 +176,8 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
   private createForm(group: CreateGroupPayload): FormGroup<GroupDetailsForm> {
     return this.fb.nonNullable.group({
       title: [ group.title, [ Validators.required ] ],
-      color: [ group.color ]
+      color: [ group.color ],
+      renewable: [ group.renewable ]
     });
   }
 
@@ -200,5 +203,10 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
       new PinGroup(Number(this.groupId)) :
       new UnPinGroup(Number(this.groupId))
     );
+  }
+
+
+  public onRenewable(value: MatSlideToggleChange): void {
+    this.store.dispatch(new UpdateGroup(this.groupId, { renewable: value.checked }));
   }
 }

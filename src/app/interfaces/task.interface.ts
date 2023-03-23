@@ -1,4 +1,4 @@
-import { TaskPriority } from '../models/task/task.enum';
+import { TaskPriority } from '../enums/task-priority.enum';
 import { User } from './account.interface';
 import { Entity } from './entity.interface';
 import { SubTask } from './sub-task.interface';

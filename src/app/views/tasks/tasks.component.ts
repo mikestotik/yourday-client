@@ -5,6 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import * as ExcelJS from 'exceljs';
 import * as fs from 'file-saver';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Group } from '../../interfaces/group.interface';
 import { Task } from '../../interfaces/task.interface';
 import { AccountState } from '../../models/account/store/account.state';
 import { isGroupId } from '../../models/group/group.utils';
@@ -13,7 +14,8 @@ import { ShowMenu } from '../../models/menu/store/menu.actions';
 import { SettingsState } from '../../models/settings/store/settings.state';
 import { ClearTasks, DisplayCompleted, RemoveTask, SortTasks, UpdateTask } from '../../models/task/store/task.actions';
 import { TaskState } from '../../models/task/store/task.state';
-import { TaskFilter, TaskPriority, TaskSort } from '../../models/task/task.enum';
+import { TaskFilter, TaskSort } from '../../models/task/task.enum';
+import { priorityName } from '../../utils/task.utils';
 import { GroupDetailsComponent } from '../groups/components/group-details/group-details.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component';
@@ -47,7 +49,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   public sortMenuItems!: SortMenuItem[];
 
   public shownEmpty!: boolean;
-  public isGroup!: boolean;
+  public group!: Group | null;
   public shownCompleted!: boolean;
   public pinned!: boolean;
 
@@ -75,7 +77,13 @@ export class TasksComponent implements OnInit, OnDestroy {
       filter(segments => segments.length !== 0),
       map(segments => segments[0].path),
       tap(groupOrFilterId => this.groupOrFilterId = groupOrFilterId),
-      tap(groupOrFilterId => this.isGroup = isGroupId(groupOrFilterId)),
+      tap(groupOrFilterId => {
+        if (isGroupId(groupOrFilterId)) {
+          this.group = this.store.selectSnapshot(GroupState.group)(parseInt(groupOrFilterId));
+        } else {
+          this.group = null;
+        }
+      }),
       tap(groupOrFilterId =>
         this.pinned = this.store.selectSnapshot(SettingsState.pinnedGroups)
           .includes(Number(groupOrFilterId))
@@ -124,7 +132,10 @@ export class TasksComponent implements OnInit, OnDestroy {
   public onCheck(task: Task, listItem: TaskListItemComponent): void {
     listItem.sent = true;
     this.store.dispatch(new UpdateTask(task.id, { completed: !task.completed }))
-      .subscribe(() => listItem.sent = false);
+      .subscribe(() => {
+        listItem.sent = false;
+        this.updateRenewable();
+      });
   }
 
 
@@ -142,9 +153,9 @@ export class TasksComponent implements OnInit, OnDestroy {
 
 
   public editGroup(): void {
-    if (this.isGroup) {
+    if (this.group) {
       this.bottomSheet.open(GroupDetailsComponent, {
-        data: Number(this.groupOrFilterId)
+        data: this.group.id
       });
     }
   }
@@ -197,7 +208,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         priority: priorityName(task.priority),
         storypoint: task.estStp,
         estimate: task.estTime,
-        note: task.note,
+        note: task.note
       });
     });
 
@@ -206,19 +217,12 @@ export class TasksComponent implements OnInit, OnDestroy {
       fs.saveAs(blob, `Tasks - ${ group?.title }.xlsx`);
     });
   }
-}
 
-function priorityName(priority: TaskPriority | null): string {
-  switch (priority) {
-    case TaskPriority.Low:
-      return 'Low'
-    case TaskPriority.Middle:
-      return 'Middle'
-    case TaskPriority.High:
-      return 'High'
-    case TaskPriority.VeryHigh:
-      return 'VeryHigh'
-    default:
-      return 'Middle'
+
+  private updateRenewable(): void {
+    if (this.group?.renewable && !this.tasks.some(i => !i.completed)) {
+      this.tasks.forEach(task => this.store.dispatch(new UpdateTask(task.id, { completed: false })));
+    }
   }
 }
+

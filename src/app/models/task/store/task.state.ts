@@ -11,7 +11,7 @@ import {
   AddSubTask,
   AddTask,
   AddTaskToStore, DeleteSubTask,
-  DisplayCompleted,
+  DisplayCompleted, DownloadExcel,
   GetTask,
   GetTasks,
   GetTasksByGroup,
@@ -210,6 +210,7 @@ export class TaskState {
     );
   }
 
+
   @Action(DeleteSubTask)
   public deleteSubTask(ctx: StateContext<TaskModel>, { taskId, id }: DeleteSubTask): Observable<void> {
     return this.subTaskService.delete(id).pipe(
@@ -226,12 +227,19 @@ export class TaskState {
       })
     );
   }
+
+
+  @Action(DownloadExcel)
+  public downloadExcel(ctx: StateContext<TaskModel>, { tasks }: DownloadExcel): void {
+    // todo: to implement
+  }
 }
 
 
 function filterByGroup(id: number, state: TaskModel): Task[] {
   return state.tasks.filter(i => i.group && i.group === id);
 }
+
 
 function filterByFilter(filter: string, state: TaskModel) {
   switch (filter) {
@@ -248,6 +256,7 @@ function filterByFilter(filter: string, state: TaskModel) {
   }
 }
 
+
 function add(ctx: StateContext<TaskModel>, value: Task | Task[]): TaskModel {
   const state = ctx.getState();
   const all = [ ...state.tasks ];
@@ -255,11 +264,13 @@ function add(ctx: StateContext<TaskModel>, value: Task | Task[]): TaskModel {
   return ctx.patchState({ tasks: all });
 }
 
+
 function update(ctx: StateContext<TaskModel>, value: Task): TaskModel {
   const state = ctx.getState();
   const all = state.tasks.map(i => i.id === value.id ? value : i);
   return ctx.patchState({ tasks: all });
 }
+
 
 function remove(ctx: StateContext<TaskModel>, value: number | number[]): TaskModel {
   const state = ctx.getState();

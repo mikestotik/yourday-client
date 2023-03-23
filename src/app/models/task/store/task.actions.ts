@@ -118,6 +118,7 @@ export class SortTasks {
   }
 }
 
+
 export class ClearTasks {
   static readonly type = '[Tasks] ClearTasks';
 
@@ -126,6 +127,7 @@ export class ClearTasks {
     public ids: number[]) {
   }
 }
+
 
 export class AddSubTask {
   static readonly type = '[Tasks] AddSubTask';
@@ -156,5 +158,15 @@ export class DeleteSubTask {
   constructor(
     public taskId: number,
     public id: number) {
+  }
+}
+
+
+export class DownloadExcel {
+  static readonly type = '[Tasks] DownloadExcel';
+
+
+  constructor(
+    public tasks: Task[]) {
   }
 }

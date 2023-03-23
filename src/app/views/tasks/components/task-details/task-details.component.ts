@@ -6,6 +6,7 @@ import { Store } from '@ngxs/store';
 import { NgxMaterialTimepickerComponent, NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 import { filter, map, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { TaskConfig } from '../../../../config/task.config';
+import { TaskPriority } from '../../../../enums/task-priority.enum';
 import { DictItem } from '../../../../interfaces/dict.interface';
 import { Group } from '../../../../interfaces/group.interface';
 import { SubTaskPayload } from '../../../../interfaces/sub-task.interface';
@@ -13,7 +14,6 @@ import { Task, TaskPriorityItem, TaskUpdate } from '../../../../interfaces/task.
 import { GroupState } from '../../../../models/group/store/group.state';
 import { AddSubTask, DeleteSubTask, RemoveTask, UpdateTask } from '../../../../models/task/store/task.actions';
 import { TaskState } from '../../../../models/task/store/task.state';
-import { TaskPriority } from '../../../../models/task/task.enum';
 import { isEqual } from '../../../../utils/obj.utils';
 
 

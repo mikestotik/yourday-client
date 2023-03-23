@@ -6,14 +6,6 @@ export enum TaskFilter {
 }
 
 
-export enum TaskPriority {
-  Low,
-  Middle,
-  High,
-  VeryHigh,
-}
-
-
 export enum TaskSort {
   None = 'None',
   Name = 'Name',

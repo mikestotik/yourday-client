@@ -1,4 +1,4 @@
-<app-page [title]="groupOrFilterId | tasksTitle" [titleSuffixIcon]="isGroup ?' icon icon-pencil' : ''" (titleClick)="editGroup()">
+<app-page [title]="groupOrFilterId | tasksTitle" [titleSuffixIcon]="group ?' icon icon-pencil' : ''" (titleClick)="editGroup()">
   <div class="tasks-page-tools" page-menu>
     <button mat-icon-button [matMenuTriggerFor]="mainMenu" color="primary">
       <i class="icon icon-dots-horizontal-triple"></i>

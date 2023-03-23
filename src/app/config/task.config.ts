@@ -1,6 +1,6 @@
+import { TaskPriority } from '../enums/task-priority.enum';
 import { DictItem } from '../interfaces/dict.interface';
 import { TaskPriorityItem } from '../interfaces/task.interface';
-import { TaskPriority } from '../models/task/task.enum';
 
 
 export class TaskConfig {

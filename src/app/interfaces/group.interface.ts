@@ -6,13 +6,12 @@ import { Tag } from './tag.interface';
 export interface CreateGroupPayload {
   title: string;
   color: number | null;
+  renewable: boolean;
 }
 
 
-export interface Group extends Entity {
-  title: string;
+export interface Group extends Entity, CreateGroupPayload {
   owner: number;
   tags: Tag[];
-  color: number | null;
   users: SharedUser[];
 }

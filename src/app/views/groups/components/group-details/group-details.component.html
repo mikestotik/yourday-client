@@ -43,6 +43,18 @@
         </div>
       </div>
 
+      <br>
+      <div class="form__field">
+        <mat-slide-toggle
+          color="primary"
+          labelPosition="before"
+          [checked]="group.renewable"
+          (change)="onRenewable($event)"
+        >
+          Renewable
+        </mat-slide-toggle>
+      </div>
+
       <form class="form__field" [formGroup]="formAddUser" (ngSubmit)="onSubmitAddUser()">
         <mat-form-field *ngIf="formAddUser.controls.email as control">
           <mat-label>Users</mat-label>
