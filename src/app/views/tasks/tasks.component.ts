@@ -183,6 +183,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     const columns = {
       Task: 'task',
       Priority: 'priority',
+      Tag: 'tag',
       Storypoint: 'storypoint',
       Estimate: 'estimate',
       Note: 'note'
@@ -196,21 +197,21 @@ export class TasksComponent implements OnInit, OnDestroy {
     worksheet.columns = [
       { header: 'Task', key: columns.Task },
       { header: 'Priority', key: columns.Priority },
+      { header: 'Tag', key: columns.Tag },
       { header: 'Storypoint', key: columns.Storypoint },
       { header: 'Estimate', key: columns.Estimate },
       { header: 'Note', key: columns.Note }
     ];
     worksheet.getColumn(1).width = 80;
 
-    this.tasks.forEach(task => {
-      worksheet.addRow({
-        task: task.title,
-        priority: priorityName(task.priority),
-        storypoint: task.estStp,
-        estimate: task.estTime,
-        note: task.note
-      });
-    });
+    this.tasks.forEach(task => worksheet.addRow({
+      [columns.Task]: task.title,
+      [columns.Priority]: priorityName(task.priority),
+      [columns.Tag]: task.tag?.title,
+      [columns.Storypoint]: task.estStp,
+      [columns.Estimate]: task.estTime,
+      [columns.Note]: task.note
+    }));
 
     workbook.xlsx.writeBuffer().then((data: any) => {
       const blob = new Blob([ data ], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
