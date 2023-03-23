@@ -170,8 +170,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     const group = this.store.selectSnapshot(GroupState.group)(parseInt(this.groupOrFilterId));
 
     const columns = {
-      Id: 'id',
       Task: 'task',
+      Priority: 'priority',
       Note: 'note'
     };
 
@@ -182,12 +182,13 @@ export class TasksComponent implements OnInit, OnDestroy {
 
     worksheet.columns = [
       { header: 'Task', key: columns.Task },
+      { header: 'Priority', key: columns.Priority },
       { header: 'Note', key: columns.Note }
     ];
     worksheet.getColumn(1).width = 80;
 
     this.tasks.forEach(task => {
-      worksheet.addRow({ task: task.title, note: task.note });
+      worksheet.addRow({ task: task.title, priority: task.priority, note: task.note });
     });
 
     workbook.xlsx.writeBuffer().then((data: any) => {
