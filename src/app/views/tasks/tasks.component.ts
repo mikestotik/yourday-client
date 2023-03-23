@@ -185,8 +185,8 @@ export class TasksComponent implements OnInit, OnDestroy {
     worksheet.columns = [
       { header: 'Task', key: columns.Task },
       { header: 'Priority', key: columns.Priority },
-      { header: 'Storypoint', key: columns.Priority },
-      { header: 'Estimate', key: columns.Priority },
+      { header: 'Storypoint', key: columns.Storypoint },
+      { header: 'Estimate', key: columns.Estimate },
       { header: 'Note', key: columns.Note }
     ];
     worksheet.getColumn(1).width = 80;
