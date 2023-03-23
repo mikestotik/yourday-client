@@ -65,18 +65,14 @@
         color: var(--color-barnd);
         display: flex;
         align-items: center;
-        margin-right: 8px;
-        font-size: 27px;
-
-        i {
-          margin-top: -1px;
-        }
+        margin-right: 12px;
+        font-size: 28px;
       }
 
       &-nav-name {
         display: flex;
         align-items: center;
-        font-size: 20px;
+        font-size: 24px;
       }
 
       &-tools {
@@ -90,15 +86,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 14px;
-      margin-top: 2px;
-      opacity: 0.75;
+      margin-top: 6px;
 
       &__user {
-
+        opacity: 0.5;
       }
 
       &__status {
+        opacity: 0.75;
+        font-size: 14px;
         color: var(--color-danged);
 
         &.online {
