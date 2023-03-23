@@ -20,6 +20,8 @@ export interface Task extends Entity, TaskPayload {
   owner: User;
   tag: Tag | null;
   checkList: SubTask[];
+  estTime: string;
+  estStp: number;
 }
 
 
@@ -30,6 +32,8 @@ export interface TaskUpdate extends Entity, TaskPayload {
   reminder: number | null;
   owner: User;
   tag: number | null;
+  estTime: string | null;
+  estStp: number | null;
 }
 
 

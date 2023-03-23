@@ -24,6 +24,8 @@ interface TaskDetailsForm {
   datetime: FormControl<Date | null>;
   reminder: FormControl<number | null>;
   tag: FormControl<number | null>;
+  estTime: FormControl<string | null>;
+  estStp: FormControl<number | null>;
 }
 
 
@@ -224,6 +226,16 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
   }
 
 
+  public onChangedEstStp($event: number): void {
+    this.saveValue({ estStp: $event });
+  }
+
+
+  public onChangedEstTime($event: string): void {
+    this.saveValue({ estTime: $event });
+  }
+
+
   private saveValue(value: Partial<TaskUpdate>): void {
     if (this.taskForm.valid && this.valueChanged) {
       this.sentSave = true;
@@ -241,7 +253,9 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
       priority: [ task.priority ],
       datetime: [ task.datetime ? new Date(task.datetime) : null ],
       reminder: [ task.reminder ],
-      tag: [ task.tag ? task.tag.id : null ]
+      tag: [ task.tag ? task.tag.id : null ],
+      estStp: [ task.estStp ? task.estStp : null ],
+      estTime: [ task.estTime ? task.estTime : null ]
     });
   }
 
@@ -260,4 +274,6 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
     }
     return '';
   }
+
+
 }
