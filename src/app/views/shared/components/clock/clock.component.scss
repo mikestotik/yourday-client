@@ -36,7 +36,7 @@ $clock-size: 180px;
 
     &.active {
       opacity: 1;
-      color: var(--color-barnd);
+      color: var(--color-brand);
     }
 
     &.disabled {
@@ -47,7 +47,7 @@ $clock-size: 180px;
 
   &__time {
     &.active {
-      color: var(--color-barnd);
+      color: var(--color-brand);
     }
   }
 
@@ -75,7 +75,7 @@ $clock-size: 180px;
     border-radius: 18px;
     margin-left: -9px;
     margin-top: -6px;
-    background: var(--color-barnd);
+    background: var(--color-brand);
     z-index: 11;
   }
 
@@ -103,7 +103,7 @@ $clock-size: 180px;
     }
 
     &.second {
-      background: var(--color-barnd);
+      background: var(--color-brand);
       width: 45%;
       height: 1px;
     }
@@ -142,7 +142,7 @@ $clock-size: 180px;
   }
 
   &_hour &__marker {
-    background: var(--color-barnd);
+    background: var(--color-brand);
     height: 6px;
     width: 6px;
     margin-top: 6px;

@@ -16,7 +16,7 @@
       height: 48px;
       width: 48px;
       font-size: 28px;
-      color: var(--color-barnd);
+      color: var(--color-brand);
       cursor: pointer;
       border-radius: 4px;
     }
@@ -37,13 +37,15 @@
 
       &:hover {
         i {
-          color: var(--color-barnd);
+          color: var(--color-brand);
         }
       }
     }
 
     &__actions {
       margin-left: auto;
+      display: flex;
+      align-items: center;
     }
   }
 

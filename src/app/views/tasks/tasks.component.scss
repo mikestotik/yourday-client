@@ -19,6 +19,12 @@
 }
 
 .tasks-page-tools {
+  display: block;
+
+  @media (min-width: 540px) {
+    display: none;
+  }
+
   & > button {
     display: flex;
     align-items: center;

@@ -1,4 +1,26 @@
-<app-page [title]="groupOrFilterId | tasksTitle" [titleSuffixIcon]="group ?' icon icon-pencil' : ''" (titleClick)="editGroup()">
+<app-page [title]="groupOrFilterId | tasksTitle" [titleSuffixIcon]="group ?' icon icon-pencil' : ''"
+          (titleClick)="editGroup()">
+  <!-- PAGE TOOLBAR -->
+  <div class="page-toolbar" page-toolbar>
+    <div class="page-toolbar__item" matTooltip="Sort" [matMenuTriggerFor]="sortMenu">
+      <i class="icon icon-sort-amount-asc"></i>
+    </div>
+
+    <div class="page-toolbar__item" matTooltip="Show / Hide Completed"
+         (click)="showCompleted(!shownCompleted)"
+         [class.active]="shownCompleted">
+      <i class="icon icon-eye"></i>
+    </div>
+
+    <div class="page-toolbar__item" matTooltip="Clear All" (click)="onClearList()">
+      <i class="icon icon-magic-wand"></i>
+    </div>
+
+    <div class="page-toolbar__item" matTooltip="Download" (click)="onDownload()">
+      <i class="icon icon-download"></i>
+    </div>
+  </div>
+
   <div class="tasks-page-tools" page-menu>
     <button mat-icon-button [matMenuTriggerFor]="mainMenu" color="primary">
       <i class="icon icon-dots-horizontal-triple"></i>
@@ -14,7 +36,8 @@
       <div class="page-menu__action menu-toggle-item" mat-menu-item>
         <i class="icon icon-eye"></i>
         <span class="menu-toggle-item__title">Show Completed</span>
-        <mat-slide-toggle class="menu-toggle-item__action" [ngModel]="shownCompleted" (ngModelChange)="showCompleted($event)" color="primary"></mat-slide-toggle>
+        <mat-slide-toggle class="menu-toggle-item__action" [ngModel]="shownCompleted"
+                          (ngModelChange)="showCompleted($event)" color="primary"></mat-slide-toggle>
       </div>
 
       <button class="page-menu__action" mat-menu-item (click)="onClearList()" [disabled]="!tasks.length" *ngIf="false">
@@ -46,7 +69,8 @@
   <!-- TASK LIST -->
   <div class="tasks-page">
     <div class="tasks-page__payload">
-      <div class="task-list" *ngIf="(tasks | filterCompleted: shownCompleted) as filteredTasks" (swiperight)="onSwipeRight()">
+      <div class="task-list" *ngIf="(tasks | filterCompleted: shownCompleted) as filteredTasks"
+           (swiperight)="onSwipeRight()">
         <app-task-list-item
           #taskListItem
           *ngFor="let task of filteredTasks | tasksSort: (sort$ | async)"
