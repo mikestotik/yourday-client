@@ -1,12 +1,12 @@
 {
-  "/core": {
+  "/api": {
     "target": "https://yourday.me",
     "secure": true,
     "logLevel": "debug",
     "changeOrigin": true,
     "ws": true,
     "pathRewrite": {
-      "^/core": ""
+      "^/api": "/api"
     }
   }
 }

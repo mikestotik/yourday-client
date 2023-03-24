@@ -8,7 +8,7 @@ export const environment = {
     ngxs: false
   },
   api: {
-    core: '/core/api/v1.0'
+    core: '/api/v1.0'
   },
   websocket: {
     url: 'http://127.0.0.1:3000'

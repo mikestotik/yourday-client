@@ -1,5 +1,5 @@
 {
-  "/core": {
+  "/api": {
     "target":  {
       "protocol": "http",
       "host": "127.0.0.1",
@@ -10,7 +10,7 @@
     "changeOrigin": true,
     "ws": true,
     "pathRewrite": {
-      "^/core": ""
+      "^/api": "/api"
     }
   }
 }
