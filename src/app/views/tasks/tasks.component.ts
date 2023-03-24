@@ -5,6 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import * as ExcelJS from 'exceljs';
 import * as fs from 'file-saver';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { ExcelSheetColumns } from '../../config/download.config';
 import { Group } from '../../interfaces/group.interface';
 import { Task } from '../../interfaces/task.interface';
 import { AccountState } from '../../models/account/store/account.state';
@@ -180,37 +181,28 @@ export class TasksComponent implements OnInit, OnDestroy {
     const user = this.store.selectSnapshot(AccountState.user);
     const group = this.store.selectSnapshot(GroupState.group)(parseInt(this.groupOrFilterId));
 
-    const columns = {
-      Task: 'task',
-      Priority: 'priority',
-      Tag: 'tag',
-      Storypoint: 'storypoint',
-      Estimate: 'estimate',
-      Note: 'note'
-    };
-
     const workbook = new ExcelJS.Workbook();
     workbook.creator = user?.fullName!;
 
     const worksheet = workbook.addWorksheet(group?.title);
 
     worksheet.columns = [
-      { header: 'Task', key: columns.Task },
-      { header: 'Priority', key: columns.Priority },
-      { header: 'Tag', key: columns.Tag },
-      { header: 'Storypoint', key: columns.Storypoint },
-      { header: 'Estimate', key: columns.Estimate },
-      { header: 'Note', key: columns.Note }
+      { header: ExcelSheetColumns.task.title, key: ExcelSheetColumns.task.field },
+      { header: ExcelSheetColumns.priority.title, key: ExcelSheetColumns.priority.field },
+      { header: ExcelSheetColumns.tag.title, key: ExcelSheetColumns.tag.field },
+      { header: ExcelSheetColumns.storypoint.title, key: ExcelSheetColumns.storypoint.field },
+      { header: ExcelSheetColumns.estimate.title, key: ExcelSheetColumns.estimate.field },
+      { header: ExcelSheetColumns.note.title, key: ExcelSheetColumns.note.field }
     ];
-    worksheet.getColumn(1).width = 80;
+    worksheet.getColumn(1).width = ExcelSheetColumns.task.width;
 
     this.tasks.forEach(task => worksheet.addRow({
-      [columns.Task]: task.title,
-      [columns.Priority]: priorityName(task.priority),
-      [columns.Tag]: task.tag?.title,
-      [columns.Storypoint]: task.estStp,
-      [columns.Estimate]: task.estTime,
-      [columns.Note]: task.note
+      [ExcelSheetColumns.task.field]: task.title,
+      [ExcelSheetColumns.priority.field]: priorityName(task.priority),
+      [ExcelSheetColumns.tag.field]: task.tag?.title,
+      [ExcelSheetColumns.storypoint.field]: task.estStp,
+      [ExcelSheetColumns.estimate.field]: task.estTime,
+      [ExcelSheetColumns.note.field]: task.note
     }));
 
     workbook.xlsx.writeBuffer().then((data: any) => {
