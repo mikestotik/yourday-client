@@ -77,10 +77,8 @@ $yourday-theme-dark: mat.define-dark-theme((
 ));
 
 
-.theme-dark {
-  @include mat.all-component-themes($yourday-theme-dark);
-}
+@include mat.all-component-themes($yourday-theme-light);
 
-.theme-light {
-  @include mat.all-component-themes($yourday-theme-light);
+.theme-dark {
+  @include mat.all-component-colors($yourday-theme-dark);
 }
