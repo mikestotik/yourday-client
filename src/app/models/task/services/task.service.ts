@@ -41,4 +41,8 @@ export class TaskService {
     return this.resource.delete(id);
   }
 
+
+  public deleteAll(ids: number[]): Observable<void> {
+    return this.resource.deleteAll(ids);
+  }
 }

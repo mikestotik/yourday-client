@@ -5,7 +5,7 @@
       <div class="page-nav-item"
            matRipple
            *ngFor="let item of pageNavigation$ | async"
-           [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, item.routerLink ]"
+           [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, 'filter', item.routerLink ]"
            routerLinkActive="active"
            (click)="itemEvent.emit()">
         <div class="page-nav-item__icon">
@@ -34,7 +34,7 @@
       <div class="page-nav-group__list" *ngFor="let group of groups | groupSort: (pinnedGroups$ | async)">
         <div class="page-nav-item"
              matRipple
-             [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, group.id ]"
+             [routerLink]="[ '/', appRoutes.App, mainRoutes.Tasks, 'group', group.id ]"
              routerLinkActive="active"
              [class.pinned]="(pinnedGroups$ | async)?.includes(group.id)"
              (click)="itemEvent.emit()">

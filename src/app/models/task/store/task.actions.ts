@@ -109,6 +109,11 @@ export class DisplayCompleted {
 }
 
 
+export class ToggleDisplayCompleted {
+  static readonly type = '[Tasks] ToggleDisplayCompleted';
+}
+
+
 export class SortTasks {
   static readonly type = '[Tasks] SortTasks';
 

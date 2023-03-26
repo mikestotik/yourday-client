@@ -42,4 +42,8 @@ export class TaskResource {
     return this.http.delete<void>(`${ ApiConfig.TASKS }/${ id }`);
   }
 
+
+  public deleteAll(ids: number[]): Observable<any> {
+    return this.http.delete<any>(`${ ApiConfig.TASKS }`, { body: ids });
+  }
 }

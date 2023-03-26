@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { patch } from '@ngxs/store/operators';
 import * as moment from 'moment';
 import { map, Observable, tap } from 'rxjs';
 import { Task } from '../../../interfaces/task.interface';
@@ -10,8 +11,11 @@ import { TaskFilter, TaskSort } from '../task.enum';
 import {
   AddSubTask,
   AddTask,
-  AddTaskToStore, DeleteSubTask,
-  DisplayCompleted, DownloadExcel,
+  AddTaskToStore,
+  ClearTasks,
+  DeleteSubTask,
+  DisplayCompleted,
+  DownloadExcel,
   GetTask,
   GetTasks,
   GetTasksByGroup,
@@ -19,6 +23,7 @@ import {
   RemoveTaskFromStore,
   RemoveTasksByGroup,
   SortTasks,
+  ToggleDisplayCompleted,
   UpdateTask,
   UpdateTaskInStore
 } from './task.actions';
@@ -27,7 +32,7 @@ import {
 export interface TaskModel {
   tasks: Task[];
   sort: TaskSort;
-  shownCompleted?: boolean;
+  displayCompleted?: boolean;
 }
 
 
@@ -36,7 +41,7 @@ export interface TaskModel {
   defaults: {
     tasks: [],
     sort: TaskSort.None,
-    shownCompleted: false
+    displayCompleted: true
   }
 })
 @Injectable({
@@ -45,13 +50,13 @@ export interface TaskModel {
 export class TaskState {
 
   @Selector()
-  public static tasks(state: TaskModel): Task[] {
+  public static selectTasks(state: TaskModel): Task[] {
     return state.tasks;
   }
 
 
   @Selector()
-  public static sort(state: TaskModel): TaskSort {
+  public static selectSort(state: TaskModel): TaskSort {
     return state.sort;
   }
 
@@ -65,6 +70,7 @@ export class TaskState {
 
 
   @Selector()
+  /**@deprecated*/
   public static filterTasks(state: TaskModel) {
     return (groupOrFilterId: string | number): Task[] => {
       if (isGroupId(groupOrFilterId)) {
@@ -77,8 +83,35 @@ export class TaskState {
 
 
   @Selector()
-  public static shownCompleted(state: TaskModel): boolean {
-    return state.shownCompleted!;
+  public static selectGroupTasks(state: TaskModel): (groupId: number) => Task[] {
+    return (groupId: number): Task[] => {
+      return state.tasks.filter(i => i.group && i.group === groupId);
+    };
+  }
+
+
+  @Selector()
+  public static selectFilterTasks(state: TaskModel): (filter: TaskFilter) => Task[] {
+    return (filter: TaskFilter): Task[] => {
+      switch (filter) {
+        case TaskFilter.All:
+          return state.tasks;
+        case TaskFilter.Incoming:
+          return state.tasks.filter(i => !i.group);
+        case TaskFilter.Today:
+          return state.tasks.filter(i => moment().isSame(i.datetime, 'day'));
+        case TaskFilter.Planned:
+          return state.tasks.filter(i => moment().isBefore(i.datetime, 'day'));
+        default:
+          return [];
+      }
+    };
+  }
+
+
+  @Selector()
+  public static selectDisplayCompleted(state: TaskModel): boolean {
+    return state.displayCompleted!;
   }
 
 
@@ -162,6 +195,14 @@ export class TaskState {
   }
 
 
+  @Action(ClearTasks)
+  public clearTasks(ctx: StateContext<TaskModel>, { ids }: ClearTasks) {
+    return this.taskService.deleteAll(ids).pipe(tap(() => ctx.setState(patch({
+      tasks: ctx.getState().tasks.filter(task => !ids.includes(task.id))
+    }))));
+  }
+
+
   @Action(AddTaskToStore)
   public addTaskOnlyStore(ctx: StateContext<TaskModel>, { task }: AddTaskToStore) {
     add(ctx, task);
@@ -182,7 +223,13 @@ export class TaskState {
 
   @Action(DisplayCompleted)
   public displayCompleted(ctx: StateContext<TaskModel>, { display }: DisplayCompleted): TaskModel {
-    return ctx.patchState({ shownCompleted: display });
+    return ctx.patchState({ displayCompleted: display });
+  }
+
+
+  @Action(ToggleDisplayCompleted)
+  public toggleDisplayCompleted(ctx: StateContext<TaskModel>): TaskModel {
+    return ctx.patchState({ displayCompleted: !ctx.getState().displayCompleted });
   }
 
 

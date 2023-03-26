@@ -34,13 +34,13 @@ export interface GroupStateModel {
 export class GroupState {
 
   @Selector()
-  public static groups(state: GroupStateModel): Group[] {
+  public static selectGroups(state: GroupStateModel): Group[] {
     return state.groups;
   }
 
 
   @Selector()
-  public static group(state: GroupStateModel): (id: number) => Group | null {
+  public static selectGroup(state: GroupStateModel): (id: number) => Group | null {
     return (id: number): Group | null => {
       const group = state.groups.find(i => i.id === id);
       return group ? group : null;
@@ -49,7 +49,7 @@ export class GroupState {
 
 
   @Selector()
-  public static latest(state: GroupStateModel): Group {
+  public static selectLatestGroup(state: GroupStateModel): Group {
     return state.groups[state.groups.length - 1];
   }
 

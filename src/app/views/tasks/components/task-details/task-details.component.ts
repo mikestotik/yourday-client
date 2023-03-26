@@ -92,8 +92,8 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
       map(filterFn => filterFn(this.taskId)),
       filter(value => !!value),
       switchMap(task => {
-        this.groups = this.store.selectSnapshot(GroupState.groups);
-        this.group = this.store.selectSnapshot(GroupState.group)(task!.group!);
+        this.groups = this.store.selectSnapshot(GroupState.selectGroups);
+        this.group = this.store.selectSnapshot(GroupState.selectGroup)(task!.group!);
         this.taskForm = this.createForm(task!);
         this.taskFormStartValue = JSON.parse(JSON.stringify(this.taskForm.value));
         this.task = task!;

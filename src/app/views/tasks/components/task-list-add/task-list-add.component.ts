@@ -19,7 +19,7 @@ interface TaskForm {
 export class TaskListAddComponent implements OnInit {
 
   @Input()
-  public groupOrFilterId!: string;
+  public groupOrFilterId!: string | number;
 
   @Input()
   public isFirst!: boolean;

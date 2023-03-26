@@ -23,7 +23,7 @@ export class PageNavigationTasksComponent implements OnInit, PageNavigation {
   @Select(NavigationState.pageNavTasks)
   public pageNavigation$!: Observable<NavItem[]>;
 
-  @Select(GroupState.groups)
+  @Select(GroupState.selectGroups)
   public readonly groups$!: Observable<Group[]>;
 
   @Select(SettingsState.pinnedGroups)

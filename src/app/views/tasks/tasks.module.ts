@@ -20,6 +20,8 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
 import { TaskListAddComponent } from './components/task-list-add/task-list-add.component';
 import { TaskListEmptyComponent } from './components/task-list-empty/task-list-empty.component';
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component';
+import { TasksFilterComponent } from './pages/tasks-filter/tasks-filter.component';
+import { TasksGroupComponent } from './pages/tasks-group/tasks-group.component';
 import { FilterCompletedPipe } from './pipes/tasks-filter-completed.pipe';
 import { TasksSortPipe } from './pipes/tasks-sort.pipe';
 import { TasksTitlePipe } from './pipes/tasks-title.pipe';
@@ -36,7 +38,9 @@ import { TasksRouting } from './tasks.routing';
     TaskListEmptyComponent,
     TaskListAddComponent,
     TasksSortPipe,
-    TasksTitlePipe
+    TasksTitlePipe,
+    TasksGroupComponent,
+    TasksFilterComponent
   ],
   imports: [
     CommonModule,

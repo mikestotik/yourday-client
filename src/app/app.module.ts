@@ -64,7 +64,7 @@ import { TaskModelModule } from './models/task/task.module';
         'auth.accessToken',
         'auth.refreshToken',
         'menu.visible',
-        'tasks.shownCompleted',
+        'tasks.displayCompleted',
         'tasks.sort',
         'settings'
       ]

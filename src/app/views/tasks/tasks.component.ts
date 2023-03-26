@@ -6,7 +6,9 @@ import * as ExcelJS from 'exceljs';
 import * as fs from 'file-saver';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { ExcelSheetColumns } from '../../config/download.config';
+import { taskSortList } from '../../config/task-sort.config';
 import { Group } from '../../interfaces/group.interface';
+import { SortMenuItem } from '../../interfaces/sort.interface';
 import { Task } from '../../interfaces/task.interface';
 import { AccountState } from '../../models/account/store/account.state';
 import { isGroupId } from '../../models/group/group.utils';
@@ -22,20 +24,13 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component';
 
 
-interface SortMenuItem {
-  title: string;
-  sort: TaskSort;
-  icon: string;
-}
-
-
 @Component({
   templateUrl: './tasks.component.html',
   styleUrls: [ './tasks.component.scss' ]
 })
 export class TasksComponent implements OnInit, OnDestroy {
 
-  @Select(TaskState.sort)
+  @Select(TaskState.selectSort)
   public sort$!: Observable<TaskSort>;
 
   @Select(SettingsState.pinnedGroups)
@@ -47,7 +42,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   public filter!: typeof TaskFilter;
   public sort!: typeof TaskSort;
-  public sortMenuItems!: SortMenuItem[];
+  public sortMenuItems: SortMenuItem[] = taskSortList;
 
   public shownEmpty!: boolean;
   public group!: Group | null;
@@ -66,13 +61,6 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.filter = TaskFilter;
     this.sort = TaskSort;
 
-    this.sortMenuItems = [
-      { title: 'None', sort: TaskSort.None, icon: 'icon icon-checkmark-circle-off' },
-      { title: 'Name', sort: TaskSort.Name, icon: 'icon icon-sort-alpha-asc' },
-      { title: 'Priority', sort: TaskSort.Priority, icon: 'icon icon-sort-amount-asc' },
-      { title: 'Created', sort: TaskSort.Created, icon: 'icon icon-calendar-today' }
-    ];
-
     this.route.url.pipe(
       /** Init groupOrFilterId */
       filter(segments => segments.length !== 0),
@@ -80,7 +68,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       tap(groupOrFilterId => this.groupOrFilterId = groupOrFilterId),
       tap(groupOrFilterId => {
         if (isGroupId(groupOrFilterId)) {
-          this.group = this.store.selectSnapshot(GroupState.group)(parseInt(groupOrFilterId));
+          this.group = this.store.selectSnapshot(GroupState.selectGroup)(parseInt(groupOrFilterId));
         } else {
           this.group = null;
         }
@@ -96,7 +84,7 @@ export class TasksComponent implements OnInit, OnDestroy {
       )),
       tap(tasks => {
         const length = tasks.filter(i => {
-          if (this.store.selectSnapshot(TaskState.shownCompleted)) {
+          if (this.store.selectSnapshot(TaskState.selectDisplayCompleted)) {
             return true;
           }
           return !i.completed;
@@ -107,7 +95,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     )
       .subscribe(tasks => this.tasks = tasks);
 
-    this.store.select(TaskState.shownCompleted).pipe(
+    this.store.select(TaskState.selectDisplayCompleted).pipe(
       takeUntil(this.destroy$)
     ).subscribe(shown => this.shownCompleted = shown);
   }
@@ -179,7 +167,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   public onDownload(): void {
     const user = this.store.selectSnapshot(AccountState.user);
-    const group = this.store.selectSnapshot(GroupState.group)(parseInt(this.groupOrFilterId));
+    const group = this.store.selectSnapshot(GroupState.selectGroup)(parseInt(this.groupOrFilterId));
 
     const workbook = new ExcelJS.Workbook();
     workbook.creator = user?.fullName!;

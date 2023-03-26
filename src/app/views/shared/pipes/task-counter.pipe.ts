@@ -11,7 +11,7 @@ import { TaskFilter } from '../../../models/task/task.enum';
 })
 export class TaskCounterPipe implements PipeTransform {
 
-  @Select(TaskState.tasks)
+  @Select(TaskState.selectTasks)
   public tasks$!: Observable<Task[]>;
 
   constructor(

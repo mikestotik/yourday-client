@@ -79,7 +79,7 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit(): void {
-    this.store.select(GroupState.group).pipe(
+    this.store.select(GroupState.selectGroup).pipe(
       map(filterFn => filterFn(this.groupId)),
       filter(value => !!value),
       tap(group => this.group = group!),
