@@ -12,6 +12,7 @@ import { ShowMenu } from '../../../../models/menu/store/menu.actions';
 import { NavigationState } from '../../../../models/navigation/store/navigation.state';
 import {
   ClearTasks,
+  DownloadExcel,
   RemoveTask,
   SortTasks,
   ToggleDisplayCompleted,
@@ -19,7 +20,6 @@ import {
 } from '../../../../models/task/store/task.actions';
 import { TaskState } from '../../../../models/task/store/task.state';
 import { TaskFilter, TaskSort } from '../../../../models/task/task.enum';
-import { downloadTasksAsExcel } from '../../../../utils/download.utils';
 import { TaskDetailsComponent } from '../../components/task-details/task-details.component';
 import { TaskListItemComponent } from '../../components/task-list-item/task-list-item.component';
 
@@ -109,7 +109,8 @@ export class TasksFilterComponent implements OnInit, OnDestroy {
 
   public onDownload(): void {
     const user = this.store.selectSnapshot(AccountState.user);
-    downloadTasksAsExcel(this.filterNavItem.title, user?.fullName!, this.tasks);
+
+    this.store.dispatch(new DownloadExcel(this.filterNavItem.title, user?.fullName!, this.tasks));
   }
 
 

@@ -12,6 +12,7 @@ import { GroupState } from '../../../../models/group/store/group.state';
 import { ShowMenu } from '../../../../models/menu/store/menu.actions';
 import {
   ClearTasks,
+  DownloadExcel,
   RemoveTask,
   SortTasks,
   ToggleDisplayCompleted,
@@ -19,7 +20,6 @@ import {
 } from '../../../../models/task/store/task.actions';
 import { TaskState } from '../../../../models/task/store/task.state';
 import { TaskSort } from '../../../../models/task/task.enum';
-import { downloadTasksAsExcel } from '../../../../utils/download.utils';
 import { GroupDetailsComponent } from '../../../groups/components/group-details/group-details.component';
 import { TaskDetailsComponent } from '../../components/task-details/task-details.component';
 import { TaskListItemComponent } from '../../components/task-list-item/task-list-item.component';
@@ -112,7 +112,8 @@ export class TasksGroupComponent implements OnInit, OnDestroy {
 
   public onDownload(): void {
     const user = this.store.selectSnapshot(AccountState.user);
-    downloadTasksAsExcel(this.group.title, user?.fullName!, this.tasks);
+
+    this.store.dispatch(new DownloadExcel(this.group.title, user?.fullName!, this.tasks));
   }
 
 

@@ -14,15 +14,24 @@ export class TaskCounterPipe implements PipeTransform {
   @Select(TaskState.selectTasks)
   public tasks$!: Observable<Task[]>;
 
+
   constructor(
     private store: Store) {
   }
 
-  public transform(groupOrFilterId: number | string): Observable<string> {
-    return this.store.select(TaskState.filterTasks).pipe(
-      map(fun => fun(groupOrFilterId as TaskFilter)),
-      map(mapCount)
-    );
+
+  public transform(groupOrFilter: number | string): Observable<string> {
+    if (typeof groupOrFilter === 'number') {
+      return this.store.select(TaskState.selectGroupTasks).pipe(
+        map(fun => fun(groupOrFilter)),
+        map(mapCount)
+      );
+    } else {
+      return this.store.select(TaskState.selectFilterTasks).pipe(
+        map(fun => fun(groupOrFilter as TaskFilter)),
+        map(mapCount)
+      );
+    }
   }
 
 }

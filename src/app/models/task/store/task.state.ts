@@ -3,8 +3,8 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { patch } from '@ngxs/store/operators';
 import * as moment from 'moment';
 import { map, Observable, tap } from 'rxjs';
+import { downloadTasksAsExcel } from 'src/app/utils/download.utils';
 import { Task } from '../../../interfaces/task.interface';
-import { isGroupId } from '../../group/group.utils';
 import { SubTaskService } from '../services/sub-task.service';
 import { TaskService } from '../services/task.service';
 import { TaskFilter, TaskSort } from '../task.enum';
@@ -65,19 +65,6 @@ export class TaskState {
   public static task(state: TaskModel) {
     return (id: number): Task | undefined => {
       return state.tasks.find(i => i.id === id);
-    };
-  }
-
-
-  @Selector()
-  /**@deprecated*/
-  public static filterTasks(state: TaskModel) {
-    return (groupOrFilterId: string | number): Task[] => {
-      if (isGroupId(groupOrFilterId)) {
-        return filterByGroup(Number(groupOrFilterId), state);
-      } else {
-        return filterByFilter(groupOrFilterId as string, state);
-      }
     };
   }
 
@@ -277,29 +264,8 @@ export class TaskState {
 
 
   @Action(DownloadExcel)
-  public downloadExcel(ctx: StateContext<TaskModel>, { tasks }: DownloadExcel): void {
-    // todo: to implement
-  }
-}
-
-
-function filterByGroup(id: number, state: TaskModel): Task[] {
-  return state.tasks.filter(i => i.group && i.group === id);
-}
-
-
-function filterByFilter(filter: string, state: TaskModel) {
-  switch (filter) {
-    case TaskFilter.All:
-      return state.tasks;
-    case TaskFilter.Incoming:
-      return state.tasks.filter(i => !i.group);
-    case TaskFilter.Today:
-      return state.tasks.filter(i => moment().isSame(i.datetime, 'day'));
-    case TaskFilter.Planned:
-      return state.tasks.filter(i => moment().isBefore(i.datetime));
-    default:
-      return [];
+  public downloadExcel(ctx: StateContext<TaskModel>, { title, creator, tasks }: DownloadExcel): void {
+    downloadTasksAsExcel(title, creator, tasks);
   }
 }
 

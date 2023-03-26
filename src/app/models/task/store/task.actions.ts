@@ -172,6 +172,8 @@ export class DownloadExcel {
 
 
   constructor(
+    public title: string,
+    public creator: string,
     public tasks: Task[]) {
   }
 }

@@ -25,13 +25,11 @@ import { TasksGroupComponent } from './pages/tasks-group/tasks-group.component';
 import { FilterCompletedPipe } from './pipes/tasks-filter-completed.pipe';
 import { TasksSortPipe } from './pipes/tasks-sort.pipe';
 import { TasksTitlePipe } from './pipes/tasks-title.pipe';
-import { TasksComponent } from './tasks.component';
 import { TasksRouting } from './tasks.routing';
 
 
 @NgModule({
   declarations: [
-    TasksComponent,
     TaskDetailsComponent,
     TaskListItemComponent,
     FilterCompletedPipe,
