@@ -13,6 +13,10 @@
       opacity: 0.75;
     }
 
+    &__subtitle {
+      margin-top: 4px;
+    }
+
     &__field {
       display: flex;
       flex-direction: column;
@@ -23,7 +27,6 @@
       flex-direction: column;
     }
   }
-
 
 
   &__form {
