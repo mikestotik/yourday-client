@@ -19,7 +19,7 @@ import {
   UpdateTask
 } from '../../../../models/task/store/task.actions';
 import { TaskState } from '../../../../models/task/store/task.state';
-import { TaskSort } from '../../../../models/task/task.enum';
+import { TaskSort } from '../../../../enums/task.enum';
 import { GroupDetailsComponent } from '../../../groups/components/group-details/group-details.component';
 import { TaskDetailsComponent } from '../../components/task-details/task-details.component';
 import { TaskListItemComponent } from '../../components/task-list-item/task-list-item.component';

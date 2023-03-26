@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { map, Observable } from 'rxjs';
 import { StartPageStrategy } from '../../../enums/start-page.enum';
-import { GeneralSettings, SettingsModel } from '../../../interfaces/settings.interface';
-import { PinGroup, UnPinGroup, UpdateCurrentUrl, UpdateGeneralSettings } from './settings.actions';
+import { GeneralSettings, ServerSettingsPayload, SettingsModel } from '../../../interfaces/settings.interface';
+import { SettingsService } from '../services/settings.service';
+import {
+  FindServerSettings,
+  PinGroup,
+  UnPinGroup,
+  UpdateCurrentUrl,
+  UpdateGeneralSettings,
+  UpdateServerSettings
+} from './settings.actions';
 
 
 @State<SettingsModel>({
@@ -12,11 +21,18 @@ import { PinGroup, UnPinGroup, UpdateCurrentUrl, UpdateGeneralSettings } from '.
     lastUrl: '',
     general: {
       startPageStrategy: StartPageStrategy.Incoming
-    }
+    },
+    server: {}
   }
 })
 @Injectable()
 export class SettingsState {
+
+  @Selector()
+  public static selectServerSettings(state: SettingsModel): ServerSettingsPayload {
+    return state.server;
+  }
+
 
   @Selector()
   public static pinnedGroups(state: SettingsModel): number[] {
@@ -36,7 +52,9 @@ export class SettingsState {
   }
 
 
-  constructor() { }
+  constructor(
+    private readonly settingsService: SettingsService) {
+  }
 
 
   @Action(PinGroup)
@@ -62,5 +80,24 @@ export class SettingsState {
   @Action(UpdateCurrentUrl)
   public updateCurrentUrl(ctx: StateContext<SettingsModel>, { url }: UpdateCurrentUrl): void {
     ctx.patchState({ lastUrl: url });
+  }
+
+
+  @Action(FindServerSettings)
+  public findServerSettings(ctx: StateContext<SettingsModel>): Observable<SettingsModel> {
+    return this.settingsService.find().pipe(
+      map(server => ctx.patchState({ server }))
+    );
+  }
+
+
+  @Action(UpdateServerSettings)
+  public updateServerSettings(ctx: StateContext<SettingsModel>, {
+    id,
+    payload
+  }: UpdateServerSettings): Observable<SettingsModel> {
+    return this.settingsService.update(id, payload).pipe(
+      map(server => ctx.patchState({ server }))
+    );
   }
 }

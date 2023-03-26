@@ -16,6 +16,9 @@ import { GroupState } from './store/group.state';
     GroupResolver,
     GroupResource,
     GroupService
+  ],
+  exports: [
+    NgxsModule
   ]
 })
 export class GroupModelModule {}

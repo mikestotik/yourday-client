@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Group } from '../../../interfaces/group.interface';
-import { isGroupId } from '../../../models/group/group.utils';
+import { isGroupId } from '../../../utils/group.utils';
 import { GroupState } from '../../../models/group/store/group.state';
 import { NavigationState } from '../../../models/navigation/store/navigation.state';
 

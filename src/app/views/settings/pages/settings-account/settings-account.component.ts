@@ -33,8 +33,8 @@ export class SettingsAccountComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
-    private store: Store) {
+    private readonly fb: FormBuilder,
+    private readonly store: Store) {
 
     this.languages = [
       { code: Languages.English, value: 'English' },

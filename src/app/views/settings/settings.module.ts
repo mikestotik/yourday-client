@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { SettingsAccountComponent } from './pages/settings-account/settings-account.component';
 import { SettingsGeneralComponent } from './pages/settings-general/settings-general.component';
+import { SettingsNotificationComponent } from './pages/settings-notification/settings-notification.component';
 import { SettingsComponent } from './settings.component';
 import { SettingsRouting } from './settings.routing';
 
@@ -16,7 +17,8 @@ import { SettingsRouting } from './settings.routing';
   declarations: [
     SettingsComponent,
     SettingsAccountComponent,
-    SettingsGeneralComponent
+    SettingsGeneralComponent,
+    SettingsNotificationComponent
   ],
   exports: [
     SettingsAccountComponent,

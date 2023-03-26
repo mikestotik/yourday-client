@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SettingsRoute } from '../../config/routes.config';
 import { SettingsAccountComponent } from './pages/settings-account/settings-account.component';
 import { SettingsGeneralComponent } from './pages/settings-general/settings-general.component';
+import { SettingsNotificationComponent } from './pages/settings-notification/settings-notification.component';
 import { SettingsComponent } from './settings.component';
 
 export const SettingsRouting: Routes = [
@@ -21,6 +22,10 @@ export const SettingsRouting: Routes = [
       {
         path: SettingsRoute.General,
         component: SettingsGeneralComponent
+      },
+      {
+        path: SettingsRoute.Notifications,
+        component: SettingsNotificationComponent
       }
     ]
   }

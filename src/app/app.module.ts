@@ -16,15 +16,14 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { HammerConfig } from './config/hammer.config';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AccountState } from './models/account/store/account.state';
 import { AuthInterceptor } from './models/auth/interceptors/auth.interceptor';
 import { AuthState } from './models/auth/store/auth.state';
-import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { GroupModelModule } from './models/group/group.module';
 import { MenuState } from './models/menu/store/menu.state';
 import { NavigationState } from './models/navigation/store/navigation.state';
-import { SettingsState } from './models/settings/store/settings.state';
-import { TaskState } from './models/task/store/task.state';
+import { SettingsModelModule } from './models/settings/settings.module';
 import { TaskModelModule } from './models/task/task.module';
 
 
@@ -48,9 +47,7 @@ import { TaskModelModule } from './models/task/task.module';
       AuthState,
       AccountState,
       MenuState,
-      TaskState,
-      NavigationState,
-      SettingsState
+      NavigationState
     ], {
       developmentMode: !environment.production
     }),
@@ -59,6 +56,7 @@ import { TaskModelModule } from './models/task/task.module';
     }),
     GroupModelModule,
     TaskModelModule,
+    SettingsModelModule,
     NgxsStoragePluginModule.forRoot({
       key: [
         'auth.accessToken',

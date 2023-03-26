@@ -1,0 +1,26 @@
+<app-page title="Notifications">
+  <div class="settings">
+    <form class="settings-chapter" [formGroup]="telegramForm" (ngSubmit)="onSubmitTelegram()">
+      <div class="settings-chapter__title">Telegram</div>
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="telegramForm.controls.telegram as control">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" [formControl]="control">
+          <mat-error *ngIf="control.hasError('minlength') && control.touched">
+            Minimal 4 symbols
+          </mat-error>
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="settings-chapter__actions">
+        <button mat-button color="primary" [disabled]="telegramForm.invalid || telegramFormSent">
+          <div *ngIf="!telegramFormSent">Link</div>
+          <div *ngIf="telegramFormSent" class="loader"></div>
+        </button>
+      </div>
+    </form>
+  </div>
+</app-page>

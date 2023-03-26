@@ -1,8 +1,30 @@
 .settings {
   display: flex;
   flex-direction: column;
-  padding: 16px 24px;
+  padding: 0 24px 16px;
   height: 100%;
+
+  &-chapter {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    &__field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+
 
   &__form {
   }

@@ -7,7 +7,7 @@ import { downloadTasksAsExcel } from 'src/app/utils/download.utils';
 import { Task } from '../../../interfaces/task.interface';
 import { SubTaskService } from '../services/sub-task.service';
 import { TaskService } from '../services/task.service';
-import { TaskFilter, TaskSort } from '../task.enum';
+import { TaskFilter, TaskSort } from '../../../enums/task.enum';
 import {
   AddSubTask,
   AddTask,

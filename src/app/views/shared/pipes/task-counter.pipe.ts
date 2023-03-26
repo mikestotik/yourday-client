@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { map, Observable } from 'rxjs';
 import { Task } from '../../../interfaces/task.interface';
 import { TaskState } from '../../../models/task/store/task.state';
-import { TaskFilter } from '../../../models/task/task.enum';
+import { TaskFilter } from '../../../enums/task.enum';
 
 
 @Pipe({

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngxs/store';
 import * as moment from 'moment';
 import { AddTask } from '../../../../models/task/store/task.actions';
-import { TaskFilter } from '../../../../models/task/task.enum';
+import { TaskFilter } from '../../../../enums/task.enum';
 
 
 interface TaskForm {

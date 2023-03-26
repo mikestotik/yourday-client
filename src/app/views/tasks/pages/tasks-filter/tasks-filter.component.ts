@@ -19,7 +19,7 @@ import {
   UpdateTask
 } from '../../../../models/task/store/task.actions';
 import { TaskState } from '../../../../models/task/store/task.state';
-import { TaskFilter, TaskSort } from '../../../../models/task/task.enum';
+import { TaskFilter, TaskSort } from '../../../../enums/task.enum';
 import { TaskDetailsComponent } from '../../components/task-details/task-details.component';
 import { TaskListItemComponent } from '../../components/task-list-item/task-list-item.component';
 

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TaskFilter } from '../../models/task/task.enum';
+import { TaskFilter } from '../../enums/task.enum';
 import { TasksFilterComponent } from './pages/tasks-filter/tasks-filter.component';
 import { TasksGroupComponent } from './pages/tasks-group/tasks-group.component';
 

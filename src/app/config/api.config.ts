@@ -10,6 +10,7 @@ export const ApiConfig = {
   AUTH_LOGOUT: `${ CORE_API_URL }/auth/logout`,
   AUTH_REFRESH: `${ CORE_API_URL }/auth/refresh`,
   GROUPS: `${ CORE_API_URL }/groups`,
+  SETTINGS: `${ CORE_API_URL }/settings`,
   TAGS: `${ CORE_API_URL }/tags`,
   COLORS: `${ CORE_API_URL }/colors`,
   TASKS: `${ CORE_API_URL }/tasks`,

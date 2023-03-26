@@ -2,8 +2,10 @@ import { Routes } from '@angular/router';
 import { MainRoutes } from '../../config/routes.config';
 import { AccountResolver } from '../../models/account/resolvers/account.resolver';
 import { GroupResolver } from '../../models/group/resolvers/group.resolver';
+import { SettingsResolver } from '../../models/settings/resolvers/settings.resolver';
 import { TaskResolver } from '../../models/task/resolvers/task.resolver';
 import { MainComponent } from './main.component';
+
 
 export const MainRouting: Routes = [
   {
@@ -12,7 +14,8 @@ export const MainRouting: Routes = [
     resolve: {
       account: AccountResolver,
       groups: GroupResolver,
-      tasks: TaskResolver
+      tasks: TaskResolver,
+      settings: SettingsResolver
     },
     children: [
       {

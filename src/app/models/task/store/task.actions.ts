@@ -1,6 +1,6 @@
 import { SubTaskPayload } from '../../../interfaces/sub-task.interface';
 import { Task, TaskPayload, TaskUpdate } from '../../../interfaces/task.interface';
-import { TaskSort } from '../task.enum';
+import { TaskSort } from '../../../enums/task.enum';
 
 
 export class GetTasks {

@@ -1,6 +1,7 @@
 import { NavItem } from '../interfaces/navigation.interface';
-import { TaskFilter } from '../models/task/task.enum';
+import { TaskFilter } from '../enums/task.enum';
 import { MainRoutes, SettingsRoute } from './routes.config';
+
 
 /**
  * MAin Sidebar Navigation Config
@@ -70,9 +71,7 @@ export const PAGE_NAVIGATION_SETTINGS: NavItem[] = [
   {
     routerLink: SettingsRoute.Notifications,
     title: 'Notifications',
-    icon: 'icon icon-alarm',
-    disabled: true,
-    hidden: true
+    icon: 'icon icon-alarm'
   },
   {
     routerLink: SettingsRoute.Reminders,

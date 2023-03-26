@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Task } from '../../../interfaces/task.interface';
-import { TaskSort } from '../../../models/task/task.enum';
+import { TaskSort } from '../../../enums/task.enum';
 
 
 @Pipe({

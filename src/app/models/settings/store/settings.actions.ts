@@ -1,4 +1,4 @@
-import { GeneralSettings } from '../../../interfaces/settings.interface';
+import { GeneralSettings, ServerSettingsPayload } from '../../../interfaces/settings.interface';
 
 
 export class PinGroup {
@@ -20,18 +20,38 @@ export class UnPinGroup {
   }
 }
 
+
 export class UpdateGeneralSettings {
   static readonly type = '[Settings] UpdateGeneralSettings';
+
 
   constructor(
     public payload: GeneralSettings) {
   }
 }
 
+
 export class UpdateCurrentUrl {
   static readonly type = '[Settings] UpdateCurrentUrl';
 
+
   constructor(
     public url: string) {
+  }
+}
+
+
+export class FindServerSettings {
+  static readonly type = '[Settings] FindServerSettings';
+}
+
+
+export class UpdateServerSettings {
+  static readonly type = '[Settings] UpdateServerSettings';
+
+
+  constructor(
+    public id: number,
+    public payload: Partial<ServerSettingsPayload>) {
   }
 }

@@ -1,4 +1,4 @@
-import { TaskSort } from '../models/task/task.enum';
+import { TaskSort } from '../enums/task.enum';
 
 
 export const taskSortList = [
