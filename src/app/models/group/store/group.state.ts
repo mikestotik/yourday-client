@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
-import { Color } from '../../../interfaces/color.interface';
 import { Group } from '../../../interfaces/group.interface';
 import { GroupService } from '../services/group.service';
 import {
@@ -9,7 +8,6 @@ import {
   CreateGroup,
   CreateTag,
   GetGroup,
-  GetGroupColors,
   GetGroups,
   RemoveGroup,
   RemoveGroupFromStore,
@@ -23,15 +21,13 @@ import {
 
 export interface GroupStateModel {
   groups: Group[];
-  colors: Color[];
 }
 
 
 @State<GroupStateModel>({
   name: 'groups',
   defaults: {
-    groups: [],
-    colors: []
+    groups: []
   }
 })
 @Injectable()
@@ -58,21 +54,6 @@ export class GroupState {
   }
 
 
-  @Selector()
-  public static colors(state: GroupStateModel): Color[] {
-    return state.colors;
-  }
-
-
-  @Selector()
-  public static color(state: GroupStateModel): (id: number) => Color | null {
-    return (id: number): Color | null => {
-      const color = state.colors.find(i => i.id === id);
-      return color ? color : null;
-    };
-  }
-
-
   constructor(
     private service: GroupService) {
   }
@@ -82,14 +63,6 @@ export class GroupState {
   public getAll(ctx: StateContext<GroupStateModel>) {
     return this.service.getAll().pipe(
       tap(value => ctx.patchState({ groups: value }))
-    );
-  }
-
-
-  @Action(GetGroupColors)
-  public getColors(ctx: StateContext<GroupStateModel>) {
-    return this.service.getColors().pipe(
-      tap(value => ctx.patchState({ colors: value }))
     );
   }
 

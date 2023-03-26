@@ -21,8 +21,8 @@
   </div>
 
   <div class="bottom-sheet-sub-header">
-    <div class="details-menu" [matMenuTriggerFor]="groupMenu" [style.color]="group?.color | colorValue">
-      <div class="details-menu__icon">
+    <div class="details-menu" [matMenuTriggerFor]="groupMenu">
+      <div class="details-menu__icon" [ngClass]="'color-' + group?.color">
         <i class="icon icon-bookmark"></i>
       </div>
       <div class="details-menu__title">{{ group ? group.title : 'Incoming'}}</div>
@@ -35,15 +35,15 @@
         <i class="icon icon-inbox"></i>
         <span>Incoming</span>
       </button>
-      <button mat-menu-item *ngFor="let group of groups" [style.color]="group.color | colorValue" (click)="onChangeGroup(group.id)">
-        <i class="icon icon-bookmark"></i>
+      <button mat-menu-item *ngFor="let group of groups" (click)="onChangeGroup(group.id)">
+        <i class="icon icon-bookmark" [ngClass]="'color-' + group.color"></i>
         <span>{{ group.title }}</span>
       </button>
     </mat-menu>
 
     <ng-container *ngIf="group?.tags?.length">
-      <div class="details-menu" [style.color]="task.tag && task.tag.color ? task.tag.color.value + 95 : ''" [matMenuTriggerFor]="tagMenu">
-        <div class="details-menu__icon">
+      <div class="details-menu" [matMenuTriggerFor]="tagMenu">
+        <div class="details-menu__icon" [ngClass]="'color-' + task.tag?.color">
           <i class="icon icon-tag"></i>
         </div>
         <div class="details-menu__title">{{ task.tag ? task.tag.title : 'Select tag'}}</div>
@@ -58,8 +58,8 @@
           <span>No tag</span>
         </button>
 
-        <button mat-menu-item *ngFor="let tag of group?.tags" [style.color]="tag.color ? tag.color.value + 95 : 'initial'" (click)="onChangeTag(tag.id)">
-          <i class="icon icon-tag"></i>
+        <button mat-menu-item *ngFor="let tag of group?.tags" (click)="onChangeTag(tag.id)">
+          <i class="icon icon-tag" [ngClass]="'color-' + tag.color"></i>
           <span>{{ tag.title }}</span>
         </button>
       </mat-menu>

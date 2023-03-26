@@ -55,7 +55,7 @@ import { TaskModelModule } from './models/task/task.module';
       developmentMode: !environment.production
     }),
     NgxsLoggerPluginModule.forRoot({
-      disabled: !environment.logs.ngxs
+      disabled: environment.production
     }),
     GroupModelModule,
     TaskModelModule,

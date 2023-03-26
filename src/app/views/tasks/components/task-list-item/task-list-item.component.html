@@ -8,7 +8,7 @@
 
   <div class="task-info" (click)="onClick()">
     <div class="task-info__tag" *ngIf="task.tag as tag">
-      <app-tag [color]="tag.color.value" [deleteDisabled]="true">{{ tag.title }}</app-tag>
+      <app-tag [color]="tag.color" [deleteDisabled]="true">{{ tag.title }}</app-tag>
     </div>
 
     <div class="task-info__est-time" *ngIf="task.estTime">{{ task.estTime }}</div>

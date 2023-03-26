@@ -1,11 +1,11 @@
-import { Color } from './color.interface';
+import { Color } from '../enums/color.enum';
 import { Group } from './group.interface';
 
 
 export interface CreateTagPayload {
   title: string;
   group: number;
-  color: number;
+  color?: Color;
 }
 
 

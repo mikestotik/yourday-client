@@ -12,6 +12,7 @@ export class SnackSimpleComponent implements OnInit {
 
   public types = SnackType;
 
+
   constructor(
     @Inject(MAT_SNACK_BAR_DATA)
     public data: SnackData) {

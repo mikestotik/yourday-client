@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Color } from '../../../../enums/color.enum';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TagComponent implements OnInit {
 
   @Input()
-  public color?: string;
+  public color!: Color;
 
   @Input()
   public icon!: string;

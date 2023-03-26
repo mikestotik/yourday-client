@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Select, Store } from '@ngxs/store';
-import { map, Observable } from 'rxjs';
-import { Color } from '../../../../interfaces/color.interface';
+import { Store } from '@ngxs/store';
+import { map } from 'rxjs';
+import { colorList } from '../../../../config/colors.config';
+import { Color } from '../../../../enums/color.enum';
 import { CreateGroupPayload } from '../../../../interfaces/group.interface';
 import { CreateGroup } from '../../../../models/group/store/group.actions';
-import { GroupState, GroupStateModel } from '../../../../models/group/store/group.state';
+import { GroupStateModel } from '../../../../models/group/store/group.state';
 
 
 interface Form {
@@ -22,11 +23,9 @@ interface Form {
 })
 export class GroupCreateComponent implements OnInit {
 
-  @Select(GroupState.colors)
-  public colors$!: Observable<Color[]>;
-
   public form!: FormGroup<Form>;
   public sentSave!: boolean;
+  public colors: Color[] = colorList;
 
 
   constructor(
@@ -61,19 +60,21 @@ export class GroupCreateComponent implements OnInit {
     }
   }
 
-  public onColor(colorId: number | null): void {
+
+  public onColor(color: Color): void {
     const control = this.form.controls.color;
-    if (control.value === colorId) {
-      control.patchValue(null);
+    if (control.value === color) {
+      control.patchValue(undefined);
     } else {
-      control.patchValue(colorId);
+      control.patchValue(color);
     }
   }
+
 
   private createForm(): FormGroup<Form> {
     return this.fb.nonNullable.group({
       title: [ '', [ Validators.required ] ],
-      color: [ null ]
+      color: [ undefined ]
     });
   }
 }

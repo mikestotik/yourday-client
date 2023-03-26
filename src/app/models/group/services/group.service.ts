@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Color } from '../../../interfaces/color.interface';
 import { CreateGroupPayload, Group } from '../../../interfaces/group.interface';
 import { CreateTagPayload, Tag } from '../../../interfaces/tag.interface';
-import { ColorResource } from '../resources/color.resource';
 import { GroupResource } from '../resources/group.resource';
 import { TagResource } from '../resources/tag.resource';
 
@@ -13,7 +11,6 @@ export class GroupService {
 
   constructor(
     private resource: GroupResource,
-    private colorResource: ColorResource,
     private tagResource: TagResource) {
   }
 
@@ -52,11 +49,6 @@ export class GroupService {
 
   public unshare(id: number, email: string): Observable<Group> {
     return this.resource.unshare(id, email);
-  }
-
-
-  public getColors(): Observable<Color[]> {
-    return this.colorResource.getColors();
   }
 
 

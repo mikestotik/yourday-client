@@ -38,7 +38,7 @@
              routerLinkActive="active"
              [class.pinned]="(pinnedGroups$ | async)?.includes(group.id)"
              (click)="itemEvent.emit()">
-          <div class="page-nav-item__icon" [style.color]="group.color | colorValue">
+          <div class="page-nav-item__icon" [ngClass]="'color-' + group.color">
             <i class="icon icon-bookmark"></i>
           </div>
           <div class="page-nav-item__title">{{ group.title }}</div>

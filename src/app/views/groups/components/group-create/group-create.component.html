@@ -18,12 +18,12 @@
     <div class="form__field" *ngIf="form.controls.color as control">
       <div class="group-colors">
         <div class="group-colors__item"
-             *ngFor="let color of colors$ | async"
-             [style.background]="color.value"
-             [class.active]="control.value === color.id"
-             (click)="onColor(color.id)"
+             *ngFor="let color of colors"
+             [ngClass]="'background-' + color"
+             [class.active]="control.value === color"
+             (click)="onColor(color)"
         >
-          <i class="icon icon-checkmark" *ngIf="control.value === color.id"></i>
+          <i class="icon icon-checkmark" *ngIf="control.value === color"></i>
         </div>
       </div>
     </div>

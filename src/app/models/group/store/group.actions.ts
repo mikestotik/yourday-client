@@ -78,11 +78,6 @@ export class RemoveGroupFromStore {
 }
 
 
-export class GetGroupColors {
-  static readonly type = '[Group] GetGroupColors';
-}
-
-
 export class CreateTag {
   static readonly type = '[Group] CreateTag';
 

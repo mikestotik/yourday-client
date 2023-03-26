@@ -1,4 +1,4 @@
-<div class="tag {{ size }}" [style.background]="color ? color + 25 : ''">
+<div class="tag {{ size }}" [ngClass]="'background-' + color">
   <div class="tag__icon">
     <i class="icon icon-tag" *ngIf="!icon"></i>
     <i [ngClass]="icon" *ngIf="icon"></i>

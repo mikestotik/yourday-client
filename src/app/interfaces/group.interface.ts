@@ -1,3 +1,4 @@
+import { Color } from '../enums/color.enum';
 import { SharedUser } from './account.interface';
 import { Entity } from './entity.interface';
 import { Tag } from './tag.interface';
@@ -5,8 +6,8 @@ import { Tag } from './tag.interface';
 
 export interface CreateGroupPayload {
   title: string;
-  color: number | null;
-  renewable: boolean;
+  color?: Color;
+  renewable?: boolean;
 }
 
 

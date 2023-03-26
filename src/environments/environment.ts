@@ -4,9 +4,6 @@
 
 export const environment = {
   production: false,
-  logs: {
-    ngxs: false
-  },
   api: {
     core: '/api/v1.0'
   },

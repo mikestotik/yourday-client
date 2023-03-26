@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { filter, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { createRandom } from 'src/app/utils/num.utils';
+import { colorList } from '../../../../config/colors.config';
 import { AppRoutes, MainRoutes } from '../../../../config/routes.config';
-import { Color } from '../../../../interfaces/color.interface';
+import { Color } from '../../../../enums/color.enum';
 import { CreateGroupPayload, Group } from '../../../../interfaces/group.interface';
 import { CreateTagPayload, Tag } from '../../../../interfaces/tag.interface';
 import {
@@ -26,8 +27,8 @@ import { isEqual } from '../../../../utils/obj.utils';
 
 interface GroupDetailsForm {
   title: FormControl<string>;
-  color: FormControl<number | null>;
-  renewable: FormControl<boolean>;
+  color: FormControl<Color | undefined>;
+  renewable: FormControl<boolean | undefined>;
 }
 
 
@@ -39,7 +40,7 @@ interface AddUserForm {
 interface AddTagForm {
   title: FormControl<string>;
   group: FormControl<number>;
-  color: FormControl<number>;
+  color: FormControl<Color>;
 }
 
 
@@ -53,7 +54,7 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
   public pinnedGroups$!: Observable<number[]>;
 
   public group!: Group;
-  public colors!: Color[];
+  public colors: Color[] = colorList;
 
   public form!: FormGroup<GroupDetailsForm>;
   public formAddUser!: FormGroup<AddUserForm>;
@@ -61,8 +62,6 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
 
   public sentDelete!: boolean;
   public sentSave!: boolean;
-
-  public tags: Tag[] = [];
 
   private destroy$ = new Subject<void>();
   private formStartValue: unknown;
@@ -80,9 +79,7 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit(): void {
-    this.store.select(GroupState.colors).pipe(
-      tap(colors => this.colors = colors),
-      switchMap(() => this.store.select(GroupState.group)),
+    this.store.select(GroupState.group).pipe(
       map(filterFn => filterFn(this.groupId)),
       filter(value => !!value),
       tap(group => this.group = group!),
@@ -141,12 +138,12 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  public onColor(colorId: number | null): void {
+  public onColor(color: Color): void {
     const control = this.form.controls.color;
-    if (control.value === colorId) {
-      control.patchValue(null);
+    if (control.value === color) {
+      control.patchValue(undefined);
     } else {
-      control.patchValue(colorId);
+      control.patchValue(color);
     }
     this.saveValue(this.form.value);
   }
@@ -190,10 +187,12 @@ export class GroupDetailsComponent implements OnInit, OnDestroy {
 
 
   private createTagsForm(): FormGroup<AddTagForm> {
+    const rand = createRandom(1, this.colors.length);
+
     return this.fb.nonNullable.group({
       title: [ '', [ Validators.minLength(2) ] ],
       group: [ this.groupId, [ Validators.required ] ],
-      color: [ createRandom(1, this.colors.length), [] ]
+      color: [ this.colors[rand], [] ]
     });
   }
 

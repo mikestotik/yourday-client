@@ -21,13 +21,17 @@ export class TaskListItemComponent implements OnInit {
   @Output()
   public selected = new EventEmitter<void>();
 
+
   constructor() { }
 
+
   public ngOnInit(): void { }
+
 
   public onCheck(): void {
     this.check.emit();
   }
+
 
   public onClick(): void {
     this.selected.emit();
