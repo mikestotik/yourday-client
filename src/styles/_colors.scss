@@ -20,6 +20,92 @@
   }
 }
 
-//--color-primary: #59ffe7;
-//--color-danged: #ff5a4a;
-//--color-warn: #fca500;
+.background {
+  &-red {
+    background: var(--color-red);
+  }
+
+  &-orange {
+    background: var(--color-orange);
+  }
+
+  &-yellow {
+    background: var(--color-yellow);
+  }
+
+  &-green {
+    background: var(--color-green);
+  }
+
+  &-blue {
+    background: var(--color-blue);
+  }
+
+  &-violet {
+    background: var(--color-violet);
+  }
+
+  &-grey {
+    background: var(--color-grey);
+  }
+}
+
+.color {
+  &-red {
+    color: var(--color-red);
+  }
+
+  &-orange {
+    color: var(--color-orange);
+  }
+
+  &-yellow {
+    color: var(--color-yellow);
+  }
+
+  &-green {
+    color: var(--color-green);
+  }
+
+  &-blue {
+    color: var(--color-blue);
+  }
+
+  &-violet {
+    color: var(--color-violet);
+  }
+
+  &-grey {
+    color: var(--color-grey);
+  }
+}
+
+.border-color {
+  &-red {
+    border-color: var(--color-red);
+  }
+
+  &-orange {
+    border-color: var(--color-orange);
+  }
+
+  &-yellow {
+    border-color: var(--color-yellow);
+  }
+
+  &-green {
+    border-color: var(--color-green);
+  }
+
+  &-blue {
+    border-color: var(--color-blue);
+  }
+
+  &-violet {
+    border-color: var(--color-violet);
+  }
+
+  &-grey {
+    border-color: var(--color-grey);
+  }
+}
