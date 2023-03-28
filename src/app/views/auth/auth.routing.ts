@@ -5,6 +5,7 @@ import { AuthActivateComponent } from './pages/auth-activate/auth-activate.compo
 import { AuthGoogleComponent } from './pages/auth-google/auth-google.component';
 import { AuthLoginComponent } from './pages/auth-login/auth-login.component';
 import { AuthRegisterComponent } from './pages/auth-register/auth-register.component';
+import { AuthResetComponent } from './pages/auth-reset/auth-reset.component';
 
 
 export const AuthRouting: Routes = [
@@ -32,6 +33,10 @@ export const AuthRouting: Routes = [
       {
         path: `${ AuthRoutes.Activate }/:email`,
         component: AuthActivateComponent
+      },
+      {
+        path: `${ AuthRoutes.ResetPass }`,
+        component: AuthResetComponent
       }
     ]
   }

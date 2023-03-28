@@ -10,6 +10,7 @@ export enum AuthRoutes {
   Register = 'register',
   Activate = 'activate',
   Google = 'google',
+  ResetPass = 'reset-pass',
 }
 
 

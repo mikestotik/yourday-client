@@ -22,6 +22,16 @@ export class Login {
 }
 
 
+export class ResetPassword {
+  static readonly type = '[Auth] ResetPassword';
+
+
+  constructor(
+    public email: string) {
+  }
+}
+
+
 export class RefreshToken {
   static readonly type = '[Auth] RefreshToken';
 }

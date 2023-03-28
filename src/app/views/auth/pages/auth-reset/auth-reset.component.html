@@ -1,0 +1,34 @@
+<main class="auth-page">
+  <form class="auth" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="auth-title">
+      <i class="icon icon-checkmark-circle-on"></i>
+      <span>Yourday</span>
+    </div>
+
+    <div class="auth-subtitle">
+      Reset Password
+    </div>
+
+    <div class="auth-payload form">
+      <mat-form-field class="form__field" *ngIf="form.controls.email as control">
+        <mat-label>Email</mat-label>
+        <input matInput appInput [formControl]="control">
+        <mat-error *ngIf="control.hasError('email') && control.touched">
+          The field does not match the email pattern
+        </mat-error>
+        <mat-error *ngIf="control.hasError('required') && control.touched">
+          Required field
+        </mat-error>
+        <mat-hint>Enter your user account's verified email address and we will send you a password reset link.</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="auth-actions">
+      <button mat-button type="submit" color="primary" [disabled]="form.invalid">
+        <div *ngIf="!formSent">Send password reset email</div>
+        <div *ngIf="formSent" class="loader"></div>
+      </button>
+    </div>
+  </form>
+</main>
+

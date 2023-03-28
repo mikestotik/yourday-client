@@ -47,6 +47,12 @@
   .mat-datepicker-content {
     background: var(--background-body);
   }
+
+  .mat-mdc-form-field-hint-wrapper,
+  .mat-mdc-form-field-error-wrapper {
+    position: relative;
+    padding: 0;
+  }
 }
 
 //

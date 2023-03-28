@@ -15,6 +15,7 @@ import { AuthActivateComponent } from './pages/auth-activate/auth-activate.compo
 import { AuthLoginComponent } from './pages/auth-login/auth-login.component';
 import { AuthRegisterComponent } from './pages/auth-register/auth-register.component';
 import { AuthGoogleComponent } from './pages/auth-google/auth-google.component';
+import { AuthResetComponent } from './pages/auth-reset/auth-reset.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AuthGoogleComponent } from './pages/auth-google/auth-google.component';
     AuthLoginComponent,
     AuthRegisterComponent,
     AuthActivateComponent,
-    AuthGoogleComponent
+    AuthGoogleComponent,
+    AuthResetComponent
   ],
   imports: [
     CommonModule,
