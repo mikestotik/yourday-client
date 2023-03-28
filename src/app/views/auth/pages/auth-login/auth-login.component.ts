@@ -61,6 +61,7 @@ export class AuthLoginComponent implements OnInit {
 
 
   public onGoogleAuth(): void {
+    // return this.router.navigateByUrl(environment.google.redirectUrl);
     window.location.href = environment.google.redirectUrl;
   }
 

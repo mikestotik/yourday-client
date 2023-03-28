@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subject, takeUntil } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 import { SetLogin } from '../../../../models/auth/store/auth.actions';
 
 
