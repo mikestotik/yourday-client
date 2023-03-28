@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -94,6 +95,10 @@ import { TaskModelModule } from './models/task/task.module';
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: HammerConfig
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: environment.production ? '/app/' : '/'
     }
   ],
   bootstrap: [ AppComponent ]
