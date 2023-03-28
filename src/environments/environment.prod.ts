@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   api: {
     core: `/api/v1.0`
   },
