@@ -29,4 +29,9 @@ export class AuthResource {
   public logout(): Observable<void> {
     return this.http.get<void>(ApiConfig.AUTH_LOGOUT);
   }
+
+
+  public resetPassword(email: string): Observable<unknown> {
+    return this.http.post<unknown>(ApiConfig.AUTH_RESET_PASS, { email });
+  }
 }

@@ -17,6 +17,13 @@ interface AccountForm {
 }
 
 
+interface PasswordForm {
+  oldPassword: FormControl<string>;
+  newPassword: FormControl<string>;
+  confirmPassword: FormControl<string>;
+}
+
+
 @Component({
   templateUrl: './settings-account.component.html',
   styleUrls: [ './settings-account.component.scss' ]
@@ -25,9 +32,18 @@ export class SettingsAccountComponent implements OnInit {
 
   public form!: FormGroup<AccountForm>;
   public formSent!: boolean;
+
+
+  public passForm!: FormGroup<PasswordForm>;
+  public passFormSent!: boolean;
+
   public languages!: DictItem[];
 
   public usernameMinlength = 4;
+
+  public oldPassVisible!: boolean;
+  public newPassVisible!: boolean;
+  public confirmPassVisible!: boolean;
 
   private user!: User;
 
@@ -46,17 +62,21 @@ export class SettingsAccountComponent implements OnInit {
   public ngOnInit(): void {
     this.user = this.store.selectSnapshot(AccountState.user)!;
     this.form = this.createForm(this.user);
+    this.passForm = this.createPassForm();
   }
 
 
   public onSubmit(): void {
-    if (this.form.valid) {
-      this.formSent = true;
-      this.store.dispatch(new UpdateAccount(this.user.id, { ...this.form.value } as User))
-        .subscribe(() => {
-          this.formSent = false;
-        });
-    }
+    this.formSent = true;
+    this.store.dispatch(new UpdateAccount(this.user.id, { ...this.form.value } as User))
+      .subscribe(() => {
+        this.formSent = false;
+      });
+  }
+
+
+  public onSubmitPassword(): void {
+
   }
 
 
@@ -64,9 +84,21 @@ export class SettingsAccountComponent implements OnInit {
     return this.fb.nonNullable.group({
       logo: [ user.logo ? user.logo : null ],
       email: [ { value: user.email, disabled: true }, [ Validators.required, Validators.email ] ],
-      username: [ { value: user.username, disabled: false }, [ Validators.required, Validators.minLength(this.usernameMinlength) ] ],
+      username: [ {
+        value: user.username,
+        disabled: false
+      }, [ Validators.required, Validators.minLength(this.usernameMinlength) ] ],
       lang: [ user.lang ],
       fullName: [ user.fullName ? user.fullName : null ]
+    });
+  }
+
+
+  private createPassForm(): FormGroup<PasswordForm> {
+    return this.fb.nonNullable.group({
+      oldPassword: [ '', [ Validators.required ] ],
+      newPassword: [ '', [ Validators.required ] ],
+      confirmPassword: [ '', [ Validators.required ] ]
     });
   }
 }

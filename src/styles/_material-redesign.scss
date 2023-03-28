@@ -53,6 +53,18 @@
     position: relative;
     padding: 0;
   }
+
+  .mat-mdc-form-field-bottom-align::before {
+    display: none;
+  }
+
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+  }
+
+  i[matSuffix] {
+    opacity: 0.5;
+  }
 }
 
 //

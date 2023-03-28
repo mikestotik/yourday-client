@@ -1,43 +1,93 @@
 <app-page title="Account">
-  <form class="settings" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="settings__form form">
-      <mat-form-field class="form__field" *ngIf="form.controls.email as control">
-        <mat-label>Email</mat-label>
-        <input matInput appInput [formControl]="control">
-        <mat-error *ngIf="control.hasError('email') && control.touched">
-          The field does not match the email pattern
-        </mat-error>
-        <mat-error *ngIf="control.hasError('required') && control.touched">
-          Required field
-        </mat-error>
-      </mat-form-field>
+  <div class="settings">
+    <form class="settings-chapter" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="settings-chapter__title">User</div>
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="form.controls.email as control" floatLabel="always">
+          <mat-label>Email</mat-label>
+          <input matInput appInput [formControl]="control" placeholder="-">
+          <mat-error *ngIf="control.hasError('email') && control.touched">
+            The field does not match the email pattern
+          </mat-error>
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field class="form__field" *ngIf="form.controls.username as control">
-        <mat-label>Username</mat-label>
-        <input matInput appInput [formControl]="control">
-        <mat-error *ngIf="control.hasError('required') && control.touched">
-          Required field
-        </mat-error>
-        <mat-error *ngIf="control.hasError('minlength') && control.touched">
-          Minimum number of characters: {{ usernameMinlength }}
-        </mat-error>
-      </mat-form-field>
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="form.controls.username as control" floatLabel="always">
+          <mat-label>Username</mat-label>
+          <input matInput appInput [formControl]="control" placeholder="-">
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+          <mat-error *ngIf="control.hasError('minlength') && control.touched">
+            Minimum number of characters: {{ usernameMinlength }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field class="form__field" *ngIf="form.controls.lang as control">
-        <mat-label>Language</mat-label>
-        <mat-select [formControl]="control">
-          <mat-option *ngFor="let lang of languages" [value]="lang.code">
-            {{ lang.value }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="form.controls.lang as control" floatLabel="always">
+          <mat-label>Language</mat-label>
+          <mat-select [formControl]="control">
+            <mat-option *ngFor="let lang of languages" [value]="lang.code">
+              {{ lang.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <div class="settings__actions">
-      <button mat-button type="submit" [disabled]="form.invalid || formSent" color="primary">
-        <div *ngIf="!formSent">Save</div>
-        <div *ngIf="formSent" class="loader"></div>
-      </button>
-    </div>
-  </form>
+      <div class="settings-chapter__actions">
+        <button mat-button type="submit" [disabled]="form.invalid || formSent" color="primary">
+          <div *ngIf="!formSent">Save</div>
+          <div *ngIf="formSent" class="loader"></div>
+        </button>
+      </div>
+    </form>
+
+    <form class="settings-chapter" [formGroup]="passForm" (ngSubmit)="onSubmitPassword()">
+      <div class="settings-chapter__title">Password</div>
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="passForm.controls.oldPassword as control" floatLabel="always">
+          <mat-label>Old Password</mat-label>
+          <input matInput appInput [formControl]="control" [type]="oldPassVisible ? 'text' : 'password'" placeholder="-">
+          <i class="icon icon-eye" matSuffix (click)="oldPassVisible = !oldPassVisible"></i>
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="passForm.controls.newPassword as control" floatLabel="always">
+          <mat-label>New Password</mat-label>
+          <input matInput appInput [formControl]="control" [type]="newPassVisible ? 'text' : 'password'" placeholder="-">
+          <i class="icon icon-eye" matSuffix (click)="newPassVisible = !newPassVisible"></i>
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="settings-chapter__field">
+        <mat-form-field *ngIf="passForm.controls.confirmPassword as control" floatLabel="always">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput appInput [formControl]="control" [type]="confirmPassVisible ? 'text' : 'password'" placeholder="-">
+          <i class="icon icon-eye" matSuffix (click)="confirmPassVisible = !confirmPassVisible"></i>
+          <mat-error *ngIf="control.hasError('required') && control.touched">
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="settings-chapter__actions">
+        <button mat-button type="submit" [disabled]="passForm.invalid || passFormSent" color="primary">
+          <div *ngIf="!passFormSent">Update Password</div>
+          <div *ngIf="passFormSent" class="loader"></div>
+        </button>
+      </div>
+    </form>
+  </div>
 </app-page>

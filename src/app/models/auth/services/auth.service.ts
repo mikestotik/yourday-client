@@ -37,4 +37,9 @@ export class AuthService {
   public collectFailedRequest(request: HttpRequest<unknown>): void {
     this.cachedRequests.push(request);
   }
+
+
+  public resetPassword(email: string): Observable<unknown> {
+    return this.resource.resetPassword(email);
+  }
 }

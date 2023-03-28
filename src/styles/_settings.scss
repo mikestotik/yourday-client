@@ -7,6 +7,7 @@
   &-chapter {
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 
     &__title {
       text-transform: uppercase;
@@ -20,11 +21,13 @@
     &__field {
       display: flex;
       flex-direction: column;
+      margin-bottom: 16px;
     }
 
     &__actions {
       display: flex;
       flex-direction: column;
+      margin-top: 8px;
     }
   }
 
