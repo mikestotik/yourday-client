@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { catchError } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 import { AuthConfig } from '../../../../config/auth.config';
 import { AppRoutes, AuthRoutes } from '../../../../config/routes.config';
 import { UserCredentials } from '../../../../interfaces/account.interface';
@@ -60,7 +61,7 @@ export class AuthLoginComponent implements OnInit {
 
 
   public onGoogleAuth(): void {
-    window.location.href = 'http://localhost:3000/api/v1.0/auth/google';
+    window.location.href = environment.google.redirectUrl;
   }
 
 
