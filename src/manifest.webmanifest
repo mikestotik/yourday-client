@@ -11,7 +11,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",
-  "start_url": "./",
+  "start_url": "/app/",
   "icons": [
     {
       "src": "assets/icons/ios2/16.png",
