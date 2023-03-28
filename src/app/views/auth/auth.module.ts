@@ -14,6 +14,7 @@ import { AuthRouting } from './auth.routing';
 import { AuthActivateComponent } from './pages/auth-activate/auth-activate.component';
 import { AuthLoginComponent } from './pages/auth-login/auth-login.component';
 import { AuthRegisterComponent } from './pages/auth-register/auth-register.component';
+import { AuthGoogleComponent } from './pages/auth-google/auth-google.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthRegisterComponent } from './pages/auth-register/auth-register.compo
     AuthComponent,
     AuthLoginComponent,
     AuthRegisterComponent,
-    AuthActivateComponent
+    AuthActivateComponent,
+    AuthGoogleComponent
   ],
   imports: [
     CommonModule,

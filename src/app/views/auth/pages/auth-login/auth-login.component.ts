@@ -59,10 +59,17 @@ export class AuthLoginComponent implements OnInit {
   }
 
 
+  public onGoogleAuth(): void {
+    window.location.href = 'http://localhost:3000/api/v1.0/auth/google';
+  }
+
+
   private createForm(): FormGroup<LoginForm> {
     return this.fb.nonNullable.group({
       email: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', [ Validators.required, Validators.minLength(this.config.PASSWORD_MIN_LENGTH) ] ]
     });
   }
+
+
 }

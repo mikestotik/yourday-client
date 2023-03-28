@@ -9,6 +9,7 @@ export enum AuthRoutes {
   Login = 'login',
   Register = 'register',
   Activate = 'activate',
+  Google = 'google',
 }
 
 

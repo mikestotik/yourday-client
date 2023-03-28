@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../../interfaces/auth.interface';
 import { JwtUtils } from '../../../utils/jwt.utils';
 import { AuthService } from '../services/auth.service';
-import { Login, Logout, RefreshToken } from './auth.actions';
+import { Login, Logout, RefreshToken, SetLogin } from './auth.actions';
 
 
 export interface AuthStateModel {
@@ -43,6 +43,12 @@ export class AuthState {
 
   constructor(
     private authService: AuthService) {
+  }
+
+
+  @Action(SetLogin)
+  public setLogin(ctx: StateContext<AuthStateModel>, { payload }: SetLogin): AuthStateModel {
+    return ctx.setState(payload);
   }
 
 

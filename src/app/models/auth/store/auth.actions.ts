@@ -1,4 +1,15 @@
 import { UserCredentials } from '../../../interfaces/account.interface';
+import { LoginResponse } from '../../../interfaces/auth.interface';
+
+
+export class SetLogin {
+  static readonly type = '[Auth] SetLogin';
+
+
+  constructor(
+    public payload: LoginResponse) {
+  }
+}
 
 
 export class Login {

@@ -41,6 +41,8 @@
         <div *ngIf="!formSent">Login</div>
         <div *ngIf="formSent" class="loader"></div>
       </button>
+
+      <button mat-flat-button type="button" color="primary" (click)="onGoogleAuth()">Login with Google</button>
     </div>
 
     <div class="auth-footer">
