@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Languages } from 'src/app/enums/language.enum';
-import { User } from '../../../../interfaces/account.interface';
+import { UpdatePasswordPayload, User } from '../../../../interfaces/account.interface';
 import { DictItem } from '../../../../interfaces/dict.interface';
-import { UpdateAccount } from '../../../../models/account/store/account.actions';
+import { UpdateAccount, UpdatePassword } from '../../../../models/account/store/account.actions';
 import { AccountState } from '../../../../models/account/store/account.state';
 
 
@@ -40,6 +40,7 @@ export class SettingsAccountComponent implements OnInit {
   public languages!: DictItem[];
 
   public usernameMinlength = 4;
+  public passwordMinlength = 5;
 
   public oldPassVisible!: boolean;
   public newPassVisible!: boolean;
@@ -76,7 +77,11 @@ export class SettingsAccountComponent implements OnInit {
 
 
   public onSubmitPassword(): void {
-
+    this.passFormSent = true;
+    this.store.dispatch(new UpdatePassword(this.user.id, this.passForm.value as UpdatePasswordPayload))
+      .subscribe(() => {
+        this.passFormSent = false;
+      });
   }
 
 
@@ -96,9 +101,9 @@ export class SettingsAccountComponent implements OnInit {
 
   private createPassForm(): FormGroup<PasswordForm> {
     return this.fb.nonNullable.group({
-      oldPassword: [ '', [ Validators.required ] ],
-      newPassword: [ '', [ Validators.required ] ],
-      confirmPassword: [ '', [ Validators.required ] ]
+      oldPassword: [ '', [ Validators.required, Validators.minLength(this.passwordMinlength) ] ],
+      newPassword: [ '', [ Validators.required, Validators.minLength(this.passwordMinlength) ] ],
+      confirmPassword: [ '', [ Validators.required, Validators.minLength(this.passwordMinlength) ] ]
     });
   }
 }

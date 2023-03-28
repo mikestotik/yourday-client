@@ -1,4 +1,4 @@
-import { AccountActivation, AccountRegister, User } from '../../../interfaces/account.interface';
+import { AccountActivation, AccountRegister, UpdatePasswordPayload, User } from '../../../interfaces/account.interface';
 
 
 export class RegisterAccount {
@@ -17,6 +17,17 @@ export class ActivateAccount {
 
   constructor(
     public payload: AccountActivation) {
+  }
+}
+
+
+export class UpdatePassword {
+  static readonly type = '[Account] UpdatePassword';
+
+
+  constructor(
+    public id: number,
+    public payload: UpdatePasswordPayload) {
   }
 }
 

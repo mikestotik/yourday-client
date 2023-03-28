@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../../interfaces/account.interface';
 import { AccountService } from '../services/account.service';
-import { ActivateAccount, GetAccount, RegisterAccount, UpdateAccount } from './account.actions';
+import { ActivateAccount, GetAccount, RegisterAccount, UpdateAccount, UpdatePassword } from './account.actions';
 
 
 export interface AccountModel {
@@ -40,6 +40,12 @@ export class AccountState {
   @Action(ActivateAccount)
   public activate(ctx: StateContext<AccountModel>, action: ActivateAccount): Observable<unknown> {
     return this.accountService.activate(action.payload);
+  }
+
+
+  @Action(UpdatePassword)
+  public updatePassword(ctx: StateContext<AccountModel>, { payload }: UpdatePassword): Observable<void> {
+    return this.accountService.updatePassword(payload);
   }
 
 

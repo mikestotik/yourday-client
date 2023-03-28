@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiConfig } from '../../../config/api.config';
-import { AccountActivation, AccountRegister, User } from '../../../interfaces/account.interface';
+import { AccountActivation, AccountRegister, UpdatePasswordPayload, User } from '../../../interfaces/account.interface';
 
 
 @Injectable({
@@ -32,5 +32,10 @@ export class AccountResource {
 
   public update(id: number, value: Partial<User>): Observable<User> {
     return this.http.patch<User>(`${ ApiConfig.ACCOUNT }/${ id }`, value);
+  }
+
+
+  public updatePassword(payload: UpdatePasswordPayload): Observable<void> {
+    return this.http.post<void>(`${ ApiConfig.ACCOUNT_UPDATE_PASS }`, payload);
   }
 }

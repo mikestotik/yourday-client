@@ -57,6 +57,9 @@
           <mat-error *ngIf="control.hasError('required') && control.touched">
             Required field
           </mat-error>
+          <mat-error *ngIf="control.hasError('minlength') && control.touched">
+            Minimum number of characters: {{ passwordMinlength }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -68,6 +71,9 @@
           <mat-error *ngIf="control.hasError('required') && control.touched">
             Required field
           </mat-error>
+          <mat-error *ngIf="control.hasError('minlength') && control.touched">
+            Minimum number of characters: {{ passwordMinlength }}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -78,6 +84,9 @@
           <i class="icon icon-eye" matSuffix (click)="confirmPassVisible = !confirmPassVisible"></i>
           <mat-error *ngIf="control.hasError('required') && control.touched">
             Required field
+          </mat-error>
+          <mat-error *ngIf="control.hasError('minlength') && control.touched">
+            Minimum number of characters: {{ passwordMinlength }}
           </mat-error>
         </mat-form-field>
       </div>

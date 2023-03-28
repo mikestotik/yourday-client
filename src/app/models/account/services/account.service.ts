@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AccountActivation, AccountRegister, User } from '../../../interfaces/account.interface';
+import { AccountActivation, AccountRegister, UpdatePasswordPayload, User } from '../../../interfaces/account.interface';
 import { AccountResource } from '../resources/account.resource';
 
 
@@ -31,5 +31,10 @@ export class AccountService {
 
   public update(id: number, value: Partial<User>): Observable<User> {
     return this.resource.update(id, value);
+  }
+
+
+  public updatePassword(payload: UpdatePasswordPayload): Observable<void> {
+    return this.resource.updatePassword(payload);
   }
 }
