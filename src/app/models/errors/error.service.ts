@@ -24,7 +24,7 @@ export class ErrorService {
     private readonly store: Store,
     private readonly snackBar: MatSnackBar) {
 
-    this.errorHandlers = new Map<string, ErrorHandler>([
+    this.errorHandlers = new Map([
       [ ApiConfig.ACCOUNT_ME, new AccountMeErrorHandler() ],
       [ ApiConfig.AUTH_REFRESH, new AuthRefreshErrorHandler(router, store) ],
       [ ApiConfig.AUTH_LOGIN, new AuthLoginErrorHandler(snackBar) ],

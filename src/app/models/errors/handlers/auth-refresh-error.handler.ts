@@ -17,6 +17,7 @@ export class AuthRefreshErrorHandler implements ErrorHandler {
 
   public handle(errorResponse: HttpErrorResponse): Observable<never> {
     switch (errorResponse.status) {
+      case HttpStatusCode.Forbidden: // todo: add inner codes "Access Denied: tokens not matched"
       case HttpStatusCode.NotFound:
         return this.store.dispatch(new ClearState()).pipe(
           map(() => this.router.navigate([ AppRoutes.Auth, AuthRoutes.Login ])),
