@@ -27,6 +27,12 @@ export enum MainRoutes {
 }
 
 
+export enum TasksRoutes {
+  Filter = 'filter',
+  Group = 'group',
+}
+
+
 export enum SettingsRoute {
   Account = 'account',
   General = 'general',

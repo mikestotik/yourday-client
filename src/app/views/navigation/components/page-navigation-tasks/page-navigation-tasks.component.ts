@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { filter, Observable } from 'rxjs';
 import { DialogConfig } from '../../../../config/dialog.config';
-import { AppRoutes, MainRoutes } from '../../../../config/routes.config';
+import { AppRoutes, MainRoutes, TasksRoutes } from '../../../../config/routes.config';
 import { Group } from '../../../../interfaces/group.interface';
 import { NavItem, PageNavigation } from '../../../../interfaces/navigation.interface';
 import { GroupState } from '../../../../models/group/store/group.state';
@@ -51,6 +51,6 @@ export class PageNavigationTasksComponent implements OnInit, PageNavigation {
       .pipe(
         filter(groupId => groupId)
       )
-      .subscribe(groupId => this.router.navigate([ AppRoutes.App, MainRoutes.Tasks, groupId ]));
+      .subscribe(groupId => this.router.navigate([ AppRoutes.App, MainRoutes.Tasks, TasksRoutes.Group, groupId ]));
   }
 }

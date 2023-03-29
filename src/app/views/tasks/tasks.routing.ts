@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { TasksRoutes } from '../../config/routes.config';
 import { TaskFilter } from '../../enums/task.enum';
 import { TasksFilterComponent } from './pages/tasks-filter/tasks-filter.component';
 import { TasksGroupComponent } from './pages/tasks-group/tasks-group.component';
@@ -7,15 +8,15 @@ import { TasksGroupComponent } from './pages/tasks-group/tasks-group.component';
 export const TasksRouting: Routes = [
   {
     path: '',
-    redirectTo: `filter/${ TaskFilter.Incoming }`,
+    redirectTo: `${ TasksRoutes.Filter }/${ TaskFilter.Incoming }`,
     pathMatch: 'full'
   },
   {
-    path: 'filter/:id',
+    path: `${ TasksRoutes.Filter }/:id`,
     component: TasksFilterComponent
   },
   {
-    path: 'group/:id',
+    path: `${ TasksRoutes.Group }/:id`,
     component: TasksGroupComponent
   }
 ];
