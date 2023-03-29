@@ -40,3 +40,8 @@ export class RefreshToken {
 export class Logout {
   static readonly type = '[Auth] Logout';
 }
+
+
+export class ClearState {
+  static readonly type = '[Auth] ClearState';
+}

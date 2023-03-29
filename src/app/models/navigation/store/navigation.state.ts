@@ -45,9 +45,13 @@ export class NavigationState {
 
 
   @Selector()
-  public static mainNavigationItem(state: NavigationStateModel): (routerLink: MainRoutes) => NavItem {
-    return (routerLink: MainRoutes): NavItem => {
-      return state.main.find(i => i.routerLink === routerLink)!;
+  public static mainNavigationItem(state: NavigationStateModel): (routerLink: MainRoutes) => NavItem | null {
+    return (routerLink: MainRoutes): NavItem | null => {
+      if (state) {
+        const navItem = state.main.find(i => i.routerLink === routerLink);
+        return navItem ? navItem : null;
+      }
+      return null;
     };
   }
 

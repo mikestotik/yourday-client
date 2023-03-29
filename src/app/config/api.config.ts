@@ -4,6 +4,7 @@ const CORE_API_URL = environment.api.core;
 
 export const ApiConfig = {
   ACCOUNT: `${ CORE_API_URL }/account`,
+  ACCOUNT_ME: `${ CORE_API_URL }/account/me`,
   ACCOUNT_REGISTER: `${ CORE_API_URL }/account/register`,
   ACCOUNT_ACTIVATE: `${ CORE_API_URL }/account/activate`,
   ACCOUNT_UPDATE_PASS: `${ CORE_API_URL }/account/update-pass`,

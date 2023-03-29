@@ -26,7 +26,7 @@ export class AccountResource {
 
 
   public getCurrent(): Observable<User> {
-    return this.http.get<User>(`${ ApiConfig.ACCOUNT }/me`);
+    return this.http.get<User>(`${ ApiConfig.ACCOUNT_ME }`);
   }
 
 

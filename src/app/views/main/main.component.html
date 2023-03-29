@@ -1,4 +1,4 @@
-<main class="main">
+<main class="main" *ngIf="currentNavigation">
   <div class="sidebar-div" *ngIf="shownSidebar$ | async" (swipeleft)="onSidebarSwipeLeft()" (click)="onSidebarSwipeLeft()"></div>
   <div class="sidebar" [class.hidden]="(shownSidebar$ | async) === false" (swipeleft)="onSidebarSwipeLeft()">
     <div class="sidebar-header">

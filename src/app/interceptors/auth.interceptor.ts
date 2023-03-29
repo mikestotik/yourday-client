@@ -2,9 +2,9 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
-import { ApiConfig } from '../../../config/api.config';
-import { RefreshToken } from '../store/auth.actions';
-import { AuthState } from '../store/auth.state';
+import { ApiConfig } from '../config/api.config';
+import { RefreshToken } from '../models/auth/store/auth.actions';
+import { AuthState } from '../models/auth/store/auth.state';
 
 
 @Injectable()

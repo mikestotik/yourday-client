@@ -20,6 +20,7 @@ import { NotificationService } from '../../models/notification/notification.serv
 import { AddTaskToStore, RemoveTaskFromStore, UpdateTaskInStore } from '../../models/task/store/task.actions';
 import { TaskState } from '../../models/task/store/task.state';
 
+
 const MAIN_ROUTE_SEGMENT_INDEX = 2;
 
 
@@ -60,6 +61,8 @@ export class MainComponent implements OnInit, OnDestroy {
       map(event => event as NavigationEnd),
       map(event => parseMainRouteSegment(event)),
       map(routeSegment => this.store.selectSnapshot(NavigationState.mainNavigationItem)(routeSegment)),
+      filter(value => !!value),
+      map(value => value as NavItem),
       takeUntil(this.destroy$)
     )
       .subscribe(navItem => this.currentNavigation = navItem);

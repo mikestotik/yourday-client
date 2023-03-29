@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../../../interfaces/auth.interface';
 import { JwtUtils } from '../../../utils/jwt.utils';
 import { AuthService } from '../services/auth.service';
-import { Login, Logout, RefreshToken, ResetPassword, SetLogin } from './auth.actions';
+import { ClearState, Login, Logout, RefreshToken, ResetPassword, SetLogin } from './auth.actions';
 
 
 export interface AuthStateModel {
@@ -88,5 +88,14 @@ export class AuthState {
         });
       })
     );
+  }
+
+
+  @Action(ClearState)
+  public clearState(ctx: StateContext<AuthStateModel>): void {
+    ctx.setState({
+      accessToken: null,
+      refreshToken: null
+    });
   }
 }

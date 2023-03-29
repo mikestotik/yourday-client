@@ -19,7 +19,7 @@ import { AppRouting } from './app.routing';
 import { HammerConfig } from './config/hammer.config';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AccountState } from './models/account/store/account.state';
-import { AuthInterceptor } from './models/auth/interceptors/auth.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthState } from './models/auth/store/auth.state';
 import { GroupModelModule } from './models/group/group.module';
 import { MenuState } from './models/menu/store/menu.state';
@@ -45,10 +45,10 @@ import { TaskModelModule } from './models/task/task.module';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     NgxsModule.forRoot([
+      NavigationState,
       AuthState,
       AccountState,
-      MenuState,
-      NavigationState
+      MenuState
     ], {
       developmentMode: !environment.production
     }),

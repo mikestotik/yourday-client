@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { AuthState } from '../../models/auth/store/auth.state';
 
 
 @Component({
@@ -9,12 +7,8 @@ import { AuthState } from '../../models/auth/store/auth.state';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(
-    private readonly store: Store) {
-  }
+  constructor() { }
 
 
-  public ngOnInit(): void {
-    this.store.reset(AuthState);
-  }
+  public ngOnInit(): void { }
 }
