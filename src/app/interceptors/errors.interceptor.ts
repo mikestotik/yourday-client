@@ -19,26 +19,4 @@ export class ErrorsInterceptor implements HttpInterceptor {
       catchError(errorResponse => this.errorService.handleError(request.url, errorResponse))
     );
   }
-
-
-  // public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-  //   return next.handle(request).pipe(
-  //     catchError((errorResponse: HttpErrorResponse) => {
-  //       if (errorResponse.status === 401) {
-  //         return throwError(() => errorResponse);
-  //       }
-  //
-  //       const apiError: ResponseError = errorResponse.error;
-  //
-  //       if (apiError && apiError.message) {
-  //         this.snackBar.open(apiError.message, 'Close', {
-  //           verticalPosition: 'top',
-  //           horizontalPosition: 'end',
-  //           duration: 5000
-  //         });
-  //       }
-  //       return throwError(() => errorResponse);
-  //     })
-  //   );
-  // }
 }

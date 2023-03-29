@@ -38,7 +38,6 @@ export class ErrorService {
     if (errorHandler) {
       return errorHandler.handle(errorResponse);
     }
-
     return throwError(() => errorResponse);
   }
 }
