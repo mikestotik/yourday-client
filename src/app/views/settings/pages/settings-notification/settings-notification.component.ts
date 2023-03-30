@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { filter, Subject, takeUntil } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ServerSettings, ServerSettingsPayload } from '../../../../interfaces/settings.interface';
 import { UpdateServerSettings } from '../../../../models/settings/store/settings.actions';
 import { SettingsState } from '../../../../models/settings/store/settings.state';
 
 
 interface TelegramForm {
-  telegram: FormControl<string | undefined>;
+  telegramUsername: FormControl<string | undefined>;
 }
 
 
@@ -18,6 +19,7 @@ interface TelegramForm {
 })
 export class SettingsNotificationComponent implements OnInit, OnDestroy {
 
+  public telegramBotUrl = environment.telegramBotUrl;
   public telegramForm!: FormGroup<TelegramForm>;
   public telegramFormSent!: boolean;
 
@@ -50,7 +52,7 @@ export class SettingsNotificationComponent implements OnInit, OnDestroy {
 
   private createTelegramForm(settings: ServerSettingsPayload): FormGroup<TelegramForm> {
     return this.fb.nonNullable.group({
-      telegram: [ settings.telegram, [
+      telegramUsername: [ settings.telegram, [
         Validators.required,
         Validators.minLength(4)
       ] ]
@@ -60,7 +62,9 @@ export class SettingsNotificationComponent implements OnInit, OnDestroy {
 
   public onSubmitTelegram(): void {
     this.telegramFormSent = true;
-    this.store.dispatch(new UpdateServerSettings(this.serverSettings.id, this.telegramForm.value))
+    this.store.dispatch(new UpdateServerSettings(this.serverSettings.id, {
+      telegram: this.telegramForm.value.telegramUsername
+    }))
       .subscribe(() => {
         this.telegramFormSent = false;
       });

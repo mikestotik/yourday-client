@@ -3,10 +3,10 @@
     <form class="settings-chapter" [formGroup]="telegramForm" (ngSubmit)="onSubmitTelegram()">
       <div class="settings-chapter__title">Telegram</div>
       <div class="settings-chapter__subtitle">
-        <a href="https://t.me/yourday_app_notification_bot" target="_blank">Open Telegram Bot</a>
+        <a [href]="telegramBotUrl" target="_blank">Open Telegram Bot</a>
       </div>
       <div class="settings-chapter__field">
-        <mat-form-field *ngIf="telegramForm.controls.telegram as control">
+        <mat-form-field *ngIf="telegramForm.controls.telegramUsername as control">
           <mat-label>Telegram Username</mat-label>
           <input matInput type="text" [formControl]="control">
           <mat-error *ngIf="control.hasError('minlength') && control.touched">

@@ -12,7 +12,8 @@ export const environment = {
   },
   google: {
     redirectUrl: 'http://localhost:3000/api/v1.0/auth/google'
-  }
+  },
+  telegramBotUrl: 'https://t.me/yourday_dev_app_notification_bot'
 };
 
 /*
