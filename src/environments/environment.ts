@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  ssl: true,
   api: {
     core: '/api/v1.0'
   },
@@ -13,7 +14,10 @@ export const environment = {
   google: {
     redirectUrl: 'http://localhost:3000/api/v1.0/auth/google'
   },
-  telegramBotUrl: 'https://t.me/yourday_dev_app_notification_bot'
+  telegramBotUrl: 'https://t.me/yourday_dev_app_notification_bot',
+  vapid: {
+    publicKey: 'BDfSXDq89TUBMTAuXrZlLE1HDnawS7BWu5BsA3RYcYA2eM_yxBhyTgjuK3zkNy7bSpqeUDx28N52svPcTmlhdbE'
+  }
 };
 
 /*

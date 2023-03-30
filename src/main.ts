@@ -11,7 +11,7 @@ if (environment.production) {
 const bootstrap = () => {
   platformBrowserDynamic().bootstrapModule(AppModule)
     .then(() => {
-      if ('serviceWorker' in navigator && environment.production) {
+      if ('serviceWorker' in navigator && (environment.production || environment.ssl)) {
         navigator.serviceWorker.register('./ngsw-worker.js');
       }
     })
