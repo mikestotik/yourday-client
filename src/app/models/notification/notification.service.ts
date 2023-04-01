@@ -35,6 +35,7 @@ export class NotificationService {
       }
       // cordova.plugins.notification.local.requestPermission(function (granted) { ... });
     } else {
+      // todo: remove, now is push enabled
       if ('Notification' in window) {
         this.platform = DeviceType.Browser;
         Notification.requestPermission().then(permission => {

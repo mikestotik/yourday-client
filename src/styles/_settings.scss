@@ -7,15 +7,15 @@
   &-chapter {
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
 
     &__title {
       text-transform: uppercase;
       opacity: 0.75;
+      margin-bottom: 8px;
     }
 
     &__subtitle {
-      margin-top: 4px;
     }
 
     &__field {

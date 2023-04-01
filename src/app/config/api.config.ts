@@ -1,5 +1,6 @@
 import { environment } from '../../environments/environment';
 
+
 const CORE_API_URL = environment.api.core;
 
 export const ApiConfig = {
@@ -18,4 +19,5 @@ export const ApiConfig = {
   COLORS: `${ CORE_API_URL }/colors`,
   TASKS: `${ CORE_API_URL }/tasks`,
   SUB_TASKS: `${ CORE_API_URL }/sub-tasks`,
+  PUSH: `${ CORE_API_URL }/push`
 };

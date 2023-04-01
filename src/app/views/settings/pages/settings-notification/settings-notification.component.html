@@ -1,5 +1,18 @@
 <app-page title="Notifications">
   <div class="settings">
+    <div class="settings-chapter">
+      <div class="settings-chapter__title">Web Push</div>
+      <div class="settings-chapter__field">
+        <mat-slide-toggle
+          [ngModel]="pushEnabled"
+          (ngModelChange)="onEnablePush($event)"
+          color="primary"
+        >
+          {{ pushEnabled ? 'Disable' : 'Enable' }} Web Push
+        </mat-slide-toggle>
+      </div>
+    </div>
+
     <form class="settings-chapter" [formGroup]="telegramForm" (ngSubmit)="onSubmitTelegram()">
       <div class="settings-chapter__title">Telegram</div>
       <div class="settings-chapter__subtitle">

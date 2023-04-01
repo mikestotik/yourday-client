@@ -1,6 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
+import { SwPush } from '@angular/service-worker';
 import { Select, Store } from '@ngxs/store';
 import { Socket } from 'ngx-socket-io';
 import { filter, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
@@ -50,6 +51,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private swPush: SwPush,
     private router: Router,
     private store: Store,
     private socket: Socket,
@@ -70,13 +72,15 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit(): void {
+    // this.swPush.requestSubscription({
+    //   serverPublicKey: environment.vapid.publicKey
+    // })
+    //   .then(sub => this.store.dispatch(new AddPush({ subscription: sub.toJSON() })))
+    //   .catch(err => console.error('Could not subscribe to notifications', err));
+
     this.websocket = this.socket.ioSocket;
     if (!this.websocket.connected) {
-      // this.snackBar.open('WebSocket connection not established', 'Close', {
-      //   verticalPosition: 'top',
-      //   horizontalPosition: 'end',
-      //   duration: 10000,
-      // });
+      console.log('WebSocket connection not established');
     }
 
     this.user = this.store.selectSnapshot(AccountState.user)!;

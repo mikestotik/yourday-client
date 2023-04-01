@@ -22,7 +22,9 @@ import {
     general: {
       startPageStrategy: StartPageStrategy.Incoming
     },
-    server: {}
+    server: {
+      pushSubscription: null
+    }
   }
 })
 @Injectable()

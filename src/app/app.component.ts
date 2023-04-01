@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { SwPush } from '@angular/service-worker';
 import { Socket } from 'ngx-socket-io';
 import { filter, map, Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 import { WebsocketEndpoints } from './config/websocket.config';
-import { NewsletterService } from './newsletter.service';
 
 
 @Component({
@@ -16,8 +13,6 @@ import { NewsletterService } from './newsletter.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private swPush: SwPush,
-    private newsletterService: NewsletterService,
     private socket: Socket,
     private router: Router) {
   }
@@ -41,12 +36,6 @@ export class AppComponent implements OnInit {
     this.navigationEvent().subscribe(event => {
       this.socket.emit(WebsocketEndpoints.TRACKER, event.urlAfterRedirects);
     });
-
-    this.swPush.requestSubscription({
-      serverPublicKey: environment.vapid.publicKey
-    })
-      .then(sub => this.newsletterService.addPushSubscriber(sub).subscribe())
-      .catch(err => console.error("Could not subscribe to notifications", err));
   }
 
 
