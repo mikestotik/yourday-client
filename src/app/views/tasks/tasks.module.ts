@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective } from 'ngx-mask';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SharedModule } from '../shared/shared.module';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
@@ -57,7 +57,7 @@ import { TasksRouting } from './tasks.routing';
     MatCheckboxModule,
     MatSlideToggleModule,
     MatBottomSheetModule,
-    NgxMaskModule,
+    NgxMaskDirective,
     NgxMaterialTimepickerModule,
     MatTooltipModule
   ],

@@ -11,15 +11,15 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { NgxMaskModule } from 'ngx-mask';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { SocketIoModule } from 'ngx-socket-io';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { HammerConfig } from './config/hammer.config';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AccountState } from './models/account/store/account.state';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthState } from './models/auth/store/auth.state';
 import { GroupModelModule } from './models/group/group.module';
 import { MenuState } from './models/menu/store/menu.state';
@@ -79,8 +79,7 @@ import { TaskModelModule } from './models/task/task.module';
     }),
     MatSnackBarModule,
     MatDialogModule,
-    MatBottomSheetModule,
-    NgxMaskModule.forRoot()
+    MatBottomSheetModule
   ],
   providers: [
     {
@@ -100,7 +99,8 @@ import { TaskModelModule } from './models/task/task.module';
     {
       provide: APP_BASE_HREF,
       useValue: environment.production ? '/app/' : '/'
-    }
+    },
+    provideEnvironmentNgxMask()
   ],
   bootstrap: [ AppComponent ]
 })
