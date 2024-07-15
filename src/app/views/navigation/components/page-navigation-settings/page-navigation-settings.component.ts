@@ -48,7 +48,7 @@ export class PageNavigationSettingsComponent implements OnInit, PageNavigation {
   }
 
 
-  public onSync(): void {
+  public onSync() {
     if ('serviceWorker' in navigator) {
       caches.keys().then(cacheNames => {
         cacheNames.forEach(cacheName => caches.delete(cacheName));

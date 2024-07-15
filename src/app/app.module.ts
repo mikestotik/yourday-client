@@ -43,7 +43,8 @@ import { TaskModelModule } from './models/task/task.module';
       enabled: true,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
+      scope: '/app/'
     }),
     NgxsModule.forRoot([
       NavigationState,
